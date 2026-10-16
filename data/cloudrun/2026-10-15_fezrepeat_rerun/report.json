@@ -1,0 +1,668 @@
+{
+  "run": "data/cloudrun/2026-10-15_fezrepeat_rerun",
+  "job_id": "db8pnu8b3g5c73egp3l0",
+  "backend": "ibm_fez",
+  "layout": [
+    124,
+    26,
+    86,
+    144,
+    2,
+    6
+  ],
+  "note": "Statistics fixed in notes/CLOUD_RUN_DESIGN.md Section 7.",
+  "amplitude": null,
+  "conditions": {
+    "G0": {
+      "kind": "tagged",
+      "shape": [
+        198,
+        400,
+        6,
+        66
+      ],
+      "per_qubit": [
+        {
+          "D_fix_clean": [
+            0.004069,
+            0.000633
+          ],
+          "D_fix_clean_upper_5sigma": 0.007232,
+          "clean": {
+            "lag1": [
+              0.004069,
+              0.000633
+            ],
+            "lag2": [
+              0.000233,
+              0.000775
+            ],
+            "lag3": [
+              -0.000595,
+              0.001096
+            ],
+            "cross_block": [
+              7.7e-05,
+              0.000581
+            ]
+          },
+          "all": {
+            "lag1": [
+              0.005411,
+              0.000619
+            ],
+            "lag2": [
+              0.001842,
+              0.000758
+            ],
+            "lag3": [
+              0.000807,
+              0.001071
+            ],
+            "cross_block": [
+              0.001353,
+              0.000562
+            ]
+          },
+          "fraction_checks_leaked": 0.002047,
+          "fraction_checks_other": 0.022135,
+          "fraction_blocks_clean": 0.955651,
+          "fraction_first_check_leaked": 0.000884,
+          "p_leaked_next_check_given_leaked": 0.518049,
+          "p_leaked_next_check_given_not": 0.001132,
+          "p_leaked_next_check_given_two_leaked": 0.663818
+        },
+        {
+          "D_fix_clean": [
+            -0.00072,
+            0.000637
+          ],
+          "D_fix_clean_upper_5sigma": 0.002467,
+          "clean": {
+            "lag1": [
+              -0.00072,
+              0.000637
+            ],
+            "lag2": [
+              -0.000741,
+              0.000781
+            ],
+            "lag3": [
+              0.000475,
+              0.001104
+            ],
+            "cross_block": [
+              -0.000538,
+              0.000587
+            ]
+          },
+          "all": {
+            "lag1": [
+              0.003498,
+              0.000619
+            ],
+            "lag2": [
+              0.003303,
+              0.000758
+            ],
+            "lag3": [
+              0.004009,
+              0.001071
+            ],
+            "cross_block": [
+              0.002658,
+              0.000562
+            ]
+          },
+          "fraction_checks_leaked": 0.005419,
+          "fraction_checks_other": 0.027404,
+          "fraction_blocks_clean": 0.942055,
+          "fraction_first_check_leaked": 0.001982,
+          "p_leaked_next_check_given_leaked": 0.482477,
+          "p_leaked_next_check_given_not": 0.003242,
+          "p_leaked_next_check_given_two_leaked": 0.613754
+        },
+        {
+          "D_fix_clean": [
+            -0.000915,
+            0.00063
+          ],
+          "D_fix_clean_upper_5sigma": 0.002237,
+          "clean": {
+            "lag1": [
+              -0.000915,
+              0.00063
+            ],
+            "lag2": [
+              -0.001067,
+              0.000772
+            ],
+            "lag3": [
+              3.7e-05,
+              0.001092
+            ],
+            "cross_block": [
+              -0.000983,
+              0.000578
+            ]
+          },
+          "all": {
+            "lag1": [
+              0.002009,
+              0.000619
+            ],
+            "lag2": [
+              0.002043,
+              0.000758
+            ],
+            "lag3": [
+              0.002664,
+              0.001071
+            ],
+            "cross_block": [
+              0.001509,
+              0.000562
+            ]
+          },
+          "fraction_checks_leaked": 0.004137,
+          "fraction_checks_other": 0.017274,
+          "fraction_blocks_clean": 0.962492,
+          "fraction_first_check_leaked": 0.001768,
+          "p_leaked_next_check_given_leaked": 0.579981,
+          "p_leaked_next_check_given_not": 0.00207,
+          "p_leaked_next_check_given_two_leaked": 0.728608
+        },
+        {
+          "D_fix_clean": [
+            0.005446,
+            0.000641
+          ],
+          "D_fix_clean_upper_5sigma": 0.008651,
+          "clean": {
+            "lag1": [
+              0.005446,
+              0.000641
+            ],
+            "lag2": [
+              0.001642,
+              0.000785
+            ],
+            "lag3": [
+              -2.1e-05,
+              0.00111
+            ],
+            "cross_block": [
+              0.000494,
+              0.000592
+            ]
+          },
+          "all": {
+            "lag1": [
+              0.007945,
+              0.000619
+            ],
+            "lag2": [
+              0.004209,
+              0.000758
+            ],
+            "lag3": [
+              0.00274,
+              0.001071
+            ],
+            "cross_block": [
+              0.002929,
+              0.000562
+            ]
+          },
+          "fraction_checks_leaked": 0.007128,
+          "fraction_checks_other": 0.031855,
+          "fraction_blocks_clean": 0.93102,
+          "fraction_first_check_leaked": 0.005025,
+          "p_leaked_next_check_given_leaked": 0.280887,
+          "p_leaked_next_check_given_not": 0.005424,
+          "p_leaked_next_check_given_two_leaked": 0.556724
+        },
+        {
+          "D_fix_clean": [
+            -0.002913,
+            0.000627
+          ],
+          "D_fix_clean_upper_5sigma": 0.000223,
+          "clean": {
+            "lag1": [
+              -0.002913,
+              0.000627
+            ],
+            "lag2": [
+              0.000403,
+              0.000768
+            ],
+            "lag3": [
+              -0.001954,
+              0.001086
+            ],
+            "cross_block": [
+              -0.000896,
+              0.000574
+            ]
+          },
+          "all": {
+            "lag1": [
+              -0.001748,
+              0.000619
+            ],
+            "lag2": [
+              0.001633,
+              0.000758
+            ],
+            "lag3": [
+              -0.000881,
+              0.001071
+            ],
+            "cross_block": [
+              6.7e-05,
+              0.000562
+            ]
+          },
+          "fraction_checks_leaked": 0.001848,
+          "fraction_checks_other": 0.013089,
+          "fraction_blocks_clean": 0.972642,
+          "fraction_first_check_leaked": 0.000896,
+          "p_leaked_next_check_given_leaked": 0.481664,
+          "p_leaked_next_check_given_not": 0.001083,
+          "p_leaked_next_check_given_two_leaked": 0.779863
+        },
+        {
+          "D_fix_clean": [
+            0.005149,
+            0.000632
+          ],
+          "D_fix_clean_upper_5sigma": 0.008309,
+          "clean": {
+            "lag1": [
+              0.005149,
+              0.000632
+            ],
+            "lag2": [
+              -0.000597,
+              0.000774
+            ],
+            "lag3": [
+              0.000751,
+              0.001095
+            ],
+            "cross_block": [
+              0.000202,
+              0.00058
+            ]
+          },
+          "all": {
+            "lag1": [
+              0.010384,
+              0.000619
+            ],
+            "lag2": [
+              0.00421,
+              0.000758
+            ],
+            "lag3": [
+              0.0055,
+              0.001071
+            ],
+            "cross_block": [
+              0.004741,
+              0.000562
+            ]
+          },
+          "fraction_checks_leaked": 0.006187,
+          "fraction_checks_other": 0.018417,
+          "fraction_blocks_clean": 0.957941,
+          "fraction_first_check_leaked": 0.002247,
+          "p_leaked_next_check_given_leaked": 0.73913,
+          "p_leaked_next_check_given_not": 0.002215,
+          "p_leaked_next_check_given_two_leaked": 0.872795
+        }
+      ],
+      "pooled": {
+        "D_fix_clean": [
+          0.001686,
+          0.000259
+        ],
+        "D_fix_clean_upper_5sigma": 0.002979,
+        "cross_block_clean": [
+          -0.000274,
+          0.000238
+        ]
+      }
+    },
+    "G1": {
+      "kind": "tagged",
+      "shape": [
+        111,
+        400,
+        6,
+        66
+      ],
+      "per_qubit": [
+        {
+          "D_fix_clean": [
+            0.005592,
+            0.000893
+          ],
+          "D_fix_clean_upper_5sigma": 0.010058,
+          "clean": {
+            "lag1": [
+              0.005592,
+              0.000893
+            ],
+            "lag2": [
+              0.000534,
+              0.001094
+            ],
+            "lag3": [
+              0.001794,
+              0.001547
+            ],
+            "cross_block": [
+              0.000149,
+              0.000844
+            ]
+          },
+          "all": {
+            "lag1": [
+              0.006209,
+              0.000826
+            ],
+            "lag2": [
+              0.001241,
+              0.001012
+            ],
+            "lag3": [
+              0.002399,
+              0.001431
+            ],
+            "cross_block": [
+              0.001805,
+              0.00075
+            ]
+          },
+          "fraction_checks_leaked": 0.003837,
+          "fraction_checks_other": 0.075287,
+          "fraction_blocks_clean": 0.855559,
+          "fraction_first_check_leaked": 0.003288,
+          "p_leaked_next_check_given_leaked": 0.123478,
+          "p_leaked_next_check_given_not": 0.003425,
+          "p_leaked_next_check_given_two_leaked": 0.424084
+        },
+        {
+          "D_fix_clean": [
+            0.0015,
+            0.000891
+          ],
+          "D_fix_clean_upper_5sigma": 0.005956,
+          "clean": {
+            "lag1": [
+              0.0015,
+              0.000891
+            ],
+            "lag2": [
+              -0.000415,
+              0.001091
+            ],
+            "lag3": [
+              0.002185,
+              0.001544
+            ],
+            "cross_block": [
+              0.000205,
+              0.000841
+            ]
+          },
+          "all": {
+            "lag1": [
+              0.005266,
+              0.000826
+            ],
+            "lag2": [
+              0.003334,
+              0.001012
+            ],
+            "lag3": [
+              0.00502,
+              0.001431
+            ],
+            "cross_block": [
+              0.002896,
+              0.00075
+            ]
+          },
+          "fraction_checks_leaked": 0.006525,
+          "fraction_checks_other": 0.071128,
+          "fraction_blocks_clean": 0.859318,
+          "fraction_first_check_leaked": 0.00455,
+          "p_leaked_next_check_given_leaked": 0.221016,
+          "p_leaked_next_check_given_not": 0.005336,
+          "p_leaked_next_check_given_two_leaked": 0.32737
+        },
+        {
+          "D_fix_clean": [
+            0.000482,
+            0.000863
+          ],
+          "D_fix_clean_upper_5sigma": 0.004795,
+          "clean": {
+            "lag1": [
+              0.000482,
+              0.000863
+            ],
+            "lag2": [
+              0.001199,
+              0.001057
+            ],
+            "lag3": [
+              0.000508,
+              0.001494
+            ],
+            "cross_block": [
+              0.000805,
+              0.000801
+            ]
+          },
+          "all": {
+            "lag1": [
+              0.005527,
+              0.000826
+            ],
+            "lag2": [
+              0.005615,
+              0.001012
+            ],
+            "lag3": [
+              0.004342,
+              0.001431
+            ],
+            "cross_block": [
+              0.00404,
+              0.00075
+            ]
+          },
+          "fraction_checks_leaked": 0.006362,
+          "fraction_checks_other": 0.039955,
+          "fraction_blocks_clean": 0.916994,
+          "fraction_first_check_leaked": 0.002995,
+          "p_leaked_next_check_given_leaked": 0.440459,
+          "p_leaked_next_check_given_not": 0.003957,
+          "p_leaked_next_check_given_two_leaked": 0.537535
+        },
+        {
+          "D_fix_clean": [
+            0.004162,
+            0.000883
+          ],
+          "D_fix_clean_upper_5sigma": 0.008577,
+          "clean": {
+            "lag1": [
+              0.004162,
+              0.000883
+            ],
+            "lag2": [
+              -0.000492,
+              0.001081
+            ],
+            "lag3": [
+              -0.002207,
+              0.001529
+            ],
+            "cross_block": [
+              -0.001126,
+              0.00083
+            ]
+          },
+          "all": {
+            "lag1": [
+              0.006793,
+              0.000826
+            ],
+            "lag2": [
+              0.001983,
+              0.001012
+            ],
+            "lag3": [
+              0.000684,
+              0.001431
+            ],
+            "cross_block": [
+              0.000629,
+              0.00075
+            ]
+          },
+          "fraction_checks_leaked": 0.00708,
+          "fraction_checks_other": 0.061656,
+          "fraction_blocks_clean": 0.875469,
+          "fraction_first_check_leaked": 0.005631,
+          "p_leaked_next_check_given_leaked": 0.175506,
+          "p_leaked_next_check_given_not": 0.006038,
+          "p_leaked_next_check_given_two_leaked": 0.451346
+        },
+        {
+          "D_fix_clean": [
+            -0.002296,
+            0.000849
+          ],
+          "D_fix_clean_upper_5sigma": 0.001949,
+          "clean": {
+            "lag1": [
+              -0.002296,
+              0.000849
+            ],
+            "lag2": [
+              -0.000245,
+              0.00104
+            ],
+            "lag3": [
+              0.001364,
+              0.001471
+            ],
+            "cross_block": [
+              0.001001,
+              0.000782
+            ]
+          },
+          "all": {
+            "lag1": [
+              -0.0004,
+              0.000826
+            ],
+            "lag2": [
+              0.001315,
+              0.001012
+            ],
+            "lag3": [
+              0.002806,
+              0.001431
+            ],
+            "cross_block": [
+              0.002024,
+              0.00075
+            ]
+          },
+          "fraction_checks_leaked": 0.002453,
+          "fraction_checks_other": 0.026411,
+          "fraction_blocks_clean": 0.946738,
+          "fraction_first_check_leaked": 0.001306,
+          "p_leaked_next_check_given_leaked": 0.381308,
+          "p_leaked_next_check_given_not": 0.001653,
+          "p_leaked_next_check_given_two_leaked": 0.53352
+        },
+        {
+          "D_fix_clean": [
+            0.005749,
+            0.000863
+          ],
+          "D_fix_clean_upper_5sigma": 0.010066,
+          "clean": {
+            "lag1": [
+              0.005749,
+              0.000863
+            ],
+            "lag2": [
+              -0.000443,
+              0.001057
+            ],
+            "lag3": [
+              5.4e-05,
+              0.001495
+            ],
+            "cross_block": [
+              0.001032,
+              0.000801
+            ]
+          },
+          "all": {
+            "lag1": [
+              0.011825,
+              0.000826
+            ],
+            "lag2": [
+              0.005824,
+              0.001012
+            ],
+            "lag3": [
+              0.005443,
+              0.001431
+            ],
+            "cross_block": [
+              0.005407,
+              0.00075
+            ]
+          },
+          "fraction_checks_leaked": 0.007418,
+          "fraction_checks_other": 0.040029,
+          "fraction_blocks_clean": 0.915633,
+          "fraction_first_check_leaked": 0.003671,
+          "p_leaked_next_check_given_leaked": 0.549309,
+          "p_leaked_next_check_given_not": 0.003794,
+          "p_leaked_next_check_given_two_leaked": 0.623669
+        }
+      ],
+      "pooled": {
+        "D_fix_clean": [
+          0.002531,
+          0.000357
+        ],
+        "D_fix_clean_upper_5sigma": 0.004315,
+        "cross_block_clean": [
+          0.000344,
+          0.000333
+        ]
+      }
+    }
+  },
+  "flags": [
+    "G0: qubit 0 clean D_fix = 0.00407 +- 0.00063 (readout memory or persistence)",
+    "G0: qubit 3 clean D_fix = 0.00545 +- 0.00064 (readout memory or persistence)",
+    "G0: qubit 5 clean D_fix = 0.00515 +- 0.00063 (readout memory or persistence)",
+    "G1: qubit 0 clean D_fix = 0.00559 +- 0.00089 (readout memory or persistence)",
+    "G1: qubit 5 clean D_fix = 0.00575 +- 0.00086 (readout memory or persistence)"
+  ]
+}

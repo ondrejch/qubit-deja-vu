@@ -1,0 +1,53 @@
+{
+ "backend": "ibm_kingston",
+ "job": "followup",
+ "shots": 400,
+ "layout": [
+  21,
+  154,
+  11,
+  149,
+  109,
+  89
+ ],
+ "readout_s": 1.38e-06,
+ "estimated_qpu_s": 163.4,
+ "conditions": {
+  "T0": {
+   "sets": 434,
+   "executions": 173600,
+   "estimated_qpu_s": 59.9
+  },
+  "T1": {
+   "sets": 246,
+   "executions": 98400,
+   "estimated_qpu_s": 60.0
+  },
+  "T2": {
+   "sets": 100,
+   "executions": 40000,
+   "estimated_qpu_s": 39.8
+  },
+  "C2": {
+   "sets": 32,
+   "executions": 12800,
+   "estimated_qpu_s": 3.2
+  }
+ }
+}
+submitted job db8kv89eukqs73aqqp9g ['C2', 'amplitude_1', 'amplitude_9', 'amplitude_25', 'amplitude_49', 'amplitude_97']
+submitted job db8kv8gb3g5c73egg7sg ['T0']
+submitted job db8kv8ob3g5c73egg7u0 ['T1']
+submitted job db8kv91eukqs73aqqpbg ['T2']
+results after 250 s
+{
+ "saved": "data/cloudrun/2026-10-15_followup",
+ "flags": [
+  "T0: qubit 1 clean D_fix = -0.00266 +- 0.00044 (readout memory or persistence)",
+  "T0: qubit 2 clean D_fix = -0.00855 +- 0.00043 (readout memory or persistence)",
+  "T0: qubit 4 clean D_fix = 0.00600 +- 0.00043 (readout memory or persistence)",
+  "T1: qubit 2 clean D_fix = -0.00745 +- 0.00058 (readout memory or persistence)",
+  "T1: qubit 4 clean D_fix = 0.00647 +- 0.00059 (readout memory or persistence)",
+  "T2: qubit 4 clean D_fix = 0.01249 +- 0.00204 (readout memory or persistence)"
+ ]
+}

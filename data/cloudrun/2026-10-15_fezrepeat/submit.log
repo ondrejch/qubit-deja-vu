@@ -1,0 +1,30 @@
+{
+ "backend": "ibm_fez",
+ "job": "fezrepeat",
+ "shots": 400,
+ "layout": [
+  124,
+  26,
+  86,
+  144,
+  2,
+  6
+ ],
+ "readout_s": 1.34e-06,
+ "estimated_qpu_s": 54.0,
+ "conditions": {
+  "G0": {
+   "sets": 198,
+   "executions": 79200,
+   "estimated_qpu_s": 27.1
+  },
+  "G1": {
+   "sets": 111,
+   "executions": 44400,
+   "estimated_qpu_s": 26.9
+  }
+ }
+}
+estimate with overhead: 57.0 s in 1 job(s)
+submitted job db8plalckpjs73b1fung ['G0', 'G1']
+JOB FAILED: db8plalckpjs73b1fung failed: RuntimeInvalidStateError: 'Unable to retrieve result for job db8plalckpjs73b1fung. Job was cancelled.'

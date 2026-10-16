@@ -1,0 +1,153 @@
+{
+  "status": "PASS",
+  "scope": "Analytic and numerical checks of a model constructed for the theory note; no experimental data",
+  "checks": 718,
+  "monte_carlo_samples_per_case": 400000,
+  "frozen_limit_table_balanced_start": [
+    {
+      "theta": "0",
+      "qm": {
+        "E_z0r": 1.0,
+        "C_zz": 1.0,
+        "D": 0.0
+      },
+      "Q": {
+        "E_z0r": 1.0,
+        "E_rz2": 1.0,
+        "C_zz": 1.0,
+        "D": 1.0
+      },
+      "D": {
+        "E_z0r": 1.0,
+        "E_rz2": 1.0,
+        "C_zz": 1.0,
+        "D": 1.0
+      }
+    },
+    {
+      "theta": "pi/8",
+      "qm": {
+        "E_z0r": 0.9238795325112867,
+        "C_zz": 0.8535533905932737,
+        "D": 0.0
+      },
+      "Q": {
+        "E_z0r": 1.0,
+        "E_rz2": 1.0,
+        "C_zz": 1.0,
+        "D": 0.6173
+      },
+      "D": {
+        "E_z0r": 1.0,
+        "E_rz2": 1.0,
+        "C_zz": 1.0,
+        "D": 0.6173
+      }
+    },
+    {
+      "theta": "pi/4",
+      "qm": {
+        "E_z0r": 0.7071067811865476,
+        "C_zz": 0.5000000000000001,
+        "D": 0.0
+      },
+      "Q": {
+        "E_z0r": 1.0,
+        "E_rz2": 1.0,
+        "C_zz": 1.0,
+        "D": 0.4647
+      },
+      "D": {
+        "E_z0r": 1.0,
+        "E_rz2": 1.0,
+        "C_zz": 1.0,
+        "D": 0.2929
+      }
+    },
+    {
+      "theta": "3pi/8",
+      "qm": {
+        "E_z0r": 0.38268343236508984,
+        "C_zz": 0.1464466094067263,
+        "D": 0.0
+      },
+      "Q": {
+        "E_z0r": 0.6126,
+        "E_rz2": 0.8652,
+        "C_zz": 0.7473,
+        "D": 0.6567
+      },
+      "D": {
+        "E_z0r": 1.0,
+        "E_rz2": 1.0,
+        "C_zz": 1.0,
+        "D": 0.6173
+      }
+    },
+    {
+      "theta": "pi/2",
+      "qm": {
+        "E_z0r": 6.123233995736766e-17,
+        "C_zz": 3.749399456654644e-33,
+        "D": 0.0
+      },
+      "Q": {
+        "E_z0r": 0.0,
+        "E_rz2": 0.0,
+        "C_zz": 1.0,
+        "D": 1.0
+      },
+      "D": {
+        "E_z0r": 1.0,
+        "E_rz2": 1.0,
+        "C_zz": 1.0,
+        "D": 1.0
+      }
+    }
+  ],
+  "shape_test_cusp_1_minus_abs_cos_phi": {
+    "K=2": {
+      "residual_rms_per_unit_w": 0.0682,
+      "five_sigma_w": {
+        "N=1e6": 0.0733,
+        "N=1e7": 0.0232,
+        "N=1e8": 0.0073
+      }
+    },
+    "K=4": {
+      "residual_rms_per_unit_w": 0.0324,
+      "five_sigma_w": {
+        "N=1e6": 0.1543,
+        "N=1e7": 0.0488,
+        "N=1e8": 0.0154
+      }
+    }
+  },
+  "shape_test_q_pair_deviation_pulse_repreparation": {
+    "K=2": {
+      "residual_rms_per_unit_w": 0.1371,
+      "five_sigma_w": {
+        "N=1e6": 0.0365,
+        "N=1e7": 0.0115,
+        "N=1e8": 0.0036
+      }
+    },
+    "K=4": {
+      "residual_rms_per_unit_w": 0.0168,
+      "five_sigma_w": {
+        "N=1e6": 0.2975,
+        "N=1e7": 0.0941,
+        "N=1e8": 0.0298
+      }
+    },
+    "first_and_third_harmonic": [
+      0.1783,
+      0.1924
+    ]
+  },
+  "not_checked": [
+    "any laboratory hardware or measured record",
+    "whether either completion is the one Donadi and Hossenfelder would endorse",
+    "diffusive (non-renewal) hidden-variable dynamics"
+  ]
+}

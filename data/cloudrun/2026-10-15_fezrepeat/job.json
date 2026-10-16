@@ -1,0 +1,80 @@
+{
+  "backend": "ibm_fez",
+  "job": "fezrepeat",
+  "shots": 400,
+  "account": "default",
+  "instance_of": "payg",
+  "submitted": "2026-10-15T23:31:53-0400",
+  "estimate": {
+    "backend": "ibm_fez",
+    "job": "fezrepeat",
+    "shots": 400,
+    "layout": [
+      124,
+      26,
+      86,
+      144,
+      2,
+      6
+    ],
+    "readout_s": 1.34e-06,
+    "estimated_qpu_s": 54.0,
+    "conditions": {
+      "G0": {
+        "sets": 198,
+        "executions": 79200,
+        "estimated_qpu_s": 27.1
+      },
+      "G1": {
+        "sets": 111,
+        "executions": 44400,
+        "estimated_qpu_s": 26.9
+      }
+    }
+  },
+  "jobs": [
+    {
+      "job_id": "db8plalckpjs73b1fung",
+      "entries": [
+        [
+          "G0",
+          null
+        ],
+        [
+          "G1",
+          null
+        ]
+      ],
+      "outcome": "failed: RuntimeInvalidStateError: 'Unable to retrieve result for job db8plalckpjs73b1fung. Job was cancelled.'",
+      "usage": 0,
+      "metrics": {
+        "caller": "qiskit",
+        "qiskit_version": "qiskit_ibm_runtime-0.50.0,qiskit-2.5.2*,qiskit_aer-0.17.2",
+        "timestamps": {
+          "created": "2026-10-16T03:31:55.029164Z",
+          "finished": "2026-10-16T03:33:05.715Z",
+          "running": "2026-10-16T03:31:56.41772Z"
+        },
+        "usage": {
+          "qpu_charge_time_seconds": 58,
+          "value": 0.95244,
+          "unit": "resource_units",
+          "status": "pending",
+          "details": [
+            {
+              "value": 0.95244,
+              "unit": "resource_units",
+              "metric": {
+                "id": "caffe3ca-729c-5750-8777-df63bbf8bfd9",
+                "value": 58
+              }
+            }
+          ]
+        },
+        "circuits_execution_time_ns": 54827228928
+      }
+    }
+  ],
+  "finished_after_s": 70,
+  "outcome_note": "Cancelled by IBM after running from 03:31:56 to 03:33:05 UTC and being charged 58 s; no results retrievable. Most likely cause: the pay-as-you-go instance's 63 s usage limit (IBM cancels running jobs when the limit is reached). The 57 s estimate with overhead left too little margin."
+}

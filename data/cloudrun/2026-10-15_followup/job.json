@@ -1,0 +1,214 @@
+{
+  "backend": "ibm_kingston",
+  "job": "followup",
+  "shots": 400,
+  "submitted": "2026-10-15T18:11:44-0400",
+  "estimate": {
+    "backend": "ibm_kingston",
+    "job": "followup",
+    "shots": 400,
+    "layout": [
+      21,
+      154,
+      11,
+      149,
+      109,
+      89
+    ],
+    "readout_s": 1.38e-06,
+    "estimated_qpu_s": 163.4,
+    "conditions": {
+      "T0": {
+        "sets": 434,
+        "executions": 173600,
+        "estimated_qpu_s": 59.9
+      },
+      "T1": {
+        "sets": 246,
+        "executions": 98400,
+        "estimated_qpu_s": 60.0
+      },
+      "T2": {
+        "sets": 100,
+        "executions": 40000,
+        "estimated_qpu_s": 39.8
+      },
+      "C2": {
+        "sets": 32,
+        "executions": 12800,
+        "estimated_qpu_s": 3.2
+      }
+    }
+  },
+  "jobs": [
+    {
+      "job_id": "db8kv89eukqs73aqqp9g",
+      "entries": [
+        [
+          "C2",
+          null
+        ],
+        [
+          "amplitude_1",
+          null
+        ],
+        [
+          "amplitude_9",
+          null
+        ],
+        [
+          "amplitude_25",
+          null
+        ],
+        [
+          "amplitude_49",
+          null
+        ],
+        [
+          "amplitude_97",
+          null
+        ]
+      ],
+      "outcome": "done",
+      "usage": 6,
+      "metrics": {
+        "caller": "qiskit",
+        "qiskit_version": "qiskit_ibm_runtime-0.50.0,qiskit-2.5.2*,qiskit_aer-0.17.2",
+        "timestamps": {
+          "created": "2026-10-15T22:11:45.986556Z",
+          "finished": "2026-10-15T22:12:34.718378Z",
+          "running": "2026-10-15T22:11:47.742081Z"
+        },
+        "usage": {
+          "qpu_charge_time_seconds": 6,
+          "value": 0.093839,
+          "unit": "resource_units",
+          "status": "complete",
+          "details": [
+            {
+              "value": 0.093839,
+              "unit": "resource_units",
+              "metric": {
+                "id": "caffe3ca-729c-5750-8777-df63bbf8bfd9",
+                "value": 6
+              }
+            }
+          ]
+        },
+        "circuits_execution_time_ns": 3856200704
+      }
+    },
+    {
+      "job_id": "db8kv8gb3g5c73egg7sg",
+      "entries": [
+        [
+          "T0",
+          null
+        ]
+      ],
+      "outcome": "done",
+      "usage": 65,
+      "metrics": {
+        "caller": "qiskit",
+        "qiskit_version": "qiskit_ibm_runtime-0.50.0,qiskit-2.5.2*,qiskit_aer-0.17.2",
+        "timestamps": {
+          "created": "2026-10-15T22:11:46.809839Z",
+          "finished": "2026-10-15T22:15:27.599016Z",
+          "running": "2026-10-15T22:11:48.044799Z"
+        },
+        "usage": {
+          "qpu_charge_time_seconds": 65,
+          "value": 1.067878,
+          "unit": "resource_units",
+          "status": "complete",
+          "details": [
+            {
+              "value": 1.067878,
+              "unit": "resource_units",
+              "metric": {
+                "id": "caffe3ca-729c-5750-8777-df63bbf8bfd9",
+                "value": 65
+              }
+            }
+          ]
+        },
+        "circuits_execution_time_ns": 61503348224
+      }
+    },
+    {
+      "job_id": "db8kv8ob3g5c73egg7u0",
+      "entries": [
+        [
+          "T1",
+          null
+        ]
+      ],
+      "outcome": "done",
+      "usage": 64,
+      "metrics": {
+        "caller": "qiskit",
+        "qiskit_version": "qiskit_ibm_runtime-0.50.0,qiskit-2.5.2*,qiskit_aer-0.17.2",
+        "timestamps": {
+          "created": "2026-10-15T22:11:47.425996Z",
+          "finished": "2026-10-15T22:13:43.173803Z",
+          "running": "2026-10-15T22:11:49.040559Z"
+        },
+        "usage": {
+          "qpu_charge_time_seconds": 64,
+          "value": 1.05053,
+          "unit": "resource_units",
+          "status": "complete",
+          "details": [
+            {
+              "value": 1.05053,
+              "unit": "resource_units",
+              "metric": {
+                "id": "caffe3ca-729c-5750-8777-df63bbf8bfd9",
+                "value": 64
+              }
+            }
+          ]
+        },
+        "circuits_execution_time_ns": 60838527488
+      }
+    },
+    {
+      "job_id": "db8kv91eukqs73aqqpbg",
+      "entries": [
+        [
+          "T2",
+          null
+        ]
+      ],
+      "outcome": "done",
+      "usage": 43,
+      "metrics": {
+        "caller": "qiskit",
+        "qiskit_version": "qiskit_ibm_runtime-0.50.0,qiskit-2.5.2*,qiskit_aer-0.17.2",
+        "timestamps": {
+          "created": "2026-10-15T22:11:48.267733Z",
+          "finished": "2026-10-15T22:15:57.215349Z",
+          "running": "2026-10-15T22:11:50.106288Z"
+        },
+        "usage": {
+          "qpu_charge_time_seconds": 43,
+          "value": 0.701646,
+          "unit": "resource_units",
+          "status": "complete",
+          "details": [
+            {
+              "value": 0.701646,
+              "unit": "resource_units",
+              "metric": {
+                "id": "caffe3ca-729c-5750-8777-df63bbf8bfd9",
+                "value": 43
+              }
+            }
+          ]
+        },
+        "circuits_execution_time_ns": 40197875200
+      }
+    }
+  ],
+  "finished_after_s": 250
+}

@@ -1,0 +1,30 @@
+{
+ "backend": "ibm_fez",
+ "job": "fezmini",
+ "shots": 400,
+ "layout": [
+  124,
+  26,
+  86,
+  144,
+  2,
+  6
+ ],
+ "readout_s": 1.34e-06,
+ "estimated_qpu_s": 12.5,
+ "conditions": {
+  "F0": {
+   "sets": 88,
+   "executions": 35200,
+   "estimated_qpu_s": 12.0
+  }
+ }
+}
+submitted job db8pactckpjs73b1f6m0 ['F0', 'amplitude_1', 'amplitude_9', 'amplitude_25', 'amplitude_49', 'amplitude_97']
+results after 72 s
+{
+ "saved": "data/cloudrun/2026-10-15_fezmini",
+ "flags": [
+  "F0: qubit 5 clean D_fix = 0.00513 +- 0.00095 (readout memory or persistence)"
+ ]
+}

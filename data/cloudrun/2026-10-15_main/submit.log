@@ -1,0 +1,56 @@
+{
+ "backend": "ibm_kingston",
+ "job": "main",
+ "shots": 400,
+ "layout": [
+  21,
+  154,
+  11,
+  149,
+  109,
+  89
+ ],
+ "readout_s": 1.38e-06,
+ "estimated_qpu_s": 363.7,
+ "conditions": {
+  "A0": {
+   "sets": 438,
+   "executions": 175200,
+   "estimated_qpu_s": 60.0
+  },
+  "A1": {
+   "sets": 251,
+   "executions": 100400,
+   "estimated_qpu_s": 60.1
+  },
+  "A2": {
+   "sets": 164,
+   "executions": 65600,
+   "estimated_qpu_s": 59.9
+  },
+  "B0": {
+   "sets": 1314,
+   "executions": 525600,
+   "estimated_qpu_s": 180.0
+  },
+  "C2": {
+   "sets": 32,
+   "executions": 12800,
+   "estimated_qpu_s": 3.2
+  }
+ }
+}
+submitted job db8ivc5ckpjs73b13pn0 ['C2', 'amplitude_1', 'amplitude_9', 'amplitude_25', 'amplitude_49', 'amplitude_97']
+submitted job db8ivcdckpjs73b13png ['A0']
+submitted job db8ivcheukqs73aqn8p0 ['A1']
+submitted job db8ivcpeukqs73aqn8q0 ['A2']
+submitted job db8ive5ckpjs73b13psg ['B0', 'B0']
+results after 546 s
+{
+ "saved": "data/cloudrun/2026-10-15_main",
+ "flags": [
+  "A0: D_fix above five standard errors; follow decision rule 3",
+  "A1: D_fix above five standard errors; follow decision rule 3",
+  "A2: D_fix above five standard errors; follow decision rule 3"
+ ]
+}

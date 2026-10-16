@@ -1,0 +1,6 @@
+layout [21, 154, 11, 149, 109, 89] estimated QPU s 9.4
+submitted job db8hu45ckpjs73b11df0
+result after 70 s; status DONE
+saved {"P0": {"kind": "probe", "records": 64, "shape": [64, 300, 6, 64]}, "C2": {"kind": "phase", "records": 1, "shape": [32, 300, 6, 1]}}
+usage 12
+metrics {"caller": "qiskit", "qiskit_version": "qiskit_ibm_runtime-0.50.0,qiskit-2.5.2*,qiskit_aer-0.17.2", "timestamps": {"created": "2026-10-15T18:44:32.947069Z", "finished": "2026-10-15T18:45:42.002418Z", "running": "2026-10-15T18:44:37.746602Z"}, "usage": {"qpu_charge_time_seconds": 12, "value": 0.192352, "unit": "resource_units", "status": "complete", "details": [{"value": 0.192352, "unit": "resource_units", "metric": {"id": "caffe3ca-729c-5750-8777-df63bbf8bfd9", "value": 12}}]}, "circuits_execution_time_ns": 9638887936}

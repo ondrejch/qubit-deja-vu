@@ -1,0 +1,217 @@
+<title>ibm_kingston Persistence Tests</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column; three result cards, two to-scale figures, compact tables. */
+:root {
+  --bg: #f4f6f7; --surface: #ffffff; --ink: #18232c; --muted: #55636e; --rule: #d6dde2;
+  --accent: #0b6772; --flag: #a65d00; --raw: #9aa8b2;
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11171c; --surface: #172028; --ink: #e3e9ed; --muted: #9aa9b4; --rule: #2c3944;
+  --accent: #4cc0c9; --flag: #e7a14a; --raw: #5d6d79; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #11171c; --surface: #172028; --ink: #e3e9ed; --muted: #9aa9b4; --rule: #2c3944;
+  --accent: #4cc0c9; --flag: #e7a14a; --raw: #5d6d79; color-scheme: dark; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); padding: 40px 16px 64px; }
+main { max-width: 46rem; margin: 0 auto; display: grid; gap: 2.2rem; }
+header { display: grid; gap: .6rem; }
+.eyebrow { font: 500 .75rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 600 clamp(2rem, 5vw, 2.8rem)/1.1 var(--display); margin: 0; text-wrap: balance; }
+h2 { font: 600 1.45rem/1.25 var(--display); margin: 0 0 .5rem; text-wrap: balance; }
+p { margin: 0; max-width: 65ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+section { display: grid; gap: .8rem; min-width: 0; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1rem; }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; display: grid; gap: .4rem; align-content: start; min-width: 0; }
+.card .k { font: 500 .72rem/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.card .v { font: 600 1.35rem/1.25 var(--display); }
+.card p { font-size: .92rem; color: var(--muted); }
+figure { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem; display: grid; gap: .6rem; min-width: 0; }
+figure .scroll { overflow-x: auto; }
+svg { width: 100%; min-width: 30rem; height: auto; display: block; }
+figcaption { font-size: .88rem; color: var(--muted); max-width: 65ch; }
+.grid { stroke: var(--rule); stroke-width: 1; }
+.axis { stroke: var(--muted); stroke-width: 1.2; }
+.tick, .cat, .axis-title, .val { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+.cat { fill: var(--ink); font-size: 12px; }
+.val { fill: var(--ink); }
+.bar-ok { fill: var(--accent); }
+.bar-flag { fill: var(--flag); }
+.bar-raw { fill: var(--raw); }
+.whisker { stroke: var(--ink); stroke-width: 1.2; }
+.legend { display: flex; flex-wrap: wrap; gap: 1rem; font: .8rem var(--mono); color: var(--muted); }
+.sw { display: inline-block; width: .8rem; height: .8rem; border-radius: 2px; vertical-align: -1px; margin-right: .35rem; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: .45rem .6rem; border-bottom: 1px solid var(--rule); }
+th { font: 500 .72rem/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+td:first-child { font-family: var(--mono); }
+ul { margin: 0; padding-left: 1.2rem; display: grid; gap: .4rem; max-width: 65ch; }
+code { font: .85em var(--mono); background: var(--bg); padding: .1em .3em; border-radius: 3px; overflow-wrap: anywhere; }
+.note { font-size: .88rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 1rem; }
+</style>
+<main>
+<header>
+  <div class="eyebrow">IBM Quantum cloud runs · 15 October 2026</div>
+  <h1>ibm_kingston Persistence Tests</h1>
+  <p class="lede">Six qubits of IBM's ibm_kingston processor were read out thousands of times in a row to look for a hidden variable that persists between measurements, in two models built for this project. Neither model shows a signal. The ordinary effects the runs uncovered, leakage and readout memory, matter for error correction.</p>
+</header>
+
+<section aria-label="Main results">
+  <div class="cards">
+    <div class="card"><div class="k">Qubit-anchored model</div><div class="v">w<sub>1</sub>w<sub>2</sub> &lt; 5.3×10<sup>−4</sup></div>
+      <p>Five-sigma limit at a 1.44 µs readout spacing; 8.0×10<sup>−4</sup> at 5.44 µs and 2.4×10<sup>−3</sup> at 41.4 µs. The shape fit agrees: w<sub>Q</sub> &lt; 2.2×10<sup>−3</sup>.</p></div>
+    <div class="card"><div class="k">Detector-anchored model</div><div class="v">w<sub>D</sub> &lt; 5.6×10<sup>−3</sup></div>
+      <p>No cusp in the angle scan. With leaked blocks removed, qubits 21 and 89 give 2.8×10<sup>−3</sup> and 2.1×10<sup>−3</sup>, assuming ordinary effects never push the correlation negative.</p></div>
+    <div class="card"><div class="k">What the hardware showed</div><div class="v">Leakage and readout memory</div>
+      <p>Leakage episodes lasting tens of microseconds, driven by elapsed time rather than readouts, plus readout memory of either sign on four qubits.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>What was tested</h2>
+  <p>Donadi and Hossenfelder's 2022 toy model picks each measurement outcome by comparing a hidden random number with the Born probability, but it says nothing about how that number changes between measurements. A draft theory note in this project adds two minimal completions: the hidden variable belongs either to the detector or to the qubit, and survives from one readout to the next with probability w. Both keep every single readout at its Born value, so the only signature is a correlation between successive outcomes.</p>
+  <p>These completions are constructions made for this project, not proposals by Donadi or Hossenfelder. The runs bound these two models on this processor and readout. They do not test superdeterminism in general or Hossenfelder's 2025 collapse model.</p>
+</section>
+
+<section>
+  <h2>How the runs worked</h2>
+  <ul>
+    <li>Each qubit ran a chain of 16 to 66 readouts per shot with no resets in between. Every setting was a frame phase on the same two π/2 pulses, so ordinary physics can only produce smooth, low-order dependence on the preparation angle.</li>
+    <li>Random relabeling of each readout separates detector-carried effects from qubit-carried ones, and a scan of the preparation angle looks for the cusp that a threshold hidden variable produces.</li>
+    <li>The design and the analysis code were committed before any data existed, for the main run and again for the follow-up.</li>
+    <li>QPU time charged: 12 s for the pilot, 2 s for a first main-run attempt that IBM rejected before running, 388 s for the main run and 178 s for the leak-tagged follow-up. That is 580 s of the free plan's 600 s per 28 days.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Leakage explains the shot-wide correlation</h2>
+  <p>In the main run, neighboring readouts were correlated on every qubit, and the correlation stayed nearly as strong two to eight readouts apart. A hidden variable that persists from readout to readout cannot produce that pattern. The follow-up placed two flip pulses after every four readouts: a qubit that has leaked out of its two levels reads "1" three times in a row instead of alternating, which tags the block.</p>
+  <figure>
+    <div class="legend"><span><span class="sw" style="background:var(--raw)"></span>all blocks</span><span><span class="sw" style="background:var(--accent)"></span>leak-tagged blocks removed</span></div>
+    <div class="scroll"><svg viewBox="0 0 640 280" role="img" aria-labelledby="fig2t">
+<title id="fig2t">Shot-wide covariance before and after removing leak-tagged blocks</title>
+<line class="axis" x1="64" x2="624" y1="208.5" y2="208.5"/>
+<text class="tick" x="56" y="212.5" text-anchor="end">0</text>
+<line class="grid" x1="64" x2="624" y1="153.5" y2="153.5"/>
+<text class="tick" x="56" y="157.5" text-anchor="end">+0.002</text>
+<line class="grid" x1="64" x2="624" y1="98.5" y2="98.5"/>
+<text class="tick" x="56" y="102.5" text-anchor="end">+0.004</text>
+<line class="grid" x1="64" x2="624" y1="43.5" y2="43.5"/>
+<text class="tick" x="56" y="47.5" text-anchor="end">+0.006</text>
+<rect class="bar-raw" x="80.8" y="178.1" width="28.0" height="30.4"/>
+<line class="whisker" x1="94.8" x2="94.8" y1="167.7" y2="188.6"/>
+<rect class="bar-ok" x="110.7" y="204.5" width="28.0" height="4.0"/>
+<line class="whisker" x1="124.7" x2="124.7" y1="193.8" y2="215.1"/>
+<text class="cat" x="110.7" y="256.0" text-anchor="middle">21</text>
+<rect class="bar-raw" x="174.1" y="116.4" width="28.0" height="92.1"/>
+<line class="whisker" x1="188.1" x2="188.1" y1="106.0" y2="126.9"/>
+<rect class="bar-ok" x="204.0" y="200.9" width="28.0" height="7.6"/>
+<line class="whisker" x1="218.0" x2="218.0" y1="189.8" y2="212.1"/>
+<text class="cat" x="204.0" y="256.0" text-anchor="middle">154</text>
+<rect class="bar-raw" x="267.5" y="125.8" width="28.0" height="82.7"/>
+<line class="whisker" x1="281.5" x2="281.5" y1="115.4" y2="136.3"/>
+<rect class="bar-ok" x="297.3" y="200.7" width="28.0" height="7.8"/>
+<line class="whisker" x1="311.3" x2="311.3" y1="190.0" y2="211.4"/>
+<text class="cat" x="297.3" y="256.0" text-anchor="middle">11</text>
+<rect class="bar-raw" x="360.8" y="30.4" width="28.0" height="178.1"/>
+<line class="whisker" x1="374.8" x2="374.8" y1="20.0" y2="40.8"/>
+<rect class="bar-ok" x="390.7" y="208.5" width="28.0" height="8.0"/>
+<line class="whisker" x1="404.7" x2="404.7" y1="205.6" y2="227.3"/>
+<text class="cat" x="390.7" y="256.0" text-anchor="middle">149</text>
+<rect class="bar-raw" x="454.1" y="96.1" width="28.0" height="112.4"/>
+<line class="whisker" x1="468.1" x2="468.1" y1="85.7" y2="106.5"/>
+<rect class="bar-ok" x="484.0" y="186.0" width="28.0" height="22.5"/>
+<line class="whisker" x1="498.0" x2="498.0" y1="175.2" y2="196.8"/>
+<text class="cat" x="484.0" y="256.0" text-anchor="middle">109</text>
+<rect class="bar-raw" x="547.5" y="58.4" width="28.0" height="150.1"/>
+<line class="whisker" x1="561.5" x2="561.5" y1="47.9" y2="68.8"/>
+<rect class="bar-ok" x="577.3" y="195.8" width="28.0" height="12.7"/>
+<line class="whisker" x1="591.3" x2="591.3" y1="185.1" y2="206.6"/>
+<text class="cat" x="577.3" y="256.0" text-anchor="middle">89</text>
+<text class="axis-title" x="344" y="274" text-anchor="middle">physical qubit</text>
+</svg></div>
+    <figcaption><b>Figure 1.</b> Covariance between readouts in consecutive six-readout blocks, about 8.7 µs apart, per qubit, at a 1.44 µs readout spacing (follow-up condition T0, 173,600 shots per qubit). Grey: every block; teal: only blocks whose own check and the previous block's check alternate normally. Whiskers show ±1 standard error. Removing tagged blocks takes the pooled value from 0.0011 to 0.0065 per qubit to +0.0003 ± 0.0002.</figcaption>
+  </figure>
+  <p>The leaked fraction barely changed when the readout rate dropped by a factor of 3.8, so the leakage builds up with elapsed time rather than being caused by the readouts. Lifetimes from the tags are 9 to 124 µs; these are lower limits.</p>
+</section>
+
+<section>
+  <h2>What remains: readout memory</h2>
+  <figure>
+    <div class="legend"><span><span class="sw" style="background:var(--accent)"></span>within five standard errors of zero</span><span><span class="sw" style="background:var(--flag)"></span>beyond five standard errors</span></div>
+    <div class="scroll"><svg viewBox="0 0 640 300" role="img" aria-labelledby="fig1t">
+<title id="fig1t">Clean neighbor covariance per qubit at a 1.44 microsecond spacing</title>
+<line class="grid" x1="64" x2="624" y1="244.0" y2="244.0"/>
+<text class="tick" x="56" y="248.0" text-anchor="end">−0.010</text>
+<line class="grid" x1="64" x2="624" y1="184.0" y2="184.0"/>
+<text class="tick" x="56" y="188.0" text-anchor="end">−0.005</text>
+<line class="axis" x1="64" x2="624" y1="124.0" y2="124.0"/>
+<text class="tick" x="56" y="128.0" text-anchor="end">+0.000</text>
+<line class="grid" x1="64" x2="624" y1="64.0" y2="64.0"/>
+<text class="tick" x="56" y="68.0" text-anchor="end">+0.005</text>
+<rect class="bar-ok" x="84.5" y="115.4" width="52.3" height="8.6"/>
+<line class="whisker" x1="110.7" x2="110.7" y1="90.0" y2="140.8"/>
+<line class="whisker" x1="104.7" x2="116.7" y1="90.0" y2="90.0"/>
+<line class="whisker" x1="104.7" x2="116.7" y1="140.8" y2="140.8"/>
+<text class="val" x="110.7" y="84.0" text-anchor="middle">+0.0007</text>
+<text class="cat" x="110.7" y="276.0" text-anchor="middle">21</text>
+<rect class="bar-flag" x="177.9" y="124.0" width="52.3" height="32.0"/>
+<line class="whisker" x1="204.0" x2="204.0" y1="129.7" y2="182.2"/>
+<line class="whisker" x1="198.0" x2="210.0" y1="129.7" y2="129.7"/>
+<line class="whisker" x1="198.0" x2="210.0" y1="182.2" y2="182.2"/>
+<text class="val" x="204.0" y="196.2" text-anchor="middle">−0.0027</text>
+<text class="cat" x="204.0" y="276.0" text-anchor="middle">154</text>
+<rect class="bar-flag" x="271.2" y="124.0" width="52.3" height="102.6"/>
+<line class="whisker" x1="297.3" x2="297.3" y1="201.0" y2="252.1"/>
+<line class="whisker" x1="291.3" x2="303.3" y1="201.0" y2="201.0"/>
+<line class="whisker" x1="291.3" x2="303.3" y1="252.1" y2="252.1"/>
+<text class="val" x="297.3" y="266.1" text-anchor="middle">−0.0085</text>
+<text class="cat" x="297.3" y="276.0" text-anchor="middle">11</text>
+<rect class="bar-ok" x="364.5" y="124.0" width="52.3" height="20.1"/>
+<line class="whisker" x1="390.7" x2="390.7" y1="118.3" y2="169.9"/>
+<line class="whisker" x1="384.7" x2="396.7" y1="118.3" y2="118.3"/>
+<line class="whisker" x1="384.7" x2="396.7" y1="169.9" y2="169.9"/>
+<text class="val" x="390.7" y="183.9" text-anchor="middle">−0.0017</text>
+<text class="cat" x="390.7" y="276.0" text-anchor="middle">149</text>
+<rect class="bar-flag" x="457.9" y="52.0" width="52.3" height="72.0"/>
+<line class="whisker" x1="484.0" x2="484.0" y1="26.3" y2="77.7"/>
+<line class="whisker" x1="478.0" x2="490.0" y1="26.3" y2="26.3"/>
+<line class="whisker" x1="478.0" x2="490.0" y1="77.7" y2="77.7"/>
+<text class="val" x="484.0" y="20.3" text-anchor="middle">+0.0060</text>
+<text class="cat" x="484.0" y="276.0" text-anchor="middle">109</text>
+<rect class="bar-ok" x="551.2" y="124.0" width="52.3" height="1.0"/>
+<line class="whisker" x1="577.3" x2="577.3" y1="99.2" y2="150.4"/>
+<line class="whisker" x1="571.3" x2="583.3" y1="99.2" y2="99.2"/>
+<line class="whisker" x1="571.3" x2="583.3" y1="150.4" y2="150.4"/>
+<text class="val" x="577.3" y="164.4" text-anchor="middle">−0.0001</text>
+<text class="cat" x="577.3" y="276.0" text-anchor="middle">89</text>
+<text class="axis-title" x="344" y="294" text-anchor="middle">physical qubit</text>
+</svg></div>
+    <figcaption><b>Figure 2.</b> Covariance of neighboring readouts after leak-tagged blocks are removed, per qubit, at a 1.44 µs spacing (follow-up condition T0), with the pulse-amplitude term subtracted. Whiskers span ±5 standard errors. A persisting detector variable can only add a positive value. The negative values on qubits 154, 11 and 149 show that ordinary readout memory of either sign is present on this device.</figcaption>
+  </figure>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Qubit</th><th>Clean neighbor covariance</th><th>Reading</th></tr></thead>
+    <tbody>
+<tr><td>21</td><td>+0.0007 ± 0.0004</td><td>w<sub>D</sub> &lt; 2.8×10<sup>−3</sup></td></tr>
+<tr><td>154</td><td>−0.0027 ± 0.0004</td><td>readout memory</td></tr>
+<tr><td>11</td><td>−0.0085 ± 0.0004</td><td>readout memory</td></tr>
+<tr><td>149</td><td>−0.0017 ± 0.0004</td><td>w<sub>D</sub> &lt; 4.8×10<sup>−4</sup></td></tr>
+<tr><td>109</td><td>+0.0060 ± 0.0004</td><td>readout memory</td></tr>
+<tr><td>89</td><td>−0.0001 ± 0.0004</td><td>w<sub>D</sub> &lt; 2.1×10<sup>−3</sup></td></tr>
+    </tbody>
+  </table></div>
+  <p>On qubit 109 the memory grows to +0.0125 at a 41.4 µs spacing. A hidden variable that decays between readouts would weaken with spacing, so this, too, is conventional. Because negative contributions occur on this device, the limits from single qubits rest on an assumption. The shape-fit limit in the second card does not.</p>
+</section>
+
+<section>
+  <h2>Why it matters beyond the models</h2>
+  <p>Leakage that lasts for many readout rounds and readout memory at the 10<sup>−3</sup> level are the kinds of correlated measurement errors that degrade surface-code memory in simulations by Kam and colleagues (Quantum Sci. Technol., 2025). Seeing them took about 10<sup>7</sup> readout pairs per qubit, well within a free cloud allowance.</p>
+</section>
+
+<p class="note">Records, run reports and code are in the project repository: run data under <code>data/cloudrun/</code>, the design notes <code>notes/CLOUD_RUN_DESIGN.md</code> and <code>notes/CLOUD_RUN_FOLLOWUP_DESIGN.md</code>, the results <code>notes/CLOUD_RUN_RESULTS.md</code>, and the analysis in <code>analysis/cloud_run_*.py</code>. The leakage model fitted after the main run is exploratory. This is independent work using a personal IBM Quantum account; no lab or institution has endorsed it.</p>
+</main>

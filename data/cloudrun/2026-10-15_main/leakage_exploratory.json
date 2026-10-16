@@ -1,0 +1,655 @@
+{
+  "run": "data/cloudrun/2026-10-15_main",
+  "status": "exploratory, chosen after seeing the data",
+  "model": "(three true levels |0>, |1>, |2>; quantum mechanics, no hidden\nvariable): before each step, |2> decays to |1> with probability g_dn per\nrecord period; the step acts on |0>, |1> as designed (P(0) = (1 - b cos phi)/2\nfrom |b>) and leaves |2> alone; during each readout |0> and |1> leak to |2>\nwith probabilities g0 and g1; the readout reports \"1\" from |0> with\nprobability e0, \"0\" from |1> with probability e1, and \"1\" from |2> with\nprobability q2; the post-readout level is the true level.",
+  "record_period_B0_s": 1.4439999999999999e-06,
+  "qubits": [
+    {
+      "qubit_index": 0,
+      "physical_qubit": 21,
+      "fit": {
+        "params": {
+          "e0": 0.004506285138903561,
+          "e1": 0.003159544936956379,
+          "g0": 5.269377108785087e-05,
+          "g1": 0.00014750591105731122,
+          "g_dn": 0.023780114202479,
+          "q2": 0.9519517183557726
+        },
+        "neg_loglik": 2797995.588207716,
+        "converged": true,
+        "records": 5120000
+      },
+      "leaked_lifetime_us": 60.723005268387965,
+      "conditions": {
+        "A0": {
+          "record_period_us": 1.444,
+          "observed_lags": [
+            0.00284,
+            0.00138,
+            0.002,
+            0.00106,
+            0.00129,
+            0.00114,
+            0.00196,
+            0.00133
+          ],
+          "predicted_lags": [
+            0.00173,
+            0.00146,
+            0.0019,
+            0.00176,
+            0.00102,
+            0.00173,
+            0.00138,
+            0.00127
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00111,
+            0.00036
+          ],
+          "lag2to8_observed_minus_predicted_mean": -5e-05
+        },
+        "A1": {
+          "record_period_us": 5.444,
+          "observed_lags": [
+            0.00388,
+            0.00193,
+            0.0017,
+            0.00096,
+            0.00115,
+            0.00139,
+            0.00125,
+            0.00054
+          ],
+          "predicted_lags": [
+            0.00088,
+            0.00116,
+            0.0007,
+            0.00086,
+            0.00034,
+            0.00041,
+            0.0005,
+            0.00043
+          ],
+          "observed_minus_predicted_lag1": [
+            0.003,
+            0.00044
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00064
+        },
+        "A2": {
+          "record_period_us": 41.444,
+          "observed_lags": [
+            0.00262,
+            0.00258,
+            0.00124,
+            -0.00057,
+            0.00051,
+            0.00152,
+            -0.00022,
+            -0.002
+          ],
+          "predicted_lags": [
+            -0.00034,
+            -0.00049,
+            0.0003,
+            0.00024,
+            0.00051,
+            1e-05,
+            -0.00021,
+            0.00067
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00297,
+            0.00109
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00029
+        }
+      }
+    },
+    {
+      "qubit_index": 1,
+      "physical_qubit": 154,
+      "fit": {
+        "params": {
+          "e0": 0.01226537930619284,
+          "e1": 0.009370903588983513,
+          "g0": 0.0003139221448029999,
+          "g1": 0.0018296725753195319,
+          "g_dn": 0.013467844851096238,
+          "q2": 0.7362718379994173
+        },
+        "neg_loglik": 2869811.467343471,
+        "converged": true,
+        "records": 5120000
+      },
+      "leaked_lifetime_us": 107.21834235285706,
+      "conditions": {
+        "A0": {
+          "record_period_us": 1.444,
+          "observed_lags": [
+            0.00402,
+            0.00551,
+            0.00521,
+            0.00504,
+            0.00495,
+            0.00479,
+            0.00494,
+            0.00416
+          ],
+          "predicted_lags": [
+            0.00561,
+            0.00558,
+            0.00557,
+            0.00497,
+            0.0048,
+            0.00487,
+            0.00477,
+            0.00443
+          ],
+          "observed_minus_predicted_lag1": [
+            -0.00159,
+            0.00036
+          ],
+          "lag2to8_observed_minus_predicted_mean": -5e-05
+        },
+        "A1": {
+          "record_period_us": 5.444,
+          "observed_lags": [
+            0.00366,
+            0.00388,
+            0.0039,
+            0.00383,
+            0.00388,
+            0.00339,
+            0.0031,
+            0.00329
+          ],
+          "predicted_lags": [
+            0.00298,
+            0.00271,
+            0.00239,
+            0.00259,
+            0.00225,
+            0.00281,
+            0.00204,
+            0.00223
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00068,
+            0.00044
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00118
+        },
+        "A2": {
+          "record_period_us": 41.444,
+          "observed_lags": [
+            0.00268,
+            0.0025,
+            0.00149,
+            0.00145,
+            0.00039,
+            0.00022,
+            -0.00066,
+            -0.00136
+          ],
+          "predicted_lags": [
+            0.00054,
+            0.00042,
+            0.0003,
+            0.00026,
+            -0.00042,
+            0.00011,
+            0.00012,
+            -0.00077
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00215,
+            0.00109
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00058
+        }
+      }
+    },
+    {
+      "qubit_index": 2,
+      "physical_qubit": 11,
+      "fit": {
+        "params": {
+          "e0": 0.003432245979306783,
+          "e1": 0.006485119472031829,
+          "g0": 0.00017743098184720376,
+          "g1": 0.00023761194441079155,
+          "g_dn": 0.0191298280918821,
+          "q2": 0.9378577646054828
+        },
+        "neg_loglik": 2802184.182423448,
+        "converged": true,
+        "records": 5120000
+      },
+      "leaked_lifetime_us": 75.48421204123487,
+      "conditions": {
+        "A0": {
+          "record_period_us": 1.444,
+          "observed_lags": [
+            -0.00439,
+            0.00301,
+            0.00352,
+            0.00298,
+            0.00297,
+            0.00336,
+            0.00305,
+            0.00325
+          ],
+          "predicted_lags": [
+            0.00364,
+            0.00355,
+            0.00367,
+            0.00321,
+            0.00299,
+            0.00311,
+            0.00271,
+            0.0024
+          ],
+          "observed_minus_predicted_lag1": [
+            -0.00803,
+            0.00036
+          ],
+          "lag2to8_observed_minus_predicted_mean": 7e-05
+        },
+        "A1": {
+          "record_period_us": 5.444,
+          "observed_lags": [
+            -0.00333,
+            0.00457,
+            0.00427,
+            0.00377,
+            0.00412,
+            0.00453,
+            0.00366,
+            0.00298
+          ],
+          "predicted_lags": [
+            0.00183,
+            0.00185,
+            0.00176,
+            0.00123,
+            0.00102,
+            0.00125,
+            0.00138,
+            0.00067
+          ],
+          "observed_minus_predicted_lag1": [
+            -0.00517,
+            0.00044
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00268
+        },
+        "A2": {
+          "record_period_us": 41.444,
+          "observed_lags": [
+            -0.00204,
+            0.00299,
+            0.00212,
+            0.00296,
+            -0.00066,
+            0.00241,
+            0.00072,
+            0.00095
+          ],
+          "predicted_lags": [
+            -9e-05,
+            8e-05,
+            0.00016,
+            0.00045,
+            0.00094,
+            0.00051,
+            -0.00049,
+            -0.00161
+          ],
+          "observed_minus_predicted_lag1": [
+            -0.00195,
+            0.00109
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00164
+        }
+      }
+    },
+    {
+      "qubit_index": 3,
+      "physical_qubit": 149,
+      "fit": {
+        "params": {
+          "e0": 0.013122936495228051,
+          "e1": 0.012942267803659577,
+          "g0": 0.0004470120867807195,
+          "g1": 0.00025348366995257566,
+          "g_dn": 0.014863131283588016,
+          "q2": 0.9892674277104386
+        },
+        "neg_loglik": 2859658.7019600263,
+        "converged": true,
+        "records": 5120000
+      },
+      "leaked_lifetime_us": 97.15314844823283,
+      "conditions": {
+        "A0": {
+          "record_period_us": 1.444,
+          "observed_lags": [
+            0.00784,
+            0.00854,
+            0.00766,
+            0.0083,
+            0.00765,
+            0.00775,
+            0.00758,
+            0.00785
+          ],
+          "predicted_lags": [
+            0.00733,
+            0.00747,
+            0.00763,
+            0.00714,
+            0.00747,
+            0.00727,
+            0.00649,
+            0.0063
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00051,
+            0.00036
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00079
+        },
+        "A1": {
+          "record_period_us": 5.444,
+          "observed_lags": [
+            0.00647,
+            0.00589,
+            0.00561,
+            0.00545,
+            0.00562,
+            0.0045,
+            0.00363,
+            0.00509
+          ],
+          "predicted_lags": [
+            0.00444,
+            0.00401,
+            0.00398,
+            0.00316,
+            0.00312,
+            0.00319,
+            0.00283,
+            0.00244
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00202,
+            0.00044
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00187
+        },
+        "A2": {
+          "record_period_us": 41.444,
+          "observed_lags": [
+            0.00481,
+            0.00287,
+            0.00212,
+            0.00253,
+            0.0008,
+            0.00166,
+            0.00025,
+            0.00067
+          ],
+          "predicted_lags": [
+            0.00054,
+            0.00059,
+            -0.00026,
+            0.00083,
+            0.00058,
+            -0.00113,
+            3e-05,
+            -0.0009
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00426,
+            0.00109
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.0016
+        }
+      }
+    },
+    {
+      "qubit_index": 4,
+      "physical_qubit": 109,
+      "fit": {
+        "params": {
+          "e0": 0.006825418121033811,
+          "e1": 0.0039546129215168166,
+          "g0": 8.418653573265667e-05,
+          "g1": 0.00021673193625985568,
+          "g_dn": 0.02702438109495572,
+          "q2": 0.9981900769688363
+        },
+        "neg_loglik": 2806984.5487563624,
+        "converged": true,
+        "records": 5120000
+      },
+      "leaked_lifetime_us": 53.433231085892736,
+      "conditions": {
+        "A0": {
+          "record_period_us": 1.444,
+          "observed_lags": [
+            0.00989,
+            0.00337,
+            0.00325,
+            0.00293,
+            0.00265,
+            0.00291,
+            0.00278,
+            0.0028
+          ],
+          "predicted_lags": [
+            0.00285,
+            0.0029,
+            0.00284,
+            0.00244,
+            0.00231,
+            0.00274,
+            0.00298,
+            0.0021
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00704,
+            0.00036
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00034
+        },
+        "A1": {
+          "record_period_us": 5.444,
+          "observed_lags": [
+            0.01064,
+            0.00226,
+            0.00293,
+            0.00197,
+            0.00213,
+            0.00291,
+            0.00262,
+            0.0012
+          ],
+          "predicted_lags": [
+            0.00128,
+            0.00111,
+            0.00068,
+            0.00067,
+            0.00094,
+            0.00067,
+            0.00073,
+            0.00051
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00936,
+            0.00044
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00153
+        },
+        "A2": {
+          "record_period_us": 41.444,
+          "observed_lags": [
+            0.00617,
+            0.00285,
+            0.00263,
+            0.00138,
+            -0.00109,
+            -0.00013,
+            0.001,
+            0.00029
+          ],
+          "predicted_lags": [
+            -5e-05,
+            -3e-05,
+            0.00017,
+            -0.00037,
+            0.0008,
+            0.00095,
+            1e-05,
+            -0.00062
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00622,
+            0.00109
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00086
+        }
+      }
+    },
+    {
+      "qubit_index": 5,
+      "physical_qubit": 89,
+      "fit": {
+        "params": {
+          "e0": 0.005427344150756333,
+          "e1": 0.0030213281707895563,
+          "g0": 0.0006485794713707858,
+          "g1": 7.610593979720096e-05,
+          "g_dn": 0.027377767838004184,
+          "q2": 0.990332188077764
+        },
+        "neg_loglik": 2794021.3941891273,
+        "converged": true,
+        "records": 5120000
+      },
+      "leaked_lifetime_us": 52.74352564256627,
+      "conditions": {
+        "A0": {
+          "record_period_us": 1.444,
+          "observed_lags": [
+            0.00656,
+            0.00543,
+            0.00533,
+            0.00571,
+            0.00565,
+            0.00498,
+            0.00484,
+            0.00465
+          ],
+          "predicted_lags": [
+            0.00654,
+            0.00639,
+            0.00631,
+            0.00593,
+            0.00558,
+            0.00536,
+            0.00521,
+            0.0047
+          ],
+          "observed_minus_predicted_lag1": [
+            2e-05,
+            0.00036
+          ],
+          "lag2to8_observed_minus_predicted_mean": -0.00041
+        },
+        "A1": {
+          "record_period_us": 5.444,
+          "observed_lags": [
+            0.00397,
+            0.00321,
+            0.00328,
+            0.00272,
+            0.0028,
+            0.00254,
+            0.00219,
+            0.00135
+          ],
+          "predicted_lags": [
+            0.00296,
+            0.00244,
+            0.00189,
+            0.00222,
+            0.00187,
+            0.00149,
+            0.00153,
+            0.00126
+          ],
+          "observed_minus_predicted_lag1": [
+            0.00102,
+            0.00044
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00077
+        },
+        "A2": {
+          "record_period_us": 41.444,
+          "observed_lags": [
+            0.0031,
+            0.00032,
+            0.00055,
+            0.00196,
+            0.00106,
+            0.00084,
+            0.00219,
+            0.00084
+          ],
+          "predicted_lags": [
+            0.00059,
+            0.00051,
+            -0.00066,
+            0.00019,
+            -0.00023,
+            -0.00027,
+            -0.00141,
+            1e-05
+          ],
+          "observed_minus_predicted_lag1": [
+            0.0025,
+            0.00109
+          ],
+          "lag2to8_observed_minus_predicted_mean": 0.00137
+        }
+      }
+    }
+  ],
+  "pooled_lag1_residual": {
+    "A0": {
+      "lag1_residual": [
+        -0.000157,
+        0.000147
+      ],
+      "upper_5sigma": 0.000578
+    },
+    "A1": {
+      "lag1_residual": [
+        0.001818,
+        0.00018
+      ],
+      "upper_5sigma": 0.002716
+    },
+    "A2": {
+      "lag1_residual": [
+        0.002692,
+        0.000445
+      ],
+      "upper_5sigma": 0.004917
+    }
+  }
+}

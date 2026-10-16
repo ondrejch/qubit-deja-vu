@@ -1,0 +1,201 @@
+{
+  "saved": "2026-10-15T20:04:45+00:00",
+  "job_id": "db8ivc5ckpjs73b13pn0,db8ivcdckpjs73b13png,db8ivcheukqs73aqn8p0,db8ivcpeukqs73aqn8q0,db8ive5ckpjs73b13psg",
+  "build_report": {
+    "backend": "ibm_kingston",
+    "measure": "measure_2",
+    "layout": [
+      21,
+      154,
+      11,
+      149,
+      109,
+      89
+    ],
+    "dt_s": 4e-09,
+    "rep_delay_s": 0.00025,
+    "readout_s": 1.38e-06,
+    "sx_s": 3.2e-08,
+    "shots": 400,
+    "checks": [
+      "step convention matches the design script (max Bloch error 8.3e-16)",
+      "A0: 768 sx",
+      "A0: 384 measure_2",
+      "A0: all 768 rz kept",
+      "A0: parameters preserved",
+      "A0: no reset or extra gates",
+      "A0: binds",
+      "A1: 768 sx",
+      "A1: 384 measure_2",
+      "A1: all 768 rz kept",
+      "A1: parameters preserved",
+      "A1: no reset or extra gates",
+      "A1: binds",
+      "A2: 192 sx",
+      "A2: 96 measure_2",
+      "A2: all 192 rz kept",
+      "A2: parameters preserved",
+      "A2: no reset or extra gates",
+      "A2: binds",
+      "B0: 768 sx",
+      "B0: 384 measure_2",
+      "B0: all 768 rz kept",
+      "B0: parameters preserved",
+      "B0: no reset or extra gates",
+      "B0: binds",
+      "C2: 12 sx",
+      "C2: 6 measure_2",
+      "C2: all 12 rz kept",
+      "C2: parameters preserved",
+      "C2: no reset or extra gates",
+      "C2: binds",
+      "amplitude_1: 6 sx",
+      "amplitude_9: 54 sx",
+      "amplitude_25: 150 sx",
+      "amplitude_49: 294 sx",
+      "amplitude_97: 582 sx"
+    ],
+    "A0": {
+      "kind": "balanced",
+      "records": 64,
+      "delay_dt": 0,
+      "sets": 438,
+      "executions": 175200,
+      "parameters": 768,
+      "estimated_duration_us": 92.42,
+      "estimated_qpu_s": 60.0,
+      "ops": {
+        "rz": 768,
+        "sx": 768,
+        "measure_2": 384,
+        "barrier": 64
+      }
+    },
+    "A1": {
+      "kind": "balanced",
+      "records": 64,
+      "delay_dt": 1000,
+      "sets": 251,
+      "executions": 100400,
+      "parameters": 768,
+      "estimated_duration_us": 348.42,
+      "estimated_qpu_s": 60.1,
+      "ops": {
+        "rz": 768,
+        "sx": 768,
+        "delay": 384,
+        "measure_2": 384,
+        "barrier": 64
+      }
+    },
+    "A2": {
+      "kind": "balanced",
+      "records": 16,
+      "delay_dt": 10000,
+      "sets": 164,
+      "executions": 65600,
+      "parameters": 192,
+      "estimated_duration_us": 663.1,
+      "estimated_qpu_s": 59.9,
+      "ops": {
+        "rz": 192,
+        "sx": 192,
+        "delay": 96,
+        "measure_2": 96,
+        "barrier": 16
+      }
+    },
+    "B0": {
+      "kind": "probe",
+      "records": 64,
+      "delay_dt": 0,
+      "sets": 1314,
+      "executions": 525600,
+      "parameters": 768,
+      "estimated_duration_us": 92.42,
+      "estimated_qpu_s": 180.0,
+      "ops": {
+        "rz": 768,
+        "sx": 768,
+        "measure_2": 384,
+        "barrier": 64
+      }
+    },
+    "C2": {
+      "kind": "phase",
+      "records": 1,
+      "delay_dt": 0,
+      "sets": 32,
+      "executions": 12800,
+      "parameters": 12,
+      "estimated_duration_us": 1.44,
+      "estimated_qpu_s": 3.2,
+      "ops": {
+        "rz": 12,
+        "sx": 12,
+        "measure_2": 6,
+        "barrier": 1
+      }
+    },
+    "estimated_qpu_s_total": 363.7
+  },
+  "chains": {
+    "A0": {
+      "kind": "balanced",
+      "records": 64,
+      "shape": [
+        438,
+        400,
+        6,
+        64
+      ]
+    },
+    "A1": {
+      "kind": "balanced",
+      "records": 64,
+      "shape": [
+        251,
+        400,
+        6,
+        64
+      ]
+    },
+    "A2": {
+      "kind": "balanced",
+      "records": 16,
+      "shape": [
+        164,
+        400,
+        6,
+        16
+      ]
+    },
+    "B0": {
+      "kind": "probe",
+      "records": 64,
+      "shape": [
+        1314,
+        400,
+        6,
+        64
+      ]
+    },
+    "C2": {
+      "kind": "phase",
+      "records": 1,
+      "shape": [
+        32,
+        400,
+        6,
+        1
+      ]
+    }
+  },
+  "amplitude_pulses": [
+    1,
+    9,
+    25,
+    49,
+    97
+  ]
+}

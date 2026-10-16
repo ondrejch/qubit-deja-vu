@@ -1,0 +1,304 @@
+{
+  "status": "PASS",
+  "checks": 26,
+  "simulated_cases": {
+    "QM, ideal": {
+      "clean": {
+        "lag1": [
+          0.00133,
+          0.0005
+        ],
+        "lag2": [
+          0.0004,
+          0.00062
+        ],
+        "lag3": [
+          7e-05,
+          0.00087
+        ],
+        "cross_block": [
+          0.00033,
+          0.00046
+        ]
+      },
+      "all": {
+        "lag1": [
+          0.00133,
+          0.0005
+        ],
+        "lag2": [
+          0.0004,
+          0.00062
+        ],
+        "lag3": [
+          7e-05,
+          0.00087
+        ],
+        "cross_block": [
+          0.00033,
+          0.00046
+        ]
+      },
+      "fraction_checks_leaked": 0.0,
+      "fraction_blocks_clean": 1.0
+    },
+    "QM, leakage": {
+      "clean": {
+        "lag1": [
+          -0.0002,
+          0.00053
+        ],
+        "lag2": [
+          0.00136,
+          0.00065
+        ],
+        "lag3": [
+          0.00012,
+          0.00093
+        ],
+        "cross_block": [
+          -0.0009,
+          0.0005
+        ]
+      },
+      "all": {
+        "lag1": [
+          0.04061,
+          0.0005
+        ],
+        "lag2": [
+          0.04091,
+          0.00061
+        ],
+        "lag3": [
+          0.03838,
+          0.00087
+        ],
+        "cross_block": [
+          0.03514,
+          0.00046
+        ]
+      },
+      "fraction_checks_leaked": 0.05197,
+      "fraction_blocks_clean": 0.8835
+    },
+    "QM, leakage and readout memory +1%": {
+      "clean": {
+        "lag1": [
+          0.00539,
+          0.00054
+        ],
+        "lag2": [
+          -0.00111,
+          0.00066
+        ],
+        "lag3": [
+          -0.00116,
+          0.00094
+        ],
+        "cross_block": [
+          7e-05,
+          0.00051
+        ]
+      },
+      "all": {
+        "lag1": [
+          0.04637,
+          0.0005
+        ],
+        "lag2": [
+          0.03853,
+          0.00061
+        ],
+        "lag3": [
+          0.03695,
+          0.00087
+        ],
+        "cross_block": [
+          0.03539,
+          0.00046
+        ]
+      },
+      "fraction_checks_leaked": 0.05662,
+      "fraction_blocks_clean": 0.8624
+    },
+    "QM, leakage and readout memory -1%": {
+      "clean": {
+        "lag1": [
+          -0.0036,
+          0.00054
+        ],
+        "lag2": [
+          0.00031,
+          0.00066
+        ],
+        "lag3": [
+          0.00137,
+          0.00093
+        ],
+        "cross_block": [
+          0.00025,
+          0.0005
+        ]
+      },
+      "all": {
+        "lag1": [
+          0.03692,
+          0.0005
+        ],
+        "lag2": [
+          0.04026,
+          0.00061
+        ],
+        "lag3": [
+          0.03962,
+          0.00087
+        ],
+        "cross_block": [
+          0.0359,
+          0.00046
+        ]
+      },
+      "fraction_checks_leaked": 0.05157,
+      "fraction_blocks_clean": 0.8796
+    },
+    "D w=0.3, leakage": {
+      "clean": {
+        "lag1": [
+          0.28824,
+          0.00051
+        ],
+        "lag2": [
+          0.08738,
+          0.00065
+        ],
+        "lag3": [
+          0.02776,
+          0.00093
+        ],
+        "cross_block": [
+          0.00087,
+          0.0005
+        ]
+      },
+      "all": {
+        "lag1": [
+          0.31391,
+          0.00048
+        ],
+        "lag2": [
+          0.12235,
+          0.00061
+        ],
+        "lag3": [
+          0.0646,
+          0.00087
+        ],
+        "cross_block": [
+          0.03705,
+          0.00046
+        ]
+      },
+      "fraction_checks_leaked": 0.0523,
+      "fraction_blocks_clean": 0.8828
+    },
+    "D w=0.05, no leakage": {
+      "clean": {
+        "lag1": [
+          0.05017,
+          0.0005
+        ],
+        "lag2": [
+          0.00293,
+          0.00062
+        ],
+        "lag3": [
+          -0.00101,
+          0.00087
+        ],
+        "cross_block": [
+          -0.00051,
+          0.00046
+        ]
+      },
+      "all": {
+        "lag1": [
+          0.05017,
+          0.0005
+        ],
+        "lag2": [
+          0.00293,
+          0.00062
+        ],
+        "lag3": [
+          -0.00101,
+          0.00087
+        ],
+        "cross_block": [
+          -0.00051,
+          0.00046
+        ]
+      },
+      "fraction_checks_leaked": 0.0,
+      "fraction_blocks_clean": 1.0
+    }
+  },
+  "leak_persistence": {
+    "estimated_after_two_leaked": 0.8843,
+    "estimated_after_one_leaked": 0.7872,
+    "model": 0.8862
+  },
+  "budget": {
+    "conditions": [
+      {
+        "label": "T0",
+        "records": 66,
+        "period_us": 1.444,
+        "qpu_s": 60.0,
+        "executions": 173759,
+        "within_block_neighbor_pairs": "3.44e+07",
+        "five_sigma_pooled_if_all_clean": 0.00085,
+        "five_sigma_per_qubit_if_all_clean": 0.00209
+      },
+      {
+        "label": "T1",
+        "records": 66,
+        "period_us": 5.444,
+        "qpu_s": 60.0,
+        "executions": 98473,
+        "within_block_neighbor_pairs": "1.95e+07",
+        "five_sigma_pooled_if_all_clean": 0.00113,
+        "five_sigma_per_qubit_if_all_clean": 0.00277
+      },
+      {
+        "label": "T2",
+        "records": 18,
+        "period_us": 41.444,
+        "qpu_s": 40.0,
+        "executions": 40160,
+        "within_block_neighbor_pairs": "2.17e+06",
+        "five_sigma_pooled_if_all_clean": 0.0034,
+        "five_sigma_per_qubit_if_all_clean": 0.00832
+      },
+      {
+        "label": "C2",
+        "records": 1,
+        "period_us": 1.444,
+        "qpu_s": 3.2,
+        "executions": 12726
+      }
+    ],
+    "amplitude_check_s": 0.51,
+    "jobs": 4,
+    "total_qpu_s_with_overheads": 173.7
+  },
+  "layout": [
+    21,
+    154,
+    11,
+    149,
+    109,
+    89
+  ],
+  "note": "Simulated design checks for the follow-up; nothing here is experimental data."
+}

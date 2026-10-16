@@ -1,0 +1,88 @@
+{
+  "backend": "ibm_fez",
+  "job": "fezmini",
+  "shots": 400,
+  "submitted": "2026-10-15T23:08:34-0400",
+  "estimate": {
+    "backend": "ibm_fez",
+    "job": "fezmini",
+    "shots": 400,
+    "layout": [
+      124,
+      26,
+      86,
+      144,
+      2,
+      6
+    ],
+    "readout_s": 1.34e-06,
+    "estimated_qpu_s": 12.5,
+    "conditions": {
+      "F0": {
+        "sets": 88,
+        "executions": 35200,
+        "estimated_qpu_s": 12.0
+      }
+    }
+  },
+  "jobs": [
+    {
+      "job_id": "db8pactckpjs73b1f6m0",
+      "entries": [
+        [
+          "F0",
+          null
+        ],
+        [
+          "amplitude_1",
+          null
+        ],
+        [
+          "amplitude_9",
+          null
+        ],
+        [
+          "amplitude_25",
+          null
+        ],
+        [
+          "amplitude_49",
+          null
+        ],
+        [
+          "amplitude_97",
+          null
+        ]
+      ],
+      "outcome": "done",
+      "usage": 15,
+      "metrics": {
+        "caller": "qiskit",
+        "qiskit_version": "qiskit_ibm_runtime-0.50.0,qiskit-2.5.2*,qiskit_aer-0.17.2",
+        "timestamps": {
+          "created": "2026-10-16T03:08:35.446684Z",
+          "finished": "2026-10-16T03:09:46.592686Z",
+          "running": "2026-10-16T03:08:37.205024Z"
+        },
+        "usage": {
+          "qpu_charge_time_seconds": 15,
+          "value": 0.244674,
+          "unit": "resource_units",
+          "status": "complete",
+          "details": [
+            {
+              "value": 0.244674,
+              "unit": "resource_units",
+              "metric": {
+                "id": "caffe3ca-729c-5750-8777-df63bbf8bfd9",
+                "value": 15
+              }
+            }
+          ]
+        },
+        "circuits_execution_time_ns": 12794144256
+      }
+    }
+  ],
+  "finished_after_s": 72
+}

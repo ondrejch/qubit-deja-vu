@@ -1,0 +1,44 @@
+{
+ "backend": "ibm_kingston",
+ "job": "main",
+ "shots": 400,
+ "layout": [
+  21,
+  154,
+  11,
+  149,
+  109,
+  89
+ ],
+ "readout_s": 1.38e-06,
+ "estimated_qpu_s": 363.7,
+ "conditions": {
+  "A0": {
+   "sets": 438,
+   "executions": 175200,
+   "estimated_qpu_s": 60.0
+  },
+  "A1": {
+   "sets": 251,
+   "executions": 100400,
+   "estimated_qpu_s": 60.1
+  },
+  "A2": {
+   "sets": 164,
+   "executions": 65600,
+   "estimated_qpu_s": 59.9
+  },
+  "B0": {
+   "sets": 1314,
+   "executions": 525600,
+   "estimated_qpu_s": 180.0
+  },
+  "C2": {
+   "sets": 32,
+   "executions": 12800,
+   "estimated_qpu_s": 3.2
+  }
+ }
+}
+submitted job db8iioheukqs73aqmbc0
+JOB FAILED: RuntimeJobFailureError "Unable to retrieve job result. Error code 1520; Failed to execute program: 'Could not fit item chunks into a shot loop of max size 1000 while also preserving quantum program item size ratios: consider reducing the ratios of item sizes or submitting items in separate jobs. -- Split workload into multiple jobs. See [Run jobs in a batch](https://quantum.cloud.ibm.com/docs/guides/run-jobs-batch#partition) for an example. -- https://ibm.biz/error_codes#1520"

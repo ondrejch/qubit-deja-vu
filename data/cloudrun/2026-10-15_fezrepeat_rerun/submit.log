@@ -1,0 +1,41 @@
+{
+ "backend": "ibm_fez",
+ "job": "fezrepeat",
+ "shots": 400,
+ "layout": [
+  124,
+  26,
+  86,
+  144,
+  2,
+  6
+ ],
+ "readout_s": 1.34e-06,
+ "estimated_qpu_s": 54.0,
+ "conditions": {
+  "G0": {
+   "sets": 198,
+   "executions": 79200,
+   "estimated_qpu_s": 27.1
+  },
+  "G1": {
+   "sets": 111,
+   "executions": 44400,
+   "estimated_qpu_s": 26.9
+  }
+ }
+}
+estimate with overhead: 57.0 s in 1 job(s)
+instance usage remaining: 98 s
+submitted job db8pnu8b3g5c73egp3l0 ['G0', 'G1']
+results after 71 s
+{
+ "saved": "data/cloudrun/2026-10-15_fezrepeat_rerun",
+ "flags": [
+  "G0: qubit 0 clean D_fix = 0.00407 +- 0.00063 (readout memory or persistence)",
+  "G0: qubit 3 clean D_fix = 0.00545 +- 0.00064 (readout memory or persistence)",
+  "G0: qubit 5 clean D_fix = 0.00515 +- 0.00063 (readout memory or persistence)",
+  "G1: qubit 0 clean D_fix = 0.00559 +- 0.00089 (readout memory or persistence)",
+  "G1: qubit 5 clean D_fix = 0.00575 +- 0.00086 (readout memory or persistence)"
+ ]
+}

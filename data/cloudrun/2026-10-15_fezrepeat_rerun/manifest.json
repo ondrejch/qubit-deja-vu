@@ -1,0 +1,93 @@
+{
+  "saved": "2026-10-16T03:38:40+00:00",
+  "job_id": "db8pnu8b3g5c73egp3l0",
+  "build_report": {
+    "backend": "ibm_fez",
+    "measure": "measure_2",
+    "layout": [
+      124,
+      26,
+      86,
+      144,
+      2,
+      6
+    ],
+    "dt_s": 4e-09,
+    "rep_delay_s": 0.00025,
+    "readout_s": 1.34e-06,
+    "sx_s": 2.4e-08,
+    "shots": 400,
+    "checks": [
+      "step convention matches the design script (max Bloch error 8.3e-16)",
+      "G0: 792 sx",
+      "G0: 396 measure_2",
+      "G0: all 792 rz kept",
+      "G0: parameters preserved",
+      "G0: no reset or extra gates",
+      "G0: binds",
+      "G1: 792 sx",
+      "G1: 396 measure_2",
+      "G1: all 792 rz kept",
+      "G1: parameters preserved",
+      "G1: no reset or extra gates",
+      "G1: binds"
+    ],
+    "G0": {
+      "kind": "tagged",
+      "records": 66,
+      "delay_dt": 0,
+      "sets": 198,
+      "executions": 79200,
+      "parameters": 792,
+      "estimated_duration_us": 91.61,
+      "estimated_qpu_s": 27.1,
+      "ops": {
+        "rz": 792,
+        "sx": 792,
+        "measure_2": 396,
+        "barrier": 66
+      }
+    },
+    "G1": {
+      "kind": "tagged",
+      "records": 66,
+      "delay_dt": 1000,
+      "sets": 111,
+      "executions": 44400,
+      "parameters": 792,
+      "estimated_duration_us": 355.61,
+      "estimated_qpu_s": 26.9,
+      "ops": {
+        "rz": 792,
+        "sx": 792,
+        "delay": 396,
+        "measure_2": 396,
+        "barrier": 66
+      }
+    },
+    "estimated_qpu_s_total": 54.0
+  },
+  "chains": {
+    "G0": {
+      "kind": "tagged",
+      "records": 66,
+      "shape": [
+        198,
+        400,
+        6,
+        66
+      ]
+    },
+    "G1": {
+      "kind": "tagged",
+      "records": 66,
+      "shape": [
+        111,
+        400,
+        6,
+        66
+      ]
+    }
+  },
+  "amplitude_pulses": []
+}

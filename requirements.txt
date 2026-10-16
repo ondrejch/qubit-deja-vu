@@ -1,0 +1,6 @@
+numpy>=1.26
+scipy>=1.11
+# optional, for circuits and Aer tests:
+# qiskit>=2.5
+# qiskit-ibm-runtime>=0.50
+# qiskit-aer>=0.17
