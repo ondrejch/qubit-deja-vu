@@ -1,0 +1,67 @@
+{
+  "run": "data/cloudrun/2026-10-15_fezmini",
+  "status": "exploratory, chosen after seeing the data",
+  "layout": [
+    124,
+    26,
+    86,
+    144,
+    2,
+    6
+  ],
+  "conditions": {
+    "F0": {
+      "kind": "tagged",
+      "clean_lag1_clustered": [
+        {
+          "cov": 0.003686,
+          "se_pairs": 0.000946,
+          "se_shot_clustered": 0.000942,
+          "se_set_clustered": 0.000881,
+          "inflation_shot": 0.996,
+          "inflation_set": 0.932
+        },
+        {
+          "cov": 9.6e-05,
+          "se_pairs": 0.00096,
+          "se_shot_clustered": 0.000955,
+          "se_set_clustered": 0.001003,
+          "inflation_shot": 0.994,
+          "inflation_set": 1.045
+        },
+        {
+          "cov": -0.000728,
+          "se_pairs": 0.000948,
+          "se_shot_clustered": 0.00094,
+          "se_set_clustered": 0.000977,
+          "inflation_shot": 0.992,
+          "inflation_set": 1.031
+        },
+        {
+          "cov": 0.003813,
+          "se_pairs": 0.000959,
+          "se_shot_clustered": 0.000957,
+          "se_set_clustered": 0.001003,
+          "inflation_shot": 0.998,
+          "inflation_set": 1.046
+        },
+        {
+          "cov": -0.00173,
+          "se_pairs": 0.000942,
+          "se_shot_clustered": 0.000936,
+          "se_set_clustered": 0.000881,
+          "inflation_shot": 0.994,
+          "inflation_set": 0.936
+        },
+        {
+          "cov": 0.005151,
+          "se_pairs": 0.000948,
+          "se_shot_clustered": 0.000949,
+          "se_set_clustered": 0.000874,
+          "inflation_shot": 1.0,
+          "inflation_set": 0.921
+        }
+      ]
+    }
+  }
+}

@@ -26,6 +26,12 @@ detector-anchored persistence would have to fit into.
 
 Exploratory: the model and the residual statistic were chosen after seeing
 the data. Needs NumPy and SciPy.
+
+  python analysis/cloud_run_leakage.py --recovery analysis/cloud_run_leakage_recovery.json
+
+fits one synthetic probe chain of the same size as the fitted subset, drawn
+from known parameters, and reports how well the fit returns them (about five
+minutes).
 """
 
 from __future__ import annotations
@@ -115,6 +121,40 @@ def simulate_balanced(p: dict, n_shots: int, K: int, g_dn: float, rng) -> np.nda
     return out
 
 
+RECOVERY_TRUE = dict(e0=0.004, e1=0.015, g0=0.0003, g1=0.002, g_dn=0.015, q2=0.97)
+
+
+def simulate_probe(p: dict, cphi: np.ndarray, shots: int, rng) -> np.ndarray:
+    """Outcomes (sets, shots, K) of a probe chain with cos(phi) cphi under the model."""
+    sets, K = cphi.shape
+    level = np.zeros((sets, shots), int)
+    r = np.empty((sets, shots, K), np.int8)
+    read1 = np.array([p["e0"], 1 - p["e1"], p["q2"]])
+    for k in range(K):
+        level = np.where((level == 2) & (rng.random((sets, shots)) < p["g_dn"]), 1, level)
+        b = np.where(level == 0, 1.0, -1.0)
+        p0 = 0.5 * (1 - b * cphi[:, k][:, None])
+        level = np.where(level < 2, np.where(rng.random((sets, shots)) < p0, 0, 1), level)
+        u = rng.random((sets, shots))
+        level = np.where((level == 0) & (u < p["g0"]) | (level == 1) & (u < p["g1"]), 2, level)
+        r[:, :, k] = np.where(rng.random((sets, shots)) < read1[level], -1, 1)
+    return r
+
+
+def recovery_check() -> dict:
+    """Fit one synthetic probe chain (400 sets x 200 shots x 64 records)."""
+    import cloud_run_design as design
+    rng = np.random.default_rng(3)
+    _, _, phi = design.probe_settings(400, 64, rng)
+    cphi = np.cos(phi)
+    r = simulate_probe(RECOVERY_TRUE, cphi, 200, rng)
+    fit = fit_qubit(r, cphi)
+    rows = {k: {"true": RECOVERY_TRUE[k], "fitted": round(fit["params"][k], 7),
+                "relative_error": round(fit["params"][k] / RECOVERY_TRUE[k] - 1.0, 4)} for k in NAMES}
+    return {"status": "consistency check on synthetic data, not a measurement",
+            "records": fit["records"], "converged": fit["converged"], "parameters": rows}
+
+
 def lag_spectrum(r: np.ndarray, max_lag: int = 8):
     """r (N, K) -> list of (cov, se) for lags 1..max_lag."""
     out = []
@@ -125,9 +165,19 @@ def lag_spectrum(r: np.ndarray, max_lag: int = 8):
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("run")
+    parser.add_argument("run", nargs="?")
     parser.add_argument("--output")
+    parser.add_argument("--recovery", metavar="OUTPUT", help="run the synthetic recovery check and write it to OUTPUT")
     args = parser.parse_args()
+    if args.recovery:
+        result = recovery_check()
+        print(json.dumps(result, indent=1))
+        with open(args.recovery, "w", encoding="utf-8") as fh:
+            json.dump(result, fh, indent=2)
+            fh.write("\n")
+        return 0
+    if not args.run:
+        parser.error("give a run directory or --recovery")
     manifest, chains, _ = cra.load(args.run)
     readout_s = manifest["build_report"].get("readout_s", 1.38e-6)
     sx_s = manifest["build_report"].get("sx_s", 32e-9)

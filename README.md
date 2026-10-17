@@ -11,7 +11,7 @@ The full write-up is `notes/CLOUD_RUN_RESULTS.md`, and each run's machine-genera
 | Finding | Value | Where |
 |---|---|---|
 | Shot-wide readout correlation explained by leakage | removing leak-tagged blocks takes it from 0.001 to 0.0065 per qubit down to 0.0003 ± 0.0002 | kingston follow-up; fez repeat |
-| Leakage episodes follow elapsed time, not readouts | leaked fraction changes by a factor of 0.6 to 1.3 when the readout rate drops 3.8-fold; lifetimes about 10 to 120 µs (lower limits) | kingston follow-up |
+| Leakage enters during idle time as well as during readouts | leaked fraction changes by a factor of 0.6 to 1.3 when the readout rate drops 3.8-fold, between the 0.35 to 0.59 expected if readouts alone caused it and the 1.3 to 2.2 if it built up only with time (buildup model, exploratory); lifetimes about 10 to 120 µs (lower limits) | kingston follow-up; fez repeat |
 | Readout memory after leakage is removed | ±2 to 9 x 10^-3, beyond five standard errors on 6 of 12 qubits; reproduced and level from 1.4 to 5.4 µs on three fez qubits | kingston follow-up; fez runs |
 | Qubit-anchored persistence (Bell-Mermin completion) | `w1 w2 < 5.3e-4` at a 1.44 µs gap (five sigma) | kingston main run |
 | Detector-anchored persistence | no cusp in the angle scan; `w_D < 5.6e-3` | kingston main run |
@@ -38,6 +38,7 @@ notes/cloud_run_results.html        One-page summary with figures (open in a bro
 theory/theorynote.pdf               Theory note: the two completions, predictions, design consequences
 analysis/                           Simulation, circuit builder, submission and analysis code, with self-tests
 data/cloudrun/<date>_<run>/         Run records: manifest.json, one NPZ per condition, amplitude.npz, job.json, report.json, submit.log
+                                    (plus exploratory outputs: leakage_exploratory.json, diagnostics_exploratory.json)
 scripts/make_cloud_results_page.py  Builds notes/cloud_run_results.html from the reports
 ```
 
@@ -53,7 +54,14 @@ python analysis/cloud_run_analyze.py selftest             # analysis self-tests 
 python analysis/cloud_run_analyze.py analyze data/cloudrun/2026-10-15_main --output /tmp/report.json
 ```
 
-The last command reproduces `data/cloudrun/2026-10-15_main/report.json`. Building circuits and running the Qiskit Aer tests needs `qiskit`, `qiskit-ibm-runtime` and `qiskit-aer`:
+The last command reproduces `data/cloudrun/2026-10-15_main/report.json`.
+
+Two scripts are exploratory: their statistics were chosen after seeing the data, and their outputs are labeled that way. `analysis/cloud_run_leakage.py` fits a three-level leakage model (`--recovery` repeats its check on synthetic data, output `analysis/cloud_run_leakage_recovery.json`). `analysis/cloud_run_diagnostics.py` computes the descriptive numbers in the results note that are not in `report.json`: long runs of one outcome, flip-step failures, standard errors clustered by shot and by parameter set, and the leak-buildup model.
+
+```sh
+python analysis/cloud_run_leakage.py data/cloudrun/2026-10-15_main --output /tmp/leakage.json
+python analysis/cloud_run_diagnostics.py data/cloudrun/2026-10-15_main --output /tmp/diagnostics.json
+``` Building circuits and running the Qiskit Aer tests needs `qiskit`, `qiskit-ibm-runtime` and `qiskit-aer`:
 
 ```sh
 python analysis/cloud_run_circuits.py --aer               # offline checks on IBM fake backends, plus an Aer end-to-end test

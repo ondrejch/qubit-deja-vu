@@ -1,0 +1,37 @@
+{
+  "status": "consistency check on synthetic data, not a measurement",
+  "records": 5120000,
+  "converged": true,
+  "parameters": {
+    "e0": {
+      "true": 0.004,
+      "fitted": 0.003883,
+      "relative_error": -0.0293
+    },
+    "e1": {
+      "true": 0.015,
+      "fitted": 0.0150343,
+      "relative_error": 0.0023
+    },
+    "g0": {
+      "true": 0.0003,
+      "fitted": 0.0003792,
+      "relative_error": 0.2639
+    },
+    "g1": {
+      "true": 0.002,
+      "fitted": 0.0019114,
+      "relative_error": -0.0443
+    },
+    "g_dn": {
+      "true": 0.015,
+      "fitted": 0.0153179,
+      "relative_error": 0.0212
+    },
+    "q2": {
+      "true": 0.97,
+      "fitted": 0.9699752,
+      "relative_error": -0.0
+    }
+  }
+}

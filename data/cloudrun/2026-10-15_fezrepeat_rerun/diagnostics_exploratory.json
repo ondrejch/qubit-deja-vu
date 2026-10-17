@@ -1,0 +1,162 @@
+{
+  "run": "data/cloudrun/2026-10-15_fezrepeat_rerun",
+  "status": "exploratory, chosen after seeing the data",
+  "layout": [
+    124,
+    26,
+    86,
+    144,
+    2,
+    6
+  ],
+  "conditions": {
+    "G0": {
+      "kind": "tagged",
+      "clean_lag1_clustered": [
+        {
+          "cov": 0.004069,
+          "se_pairs": 0.000633,
+          "se_shot_clustered": 0.000635,
+          "se_set_clustered": 0.000671,
+          "inflation_shot": 1.004,
+          "inflation_set": 1.061
+        },
+        {
+          "cov": -0.00072,
+          "se_pairs": 0.000637,
+          "se_shot_clustered": 0.000636,
+          "se_set_clustered": 0.000679,
+          "inflation_shot": 0.999,
+          "inflation_set": 1.065
+        },
+        {
+          "cov": -0.000915,
+          "se_pairs": 0.00063,
+          "se_shot_clustered": 0.000633,
+          "se_set_clustered": 0.000666,
+          "inflation_shot": 1.003,
+          "inflation_set": 1.057
+        },
+        {
+          "cov": 0.005446,
+          "se_pairs": 0.000641,
+          "se_shot_clustered": 0.000645,
+          "se_set_clustered": 0.000701,
+          "inflation_shot": 1.006,
+          "inflation_set": 1.093
+        },
+        {
+          "cov": -0.002913,
+          "se_pairs": 0.000627,
+          "se_shot_clustered": 0.000629,
+          "se_set_clustered": 0.000614,
+          "inflation_shot": 1.002,
+          "inflation_set": 0.978
+        },
+        {
+          "cov": 0.005149,
+          "se_pairs": 0.000632,
+          "se_shot_clustered": 0.000633,
+          "se_set_clustered": 0.00058,
+          "inflation_shot": 1.002,
+          "inflation_set": 0.918
+        }
+      ]
+    },
+    "G1": {
+      "kind": "tagged",
+      "clean_lag1_clustered": [
+        {
+          "cov": 0.005592,
+          "se_pairs": 0.000893,
+          "se_shot_clustered": 0.000896,
+          "se_set_clustered": 0.000959,
+          "inflation_shot": 1.003,
+          "inflation_set": 1.074
+        },
+        {
+          "cov": 0.0015,
+          "se_pairs": 0.000891,
+          "se_shot_clustered": 0.000889,
+          "se_set_clustered": 0.000995,
+          "inflation_shot": 0.998,
+          "inflation_set": 1.117
+        },
+        {
+          "cov": 0.000482,
+          "se_pairs": 0.000863,
+          "se_shot_clustered": 0.000863,
+          "se_set_clustered": 0.000923,
+          "inflation_shot": 1.0,
+          "inflation_set": 1.07
+        },
+        {
+          "cov": 0.004162,
+          "se_pairs": 0.000883,
+          "se_shot_clustered": 0.000887,
+          "se_set_clustered": 0.000914,
+          "inflation_shot": 1.004,
+          "inflation_set": 1.036
+        },
+        {
+          "cov": -0.002296,
+          "se_pairs": 0.000849,
+          "se_shot_clustered": 0.00085,
+          "se_set_clustered": 0.000792,
+          "inflation_shot": 1.001,
+          "inflation_set": 0.932
+        },
+        {
+          "cov": 0.005749,
+          "se_pairs": 0.000863,
+          "se_shot_clustered": 0.000864,
+          "se_set_clustered": 0.000793,
+          "inflation_shot": 1.001,
+          "inflation_set": 0.918
+        }
+      ]
+    }
+  },
+  "leak_buildup": {
+    "reference": "G0",
+    "reference_period_us": 1.388,
+    "tau_us": [
+      20,
+      40,
+      60,
+      80,
+      100,
+      120
+    ],
+    "conditions": {
+      "G1": {
+        "period_us": 5.388,
+        "rate_factor": 3.882,
+        "expected_ratio_readout_only": [
+          0.339,
+          0.391,
+          0.449,
+          0.502,
+          0.547,
+          0.586
+        ],
+        "expected_ratio_time_only": [
+          1.315,
+          1.516,
+          1.739,
+          1.941,
+          2.117,
+          2.267
+        ],
+        "observed_ratio": [
+          1.875,
+          1.204,
+          1.538,
+          0.993,
+          1.327,
+          1.199
+        ]
+      }
+    }
+  }
+}

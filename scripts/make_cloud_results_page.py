@@ -182,7 +182,7 @@ code {{ font: .85em var(--mono); background: var(--bg); padding: .1em .3em; bord
     <div class="card"><div class="k">Detector-anchored model</div><div class="v">w<sub>D</sub> &lt; {fmt(wd4)}</div>
       <p>No cusp in the angle scan. With leaked blocks removed, qubits 21 and 89 give {fmt(lim21)} and {fmt(lim89)}, assuming ordinary effects never push the correlation negative.</p></div>
     <div class="card"><div class="k">What the hardware showed</div><div class="v">Leakage and readout memory</div>
-      <p>Leakage episodes lasting tens of microseconds, driven by elapsed time rather than readouts, plus readout memory of either sign on four qubits.</p></div>
+      <p>Leakage episodes lasting tens of microseconds, entering during idle time as well as during readouts, plus readout memory of either sign on four qubits.</p></div>
   </div>
 </section>
 
@@ -210,7 +210,7 @@ code {{ font: .85em var(--mono); background: var(--bg); padding: .1em .3em; bord
     <div class="scroll">{bar_chart_cross()}</div>
     <figcaption><b>Figure 1.</b> Covariance between readouts in consecutive six-readout blocks, about 8.7 µs apart, per qubit, at a 1.44 µs readout spacing (follow-up condition T0, 173,600 shots per qubit). Grey: every block; teal: only blocks whose own check and the previous block's check alternate normally. Whiskers show ±1 standard error. Removing tagged blocks takes the pooled value from 0.0011 to 0.0065 per qubit to {num(fol['conditions']['T0']['pooled']['cross_block_clean'][0], 4)} ± {fol['conditions']['T0']['pooled']['cross_block_clean'][1]:.4f}.</figcaption>
   </figure>
-  <p>The leaked fraction barely changed when the readout rate dropped by a factor of 3.8, so the leakage builds up with elapsed time rather than being caused by the readouts. Lifetimes from the tags are 9 to 124 µs; these are lower limits.</p>
+  <p>When the readout rate dropped by a factor of 3.8, the leaked fraction changed by factors of 0.59 to 1.28, between what leakage caused only by readouts (0.35 to 0.59) and leakage that only builds up with time (1.3 to 2.2) would give once the buildup within each shot is counted (exploratory). Both contribute. Lifetimes from the tags are 9 to 124 µs; these are lower limits.</p>
 </section>
 
 <section>
