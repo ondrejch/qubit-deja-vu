@@ -34,11 +34,20 @@ Each design and its analysis code were committed before the corresponding data e
 notes/CLOUD_RUN_DESIGN.md           Design of the pilot and main run
 notes/CLOUD_RUN_FOLLOWUP_DESIGN.md  Leak-tagged follow-up and the ibm_fez add-ons
 notes/CLOUD_RUN_RESULTS.md          Results of every run
+notes/overview.svg                  Three-panel graphical summary, generated from the run reports
+notes/qubit_deja_vu_art.png         Earlier Futurist / Art Deco cover illustration
+notes/qubit_deja_vu_art_v2.png      Futurist / Art Deco method illustration
+notes/qubit_deja_vu_art_v3.png      Futurist / Art Deco cover illustration: the flipping qubit
+notes/qubit_deja_vu_art_v4.png      Futurist / Art Deco illustration: reset-free readout colonnade
+notes/qubit_deja_vu_art_v5.png      Futurist / Art Deco illustration: leakage caught by caliper blades
+notes/qubit_deja_vu_art_v6.png      Futurist / Art Deco illustration: memoryless versus deja-vu halls
 notes/cloud_run_results.html        One-page summary with figures (open in a browser)
 theory/theorynote.pdf               Theory note: the two completions, predictions, design consequences
 analysis/                           Simulation, circuit builder, submission and analysis code, with self-tests
 data/cloudrun/<date>_<run>/         Run records: manifest.json, one NPZ per condition, amplitude.npz, job.json, report.json, submit.log
                                     (plus exploratory outputs: leakage_exploratory.json, diagnostics_exploratory.json)
+scripts/make_overview_figure.py     Builds notes/overview.svg from the run reports
+scripts/generate_repo_art.py        Generates the Futurist / Art Deco illustrations via Gemini
 scripts/make_cloud_results_page.py  Builds notes/cloud_run_results.html from the reports
 ```
 
