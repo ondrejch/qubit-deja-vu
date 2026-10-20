@@ -20,6 +20,8 @@ The two hidden-variable models are completions of the Donadi-Hossenfelder outcom
 
 ## Method in brief
 
+![Symmetrical Art Deco and Futurist illustration of memoryless versus echo-carrying readout corridors](notes/qubit_deja_vu_art_v2.png)
+
 Every record applies two sx pulses whose relative frame phase sets the state, then a mid-circuit readout. Several properties follow:
 
 1. Every setting, including random relabeling of the readout, is a virtual-Z frame phase on identical pulses. Quantum mechanics with any memory then produces only low harmonics of the phase, which separates threshold-type hidden variables from conventional memory.
