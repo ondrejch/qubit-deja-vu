@@ -20,7 +20,7 @@ The two hidden-variable models are completions of the Donadi-Hossenfelder outcom
 
 ## Method in brief
 
-![Symmetrical Art Deco and Futurist illustration of memoryless versus echo-carrying readout corridors](notes/qubit_deja_vu_art_v2.png)
+![Art Deco illustration of a single qubit flipping between two orientations](notes/qubit_deja_vu_art_v3.png)
 
 Every record applies two sx pulses whose relative frame phase sets the state, then a mid-circuit readout. Several properties follow:
 
