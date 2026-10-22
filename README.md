@@ -1,5 +1,7 @@
 # qubit-deja-vu: time-correlated readout errors on IBM Heron processors
 
+![Art Deco illustration of a single qubit flipping between two orientations](notes/qubit_deja_vu_art_v3.png)
+
 Reset-free chains of up to 66 mid-circuit readouts per qubit, run on IBM Quantum's ibm_kingston and ibm_fez on 15 and 16 October 2026 (UTC). The chains screen for measurement errors that are correlated from one readout to the next, which matter for quantum error correction. The same data bound two models in which a hidden variable persists between measurements.
 
 This is independent work by Ondrej Chvala (UT Austin) using a personal IBM Quantum account. No lab or institution has endorsed it.
@@ -19,8 +21,6 @@ The full write-up is `notes/CLOUD_RUN_RESULTS.md`, and each run's machine-genera
 The two hidden-variable models are completions of the Donadi-Hossenfelder outcome rule constructed for this project (`theory/theorynote.pdf`), not proposals by Donadi or Hossenfelder. The limits bound those models on these processors and readouts at the stated gaps. They are not a test of superdeterminism in general. The question of hidden order in repeated measurements of one atom was tested in quantum-jump data in 1985 to 1990 and in 2004; the novelty here is methodological.
 
 ## Method in brief
-
-![Art Deco illustration of a single qubit flipping between two orientations](notes/qubit_deja_vu_art_v3.png)
 
 Every record applies two sx pulses whose relative frame phase sets the state, then a mid-circuit readout. Several properties follow:
 
