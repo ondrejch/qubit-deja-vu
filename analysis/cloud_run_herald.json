@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "checks": 21,
+  "budget": {
+    "conditions": [
+      {
+        "label": "AH",
+        "kind": "assign_herald",
+        "records": 2,
+        "sets": 138,
+        "qpu_s": 13.95
+      },
+      {
+        "label": "AS",
+        "kind": "assign",
+        "records": 1,
+        "sets": 119,
+        "qpu_s": 11.97
+      }
+    ],
+    "jobs": [
+      [
+        "AH"
+      ],
+      [
+        "AS"
+      ]
+    ],
+    "job_estimates_s": [
+      13.95,
+      11.97
+    ],
+    "total_with_overhead_s": 31.9,
+    "usage_margin_s": 36.75,
+    "total_at_5.1s_overhead_s": 36.1
+  },
+  "simulated_cases": {
+    "initialization only": {
+      "question_1": "heralding removes a first-readout excess in e1",
+      "question_2": "consistent with an initialization population alone",
+      "pooled_d1": [
+        0.003225,
+        0.000274
+      ],
+      "pooled_d1_minus_d0": [
+        0.000351,
+        0.000332
+      ]
+    },
+    "first-readout e1 excess": {
+      "question_1": "heralding removes a first-readout excess in e1",
+      "question_2": "the e1 excess exceeds the e0 excess: initialization alone does not explain it",
+      "pooled_d1": [
+        0.002746,
+        0.00027
+      ],
+      "pooled_d1_minus_d0": [
+        0.002676,
+        0.000304
+      ]
+    },
+    "no offset": {
+      "question_1": "no first-readout excess in e1 resolved",
+      "question_2": "consistent with an initialization population alone",
+      "pooled_d1": [
+        0.000399,
+        0.000245
+      ],
+      "pooled_d1_minus_d0": [
+        0.000186,
+        0.000282
+      ]
+    }
+  },
+  "pooled_d1_standard_error": 0.000245,
+  "note": "Simulated design checks; nothing here is experimental data. Readings fixed in notes/CLOUD_RUN_NEXT_DESIGN.md Section 2I."
+}

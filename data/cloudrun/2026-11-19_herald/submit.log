@@ -1,0 +1,76 @@
+{
+ "backend": "ibm_fez",
+ "job": "herald",
+ "shots": 400,
+ "layout": [
+  124,
+  144,
+  6,
+  50,
+  23,
+  59,
+  114,
+  132
+ ],
+ "readout_s": 1.34e-06,
+ "estimated_qpu_s": 26.0,
+ "calibration": {
+  "t1_s": [
+   9.43275393362592e-05,
+   0.00012331522500512863,
+   0.00021134758400112884,
+   0.000169377014728591,
+   0.0001205263963264469,
+   0.00015084302911799654,
+   0.00012407598210171267,
+   0.00013000416561730082
+  ],
+  "readout_error": [
+   0.007080078125,
+   0.00390625,
+   0.0035400390625,
+   0.0029296875,
+   0.0028076171875,
+   0.0093994140625,
+   0.0074462890625,
+   0.004638671875
+  ]
+ },
+ "conditions": {
+  "AH": {
+   "sets": 138,
+   "executions": 55200,
+   "estimated_qpu_s": 14.0
+  },
+  "AS": {
+   "sets": 119,
+   "executions": 47600,
+   "estimated_qpu_s": 12.0
+  }
+ },
+ "jobs": [
+  {
+   "entries": [
+    "AH"
+   ],
+   "estimated_qpu_s": 14.0
+  },
+  {
+   "entries": [
+    "AS"
+   ],
+   "estimated_qpu_s": 12.0
+  }
+ ]
+}
+estimate with overhead: 32.0 s in 2 job(s); per-job estimates [14.0, 12.0]
+instance usage remaining: 49 s
+submitted job dbvoeqthdvas73bie880 ['AH']
+submitted job dbvoeqthdvas73bie890 ['AS']
+results after 178 s
+{
+ "saved": "data/cloudrun/2026-11-19_herald",
+ "flags": [
+  "none: every primary statistic is within five standard errors of zero"
+ ]
+}

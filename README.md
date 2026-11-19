@@ -18,6 +18,7 @@ The full write-up is `notes/CLOUD_RUN_RESULTS.md`, and each run's machine-genera
 | Leakage enters during idle time as well as during readouts | leaked fraction changes by a factor of 0.6 to 1.3 when the readout rate drops 3.8-fold, between the 0.35 to 0.59 expected if readouts alone caused it and the 1.3 to 2.2 if it built up only with time (buildup model, exploratory); lifetimes about 10 to 120 µs (lower limits) | kingston follow-up; fez repeat |
 | Readout memory after leakage is removed | ±2 to 9 x 10^-3, beyond five standard errors on 6 of 12 qubits; reproduced and level from 1.4 to 5.4 µs on three fez qubits | kingston follow-up; fez runs |
 | First readout of a shot differs from readouts inside a chain | a fresh \|1> is misread 0.1 to 0.6 points more often on the first readout than inside the chain, on all 8 fez qubits; found after the first November run, replicated on all 8 in a pre-registered repeat | fez E0 and E0R |
+| Heralded calibration of the first readout | heralding lowers the pooled first-readout e1 by 0.16 ± 0.03 points, mostly on one qubit; consistent with an initialization population on the pooled test; first-readout calibrations drift by up to 0.9 points within hours | fez AH |
 | Readout memory on eigenstate inputs (as a syndrome qubit sees them) | against in-chain errors, 0.1 to 0.4 points on 7 of 8 fez qubits, negative on six and positive on one; replicated with the same sign on 7 of 8 in the pre-registered repeat, one inconclusive; equator memory does not predict it qubit by qubit | fez E0 and E0R |
 | Qubit-anchored persistence (Bell-Mermin completion) | `w1 w2 < 5.3e-4` at a 1.44 µs gap (five sigma) | kingston main run |
 | Detector-anchored persistence | no cusp in the angle scan; `w_D < 5.6e-3` | kingston main run |
@@ -46,7 +47,8 @@ theory/theorynote.pdf               Theory note: the two completions, prediction
 analysis/                           Simulation, circuit builder, submission and analysis code, with self-tests
 data/cloudrun/<date>_<run>/         Run records: manifest.json, one NPZ per condition, amplitude.npz, job.json, report.json, submit.log
                                     (plus exploratory outputs: leakage_exploratory.json, diagnostics_exploratory.json,
-                                    drift_exploratory.json; and for the November repeat inchain_reading.json, replication.json)
+                                    drift_exploratory.json; for the November repeat inchain_reading.json, replication.json;
+                                    for the heralded calibration herald_reading.json)
 scripts/make_overview_figure.py     Builds a three-panel summary figure from the run reports (output kept out of the repository)
 scripts/generate_repo_art.py        Generates the Futurist / Art Deco illustrations via Gemini
 scripts/make_cloud_results_page.py  Builds notes/cloud_run_results.html from the reports

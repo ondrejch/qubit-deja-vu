@@ -480,6 +480,12 @@ def analyze(directory: str) -> dict:
                         f"{label}: qubit {q} only {st['fraction_blocks_clean']:.3f} of blocks clean")
         elif kind == "assign":
             entry["per_qubit"] = [{k: [round(v[0], 6), round(v[1], 6)] for k, v in a.items()} for a in assign]
+        elif kind == "assign_herald":
+            import cloud_run_herald as herald
+            per_q = [herald.herald_errors(r[:, :, q, :], arrays["phi"][:, q, :]) for q in range(nq)]
+            entry["per_qubit"] = [{k: [round(v[0], 6), round(v[1], 6)] for k, v in h.items()} for h in per_q]
+            entry["reference"] = ("readings fixed in notes/CLOUD_RUN_NEXT_DESIGN.md Section 2I; "
+                                  "analysis/cloud_run_herald.py --evaluate applies them")
         elif kind == "phase":
             per_q = []
             for q in range(nq):

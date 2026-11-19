@@ -10,6 +10,7 @@ The designs and analysis code were developed in the author's private repository 
 | Paid ibm_fez repeat (Section 10) | 54ddcf2, 2026-10-16 03:14:07; adjusted before data in b5bd8ec, 03:31:48 | 03:31:55 (cancelled at the cost limit), rerun 03:37:29 |
 | Eigenstate run E0 on ibm_fez (next-window design note, Section 2G) | ed166a4, 2026-11-03 00:52:56; failure handling changed after an outside code review in 693e4f4, 2026-11-19 17:31:46 | 2026-11-19 17:33:43 |
 | Repeat E0R with the in-chain reading as primary (Section 2H) | 2dbca4f, 2026-11-19 18:31:02 | 2026-11-19 18:37:33 |
+| Heralded assignment calibration AH (Section 2I) | 8be925d, 2026-11-19 23:05:32 | 2026-11-19 23:34:03 |
 
 The design note for the November runs (sections 2G and 2H) is kept in the private repository with the commits above and can be shown on request; `notes/CLOUD_RUN_RESULTS.md` Sections 10 and 11 summarize it.
 

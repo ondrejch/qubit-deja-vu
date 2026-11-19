@@ -1,6 +1,6 @@
 # Cloud run results: ibm_kingston and ibm_fez, October and November 2026
 
-These are the first experimental data in the package. The records and machine-generated reports are in `data/cloudrun/2026-10-15_pilot/`, `data/cloudrun/2026-10-15_main/` and `data/cloudrun/2026-10-15_followup/`; this note summarizes `report.json` in each. Sections 1 to 5 cover the pilot and main run, Section 6 an exploratory leakage analysis, and Section 7 the leak-tagged follow-up. Sections 8 and 9 cover the ibm_fez add-on and paid repeat of the same day, Section 10 covers the eigenstate repeat/flip run on ibm_fez of 19 November 2026 (`data/cloudrun/2026-11-19_eig/`, design in `notes/CLOUD_RUN_NEXT_DESIGN.md`), and Section 11 its pre-registered repeat of the same day (`data/cloudrun/2026-11-19_eigrepeat/`). The design and analysis were committed before the runs (commit 85a36c6; `notes/CLOUD_RUN_DESIGN.md`). The results bound the theory note's two completions of the Donadi-Hossenfelder rule for this processor and readout at the stated gaps. They are not a test of superdeterminism in general, of Hossenfelder's 2025 model, or of any proposal by Donadi or Hossenfelder.
+These are the first experimental data in the package. The records and machine-generated reports are in `data/cloudrun/2026-10-15_pilot/`, `data/cloudrun/2026-10-15_main/` and `data/cloudrun/2026-10-15_followup/`; this note summarizes `report.json` in each. Sections 1 to 5 cover the pilot and main run, Section 6 an exploratory leakage analysis, and Section 7 the leak-tagged follow-up. Sections 8 and 9 cover the ibm_fez add-on and paid repeat of the same day, Section 10 covers the eigenstate repeat/flip run on ibm_fez of 19 November 2026 (`data/cloudrun/2026-11-19_eig/`, design in `notes/CLOUD_RUN_NEXT_DESIGN.md`), Section 11 its pre-registered repeat of the same day (`data/cloudrun/2026-11-19_eigrepeat/`), and Section 12 the heralded assignment calibration of the same evening (`data/cloudrun/2026-11-19_herald/`). The design and analysis were committed before the runs (commit 85a36c6; `notes/CLOUD_RUN_DESIGN.md`). The results bound the theory note's two completions of the Donadi-Hossenfelder rule for this processor and readout at the stated gaps. They are not a test of superdeterminism in general, of Hossenfelder's 2025 model, or of any proposal by Donadi or Hossenfelder.
 
 ## 1. What ran
 
@@ -314,3 +314,37 @@ The pre-registered rules give the following:
 1. On these eight ibm_fez qubits, the first mid-circuit readout of a shot misreads |1> more often than readouts inside a chain, by 0.1 to 0.6 points. This was found after E0's data and confirmed in a run fixed in advance. Any per-qubit error model built from first-readout assignment data carries this offset into the rounds after the first.
 2. Against in-chain errors, eigenstate readouts carry a history-dependent error of 0.1 to 0.4 points on seven of eight qubits (Section 10.5, item 4, gives the model-light statement). It has a stable sign per qubit and is negative on six of them. The attribution to memory after a reported "1" rests on the chain model: memory that also acts after a "0" cannot be separated from an in-chain static shift with these chains.
 3. The pre-registered first-readout reading of Section 10.2 stands as recorded. It is superseded as a measurement of memory by the in-chain reading, which is pre-registered for E0R.
+
+## 12. Heralded assignment calibration (AH), 19 November 2026 (pre-registered)
+
+The design is Section 2I of `notes/CLOUD_RUN_NEXT_DESIGN.md`, committed before the data in 8be925d. Two jobs ran on the same eight ibm_fez qubits: dbvoeqthdvas73bie880 (AH, 138 sets, 17 s) and dbvoeqthdvas73bie890 (AS, 119 sets, 15 s), 400 shots each. The first job was created at 23:34 UTC, about 5 hours after E0R. The total charge was 32 s, and the window now has 17 s left until the 19 November charges expire on 17 December 2026. Numbers come from `report.json` and from `herald_reading.json`, written by `analysis/cloud_run_herald.py --evaluate`.
+
+### 12.1 Pre-registered readings
+
+1. Question 1 reads "heralding removes a first-readout excess in e1". The pooled `d1 = e1_AS - e1_H` is +0.16 ± 0.03 percentage points (6.1 standard errors).
+2. Question 2 reads "consistent with an initialization population alone". The pooled `d1 - d0` is +0.08 ± 0.03 points (2.5 standard errors, under the threshold of 3).
+3. The secondary per-qubit comparison finds heralded e1 matching E0R's in-chain e1 on 2 of 8 qubits.
+
+### 12.2 Per qubit (descriptive, not a pre-registered per-qubit test)
+
+| Physical qubit | d0 = e0_AS - e0_H | d1 = e1_AS - e1_H | d1 - d0 | Herald reads "1" |
+|---|---|---|---|---|
+| 124 | +0.06 ± 0.03 | +0.19 ± 0.07 | +0.13 ± 0.08 | 0.15% |
+| 144 | -0.11 ± 0.07 | -0.04 ± 0.07 | +0.08 ± 0.10 | 0.70% |
+| 6 | +0.08 ± 0.04 | +0.95 ± 0.09 | +0.86 ± 0.09 | 0.21% |
+| 50 | +0.12 ± 0.04 | +0.11 ± 0.05 | -0.02 ± 0.06 | 0.29% |
+| 23 | +0.06 ± 0.08 | -0.08 ± 0.08 | -0.14 ± 0.11 | 0.70% |
+| 59 | +0.32 ± 0.07 | +0.17 ± 0.09 | -0.14 ± 0.11 | 0.66% |
+| 114 | +0.01 ± 0.06 | +0.02 ± 0.09 | +0.01 ± 0.11 | 0.37% |
+| 132 | +0.09 ± 0.04 | -0.02 ± 0.07 | -0.11 ± 0.08 | 0.21% |
+
+All differences are in percentage points. Several features are noteworthy:
+
+1. Qubit 6 carries most of the pooled excess. Its d1 is +0.95 points (11 standard errors) and its d1 - d0 is +0.86 points (9 standard errors), so on that qubit an initialization population does not explain the first-readout e1 excess. On every other qubit, d1 lies within 2.7 standard errors of zero.
+2. On most qubits, heralding lowers e0 by 0.06 to 0.32 points. This is what an excited population left after the shot's initialization would do. On those qubits it is the same size as d1.
+3. The first-readout calibration drifted within the day. Between E0R and AH, the AS e1 changed by -0.48, +0.93 and -0.79 points on qubits 144, 6 and 114 (6 to 11 standard errors), and qubit 6's AS e1 rose from 0.43% to 1.36%. Comparisons across sessions are therefore not informative: the secondary 2-of-8 match, and any comparison of AH with the E0 and E0R in-chain values. Within-session differences are the reliable ones.
+4. The uniform in-chain e1 offset of E0 and E0R (0.10 to 0.64 points on every qubit, inferred through the chain model) is not reproduced as a uniform first-readout excess here. Heralding a single readout recovers the excess on qubit 6 only. The two measurements differ in session, in calibration state, and in what they compare: a second readout against the in-chain readouts deep in a 72-record chain. This run does not settle which of these explains the difference.
+
+### 12.3 What it means
+
+The pre-registered pooled readings stand: heralding lowers e1, and the pooled pattern does not exclude an initialization population. Per qubit, the effect is heterogeneous and drifts within hours. An initialization population of up to about 0.3 points is visible in e0 on several qubits, and qubit 6 shows a large e1 excess that heralding removes and initialization does not explain. For error models of rounds after the first, the practical conclusion is unchanged and now rests on two methods: calibrate assignment errors after a heralding readout, in the same session. The mechanism of the in-chain offset remains open.

@@ -121,6 +121,10 @@ def draw_settings(kind: str, K: int, n_qubits: int, n_sets: int, seed: int):
     elif kind == "assign":
         alpha, beta, phi = eigenstate.assign_settings(n_sets, n_qubits, rng)
         extra = {"phi": phi.reshape(n_sets, n_qubits, K)}
+    elif kind == "assign_herald":
+        import cloud_run_herald as herald
+        alpha, beta, phi = herald.herald_settings(n_sets, n_qubits, rng)
+        extra = {"phi": phi.reshape(n_sets, n_qubits, K)}
     elif kind == "phase":
         alpha = rng.uniform(0.0, 2 * math.pi, (n, K))
         phi = rng.uniform(0.0, 2 * math.pi, (n, K))

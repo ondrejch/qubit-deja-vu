@@ -46,7 +46,7 @@ import time
 sys.dont_write_bytecode = True
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-SHOTS = {"pilot": 300, "main": 400, "followup": 400, "fezmini": 400, "fezrepeat": 400, "eig": 400, "eigrepeat": 400}
+SHOTS = {"pilot": 300, "main": 400, "followup": 400, "fezmini": 400, "fezrepeat": 400, "eig": 400, "eigrepeat": 400, "herald": 400}
 JOB_OVERHEAD_S = 3.0  # charged per job beyond the estimate, from the 15 October jobs
 USAGE_MARGIN = 0.75  # the estimate may use at most this fraction of the instance's remaining usage
 MAX_SETS_PER_PUB = 700
@@ -381,6 +381,7 @@ def main() -> int:
 
     from cloud_run_circuits import build_all
     import cloud_run_eigenstate as eigenstate
+    import cloud_run_herald as herald
 
     shots = args.shots or SHOTS[args.job]
     backend = service.backend(args.backend)
@@ -388,11 +389,12 @@ def main() -> int:
 
     layout = [int(x) for x in args.layout.split(",")] if args.layout else (
         followup.LAYOUT if args.job == "followup" else (followup.FEZ_LAYOUT if args.job == "fezrepeat" else (
-            list(eigenstate.EIG_REPEAT_LAYOUT) if args.job == "eigrepeat" else None)))
+            list(eigenstate.EIG_REPEAT_LAYOUT) if args.job == "eigrepeat" else (
+                list(herald.HERALD_LAYOUT) if args.job == "herald" else None))))
     eig = args.job == "eig"
     # eig keeps the October fez positives as controls and excludes the other
     # October fez qubits, so the picker cannot return them as fresh.
-    built = build_all(backend, n_qubits=args.qubits or (eigenstate.EIG_QUBITS if eig or args.job == "eigrepeat" else 6),
+    built = build_all(backend, n_qubits=args.qubits or (eigenstate.EIG_QUBITS if eig or args.job in ("eigrepeat", "herald") else 6),
                       shots=shots,
                       include=eigenstate.EIG_CONTROLS if eig and not layout else (),
                       exclude=eigenstate.EIG_EXCLUDE if eig and not layout else (),
@@ -401,8 +403,9 @@ def main() -> int:
                       conditions={"fezmini": followup.FEZ_MINI_CONDITIONS,
                                   "fezrepeat": followup.FEZ_REPEAT_CONDITIONS,
                                   "eig": eigenstate.EIG_CONDITIONS,
-                                  "eigrepeat": eigenstate.EIG_REPEAT_CONDITIONS}.get(args.job),
-                      amplitude=args.job != "fezrepeat")
+                                  "eigrepeat": eigenstate.EIG_REPEAT_CONDITIONS,
+                                  "herald": herald.HERALD_CONDITIONS}.get(args.job),
+                      amplitude=args.job not in ("fezrepeat", "herald"))
     rep = built["report"]
     summary = {"backend": backend.name, "job": args.job, "shots": shots, "layout": rep["layout"],
                "readout_s": rep["readout_s"], "estimated_qpu_s": rep["estimated_qpu_s_total"],

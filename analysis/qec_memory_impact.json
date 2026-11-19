@@ -1,0 +1,321 @@
+{
+ "status": "PASS",
+ "checks": 3,
+ "note": "Simulation of a bit-flip repetition code with the measured memory and leakage scales; nothing here is experimental data. See the module docstring for the model and its assumptions.",
+ "settings": {
+  "shots": {
+   "3": 1000000,
+   "5": 2000000,
+   "7": 6000000
+  },
+  "p_data": 0.01,
+  "e0": 0.003,
+  "e1": 0.008,
+  "rounds": "d",
+  "distances": [
+   3,
+   5,
+   7
+  ]
+ },
+ "results": {
+  "independent (reference)": {
+   "3": {
+    "logical_error": 0.001737,
+    "se": 4.164111947342435e-05,
+    "misread_rate": 0.003187
+   },
+   "5": {
+    "logical_error": 0.0001725,
+    "se": 9.286286764633106e-06,
+    "misread_rate": 0.003297
+   },
+   "7": {
+    "logical_error": 1.25e-05,
+    "se": 1.4433666518479173e-06,
+    "misread_rate": 0.003366
+   }
+  },
+  "negative memory 0.2%": {
+   "3": {
+    "logical_error": 0.001852,
+    "se": 4.2995000825677394e-05,
+    "misread_rate": 0.003272
+   },
+   "5": {
+    "logical_error": 0.0001585,
+    "se": 8.901541376357243e-06,
+    "misread_rate": 0.003365
+   },
+   "7": {
+    "logical_error": 1.3666666666666667e-05,
+    "se": 1.509220543243481e-06,
+    "misread_rate": 0.003475
+   }
+  },
+  "negative memory 0.4%": {
+   "3": {
+    "logical_error": 0.001747,
+    "se": 4.176060333615883e-05,
+    "misread_rate": 0.003266
+   },
+   "5": {
+    "logical_error": 0.000167,
+    "se": 9.137070400297898e-06,
+    "misread_rate": 0.003434
+   },
+   "7": {
+    "logical_error": 1.2e-05,
+    "se": 1.4142050770662647e-06,
+    "misread_rate": 0.003584
+   }
+  },
+  "positive memory 0.4%": {
+   "3": {
+    "logical_error": 0.001735,
+    "se": 4.161718124765299e-05,
+    "misread_rate": 0.003176
+   },
+   "5": {
+    "logical_error": 0.0001755,
+    "se": 9.366674963667738e-06,
+    "misread_rate": 0.003277
+   },
+   "7": {
+    "logical_error": 1.55e-05,
+    "se": 1.6072626704016575e-06,
+    "misread_rate": 0.003382
+   }
+  },
+  "leakage episodes": {
+   "3": {
+    "logical_error": 0.001882,
+    "se": 4.3341182217378424e-05,
+    "misread_rate": 0.004086
+   },
+   "5": {
+    "logical_error": 0.0002875,
+    "se": 1.1987855182433595e-05,
+    "misread_rate": 0.004484
+   },
+   "7": {
+    "logical_error": 0.00014133333333333334,
+    "se": 4.85306360666851e-06,
+    "misread_rate": 0.00485
+   }
+  },
+  "negative memory 0.4% + leakage": {
+   "3": {
+    "logical_error": 0.001797,
+    "se": 4.235293131531748e-05,
+    "misread_rate": 0.004129
+   },
+   "5": {
+    "logical_error": 0.0002765,
+    "se": 1.1756350363739591e-05,
+    "misread_rate": 0.004642
+   },
+   "7": {
+    "logical_error": 0.00014566666666666667,
+    "se": 4.9268896186960405e-06,
+    "misread_rate": 0.005067
+   }
+  },
+  "leakage, g 1e-4": {
+   "3": {
+    "logical_error": 0.001793,
+    "se": 4.230585244384044e-05,
+    "misread_rate": 0.003339
+   },
+   "5": {
+    "logical_error": 0.0001895,
+    "se": 9.73303883044756e-06,
+    "misread_rate": 0.003504
+   },
+   "7": {
+    "logical_error": 3.983333333333333e-05,
+    "se": 2.5765528210799043e-06,
+    "misread_rate": 0.003667
+   }
+  },
+  "leakage, g 2e-3": {
+   "3": {
+    "logical_error": 0.002083,
+    "se": 4.559233609939285e-05,
+    "misread_rate": 0.006707
+   },
+   "5": {
+    "logical_error": 0.0006565,
+    "se": 1.8111722830117515e-05,
+    "misread_rate": 0.008119
+   },
+   "7": {
+    "logical_error": 0.0006415,
+    "se": 1.0336734475887442e-05,
+    "misread_rate": 0.00928
+   }
+  },
+  "leakage, 3-round episodes": {
+   "3": {
+    "logical_error": 0.001739,
+    "se": 4.1665043849730916e-05,
+    "misread_rate": 0.003936
+   },
+   "5": {
+    "logical_error": 0.0002395,
+    "se": 1.0941723807289233e-05,
+    "misread_rate": 0.004193
+   },
+   "7": {
+    "logical_error": 7.2e-05,
+    "se": 3.463976905234791e-06,
+    "misread_rate": 0.004365
+   }
+  },
+  "leakage, 30-round episodes": {
+   "3": {
+    "logical_error": 0.001794,
+    "se": 4.231762710738872e-05,
+    "misread_rate": 0.004107
+   },
+   "5": {
+    "logical_error": 0.000312,
+    "se": 1.2488047405419311e-05,
+    "misread_rate": 0.004593
+   },
+   "7": {
+    "logical_error": 0.000187,
+    "se": 5.582189400226402e-06,
+    "misread_rate": 0.005054
+   }
+  }
+ },
+ "ratio_to_independent": {
+  "negative memory 0.2%": {
+   "3": [
+    1.066,
+    0.036
+   ],
+   "5": [
+    0.919,
+    0.071
+   ],
+   "7": [
+    1.093,
+    0.175
+   ]
+  },
+  "negative memory 0.4%": {
+   "3": [
+    1.006,
+    0.034
+   ],
+   "5": [
+    0.968,
+    0.074
+   ],
+   "7": [
+    0.96,
+    0.158
+   ]
+  },
+  "positive memory 0.4%": {
+   "3": [
+    0.999,
+    0.034
+   ],
+   "5": [
+    1.017,
+    0.077
+   ],
+   "7": [
+    1.24,
+    0.192
+   ]
+  },
+  "leakage episodes": {
+   "3": [
+    1.083,
+    0.036
+   ],
+   "5": [
+    1.667,
+    0.113
+   ],
+   "7": [
+    11.307,
+    1.362
+   ]
+  },
+  "negative memory 0.4% + leakage": {
+   "3": [
+    1.035,
+    0.035
+   ],
+   "5": [
+    1.603,
+    0.11
+   ],
+   "7": [
+    11.653,
+    1.402
+   ]
+  },
+  "leakage, g 1e-4": {
+   "3": [
+    1.032,
+    0.035
+   ],
+   "5": [
+    1.099,
+    0.082
+   ],
+   "7": [
+    3.187,
+    0.422
+   ]
+  },
+  "leakage, g 2e-3": {
+   "3": [
+    1.199,
+    0.039
+   ],
+   "5": [
+    3.806,
+    0.23
+   ],
+   "7": [
+    51.32,
+    5.983
+   ]
+  },
+  "leakage, 3-round episodes": {
+   "3": [
+    1.001,
+    0.034
+   ],
+   "5": [
+    1.388,
+    0.098
+   ],
+   "7": [
+    5.76,
+    0.721
+   ]
+  },
+  "leakage, 30-round episodes": {
+   "3": [
+    1.033,
+    0.035
+   ],
+   "5": [
+    1.809,
+    0.121
+   ],
+   "7": [
+    14.96,
+    1.784
+   ]
+  }
+ }
+}

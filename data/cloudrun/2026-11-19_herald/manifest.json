@@ -1,0 +1,116 @@
+{
+  "saved": "2026-11-19T23:37:02+00:00",
+  "job_id": "dbvoeqthdvas73bie880,dbvoeqthdvas73bie890",
+  "build_report": {
+    "backend": "ibm_fez",
+    "measure": "measure_2",
+    "layout": [
+      124,
+      144,
+      6,
+      50,
+      23,
+      59,
+      114,
+      132
+    ],
+    "dt_s": 4e-09,
+    "rep_delay_s": 0.00025,
+    "readout_s": 1.34e-06,
+    "sx_s": 2.4e-08,
+    "shots": 400,
+    "checks": [
+      "step convention matches the design script (max Bloch error 8.3e-16)",
+      "AH: 32 sx",
+      "AH: 16 measure_2",
+      "AH: all 32 rz kept",
+      "AH: parameters preserved",
+      "AH: no reset or extra gates",
+      "AH: binds",
+      "AS: 16 sx",
+      "AS: 8 measure_2",
+      "AS: all 16 rz kept",
+      "AS: parameters preserved",
+      "AS: no reset or extra gates",
+      "AS: binds"
+    ],
+    "calibration": {
+      "t1_s": [
+        9.43275393362592e-05,
+        0.00012331522500512863,
+        0.00021134758400112884,
+        0.000169377014728591,
+        0.0001205263963264469,
+        0.00015084302911799654,
+        0.00012407598210171267,
+        0.00013000416561730082
+      ],
+      "readout_error": [
+        0.007080078125,
+        0.00390625,
+        0.0035400390625,
+        0.0029296875,
+        0.0028076171875,
+        0.0093994140625,
+        0.0074462890625,
+        0.004638671875
+      ]
+    },
+    "AH": {
+      "kind": "assign_herald",
+      "records": 2,
+      "delay_dt": 0,
+      "sets": 138,
+      "executions": 55200,
+      "parameters": 32,
+      "estimated_duration_us": 2.78,
+      "estimated_qpu_s": 14.0,
+      "ops": {
+        "rz": 32,
+        "sx": 32,
+        "measure_2": 16,
+        "barrier": 2
+      }
+    },
+    "AS": {
+      "kind": "assign",
+      "records": 1,
+      "delay_dt": 0,
+      "sets": 119,
+      "executions": 47600,
+      "parameters": 16,
+      "estimated_duration_us": 1.39,
+      "estimated_qpu_s": 12.0,
+      "ops": {
+        "rz": 16,
+        "sx": 16,
+        "measure_2": 8,
+        "barrier": 1
+      }
+    },
+    "estimated_qpu_s_total": 26.0
+  },
+  "chains": {
+    "AH": {
+      "kind": "assign_herald",
+      "records": 2,
+      "shape": [
+        138,
+        400,
+        8,
+        2
+      ]
+    },
+    "AS": {
+      "kind": "assign",
+      "records": 1,
+      "shape": [
+        119,
+        400,
+        8,
+        1
+      ]
+    }
+  },
+  "amplitude_pulses": []
+}
