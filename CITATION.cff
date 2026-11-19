@@ -8,6 +8,7 @@ authors:
     affiliation: "Walker Department of Mechanical Engineering, The University of Texas at Austin"
     orcid: "https://orcid.org/0000-0003-4614-6649"
 repository-code: "https://github.com/ondrejch/qubit-deja-vu"
+doi: "10.5281/zenodo.24379286"
 license: CC-BY-4.0
 keywords:
   - quantum error correction

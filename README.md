@@ -4,6 +4,8 @@
 
 Reset-free chains of up to 72 mid-circuit readouts per qubit, run on IBM Quantum's ibm_kingston and ibm_fez on 15 and 16 October and 19 November 2026 (UTC). The chains screen for measurement errors that are correlated from one readout to the next, which matter for quantum error correction. The same data bound two models in which a hidden variable persists between measurements.
 
+Archived on Zenodo: [doi:10.5281/zenodo.24379286](https://doi.org/10.5281/zenodo.24379286) (all versions; v1.0.0 is [10.5281/zenodo.24379287](https://doi.org/10.5281/zenodo.24379287)).
+
 This is independent work by Ondrej Chvala (Walker Department of Mechanical Engineering, The University of Texas at Austin; ORCID [0000-0003-4614-6649](https://orcid.org/0000-0003-4614-6649)) using a personal IBM Quantum account. No lab or institution has endorsed it.
 
 ## Results so far
@@ -89,4 +91,4 @@ python analysis/cloud_run_analyze.py selftest --aer
 
 ## License
 
-The code in `analysis/` and `scripts/` is MIT-licensed (`LICENSE`). The data, notes and theory note are CC BY 4.0 (`LICENSE-CC-BY-4.0.md`). Please cite this repository when reusing the data.
+The code in `analysis/` and `scripts/` is MIT-licensed (`LICENSE`). The data, notes and theory note are CC BY 4.0 (`LICENSE-CC-BY-4.0.md`). Please cite the Zenodo archive (doi:10.5281/zenodo.24379286) when reusing the data; `CITATION.cff` has the details.
