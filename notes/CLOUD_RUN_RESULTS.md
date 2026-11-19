@@ -169,7 +169,7 @@ The run was submitted at 12:33 EST on 19 November 2026 as one batch of nine jobs
 | AS | dbvj5tol0c4s739lqkj0 | assignment calibration, 199 sets | 23 s |
 | E0, seven parts | dbvj5u813mdc73dfeol0, dbvj5ugl0c4s739lqkkg, dbvj5uo13mdc73dfeon0, dbvj5v9cn7vc73eh12gg, dbvj5vgl0c4s739lqkm0, dbvj5vol0c4s739lqkn0, dbvj609cn7vc73eh12i0 | 2572 sets of the 72-record chain, rejoined when saved | 7 x 55 = 385 s |
 
-Every condition ran 400 shots per set. Eight qubits ran in parallel, 576 mid-circuit readouts per shot, which the October runs (at most 384) had not tried; IBM accepted it. The controls 124, 144 and 6 are the October fez positives. The builder's rule picked the five fresh qubits 50, 23, 59, 114 and 132 from the calibration at submission, with the other October fez qubits 26, 86 and 2 excluded. That calibration listed readout errors of 0.27% to 0.39% and T1 of 94 to 211 µs. `measure_2` took 1.34 µs and the record period was 1.39 µs, the period of the October F0 and G0 conditions.
+Every condition ran 400 shots per set. Eight qubits ran in parallel, 576 mid-circuit readouts per shot, which the October runs (at most 384) had not tried; IBM accepted it. The controls 124, 144 and 6 are the October fez positives. The builder's rule picked the five fresh qubits 50, 23, 59, 114 and 132 from the calibration at submission, with the other October fez qubits 26, 86 and 2 excluded. That calibration listed readout errors of 0.27% to 0.40% and T1 of 94 to 211 µs. `measure_2` took 1.34 µs and the record period was 1.39 µs, the period of the October F0 and G0 conditions.
 
 ### 10.2 Pre-registered reading
 
@@ -211,7 +211,7 @@ Several features are noteworthy:
    - Qubits 6 and 59 are positive in both.
 
    The equator covariance does not separate memory from persistence, so this is no contradiction, but the October equator values would not have predicted the eigenstate readings.
-3. The repeat fidelities on the clean mask are 0.9847 to 0.9933 and the flip fidelities 0.9798 to 0.9910. On the secondary fidelity rule, repeat fidelity falls below the null on qubits 144 and 50, and flip fidelity on qubit 50.
+3. The repeat fidelities on the clean mask are 0.9846 to 0.9933 and the flip fidelities 0.9797 to 0.9910. On the secondary fidelity rule, repeat fidelity falls below the null on qubits 144 and 50, and flip fidelity on qubit 50.
 4. The in-run assignment errors from AS are e0 = 0.12% to 0.67% and e1 = 0.34% to 1.16%. Leaked checks are 0.17% to 1.56% (qubit 23 highest), and 92.5% to 95.9% of blocks are clean.
 5. The checks are clean. The amplitude terms are at most 3.3e-5, and the phase check's largest harmonic above order 2 is 2.42 (flag at 5).
 
@@ -303,7 +303,7 @@ The pre-registered rules give the following:
 
 ### 11.3 Secondary readings and checks
 
-1. Against the first-readout null (`report.json`), E0R reads positive memory on qubits 6 and 50 and is consistent elsewhere. E0 read four qubits there, and only qubit 6 agrees between the two runs. The first-readout reading is the one Section 10.5 showed to be miscalibrated, and its disagreement between runs fits that.
+1. Against the first-readout null (`report.json`), E0R reads positive memory on qubits 6 and 50 and is consistent elsewhere. E0 read four qubits there, and qubit 6 is the only qubit that reads memory in both runs. The first-readout reading is the one Section 10.5 showed to be miscalibrated, and its disagreement between runs fits that.
 2. The equator B lag-1 covariance repeats E0 on the controls: +0.0038, +0.0055 and +0.0055 on qubits 124, 144 and 6. It is +0.0058 on qubit 59 and within 0.0012 of zero on the other fresh qubits.
 3. Two flags fire: the clean-mask flip fidelity falls 0.0019 and 0.0013 below clean_next on qubits 23 and 59, the two with the most leakage (1.83% and 1.22% of checks leaked).
 4. Per block, the in-chain e0 trends along the chain on qubits 124 and 59 (trend z of +3.6 and +3.1). Neither e1 nor the contrast deviation trends on any qubit (all |z| at most 2.4). This is not a pre-registered statistic.

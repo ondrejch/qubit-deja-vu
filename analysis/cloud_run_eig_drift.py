@@ -240,7 +240,8 @@ def main() -> int:
     nulls = report["conditions"]["E0"]["per_qubit_null"]
     with np.load(os.path.join(args.run, "E0.npz")) as z:
         r = z["r"]                                       # (sets, shots, qubits, 72)
-    out = {"note": "Exploratory, chosen after seeing the E0 data; not a pre-registered reading. de0, de1 are the "
+    out = {"note": "Exploratory for the 19 November 2026 E0 run (chosen after its data); the pre-registered primary "
+                   "reading for its repeat E0R (notes/CLOUD_RUN_NEXT_DESIGN.md Section 2H). de0, de1 are the "
                    "in-chain static assignment errors minus the AS (first-readout) values, from repeat_agree_0 and "
                    "flip_agree_0, which the chain model makes free of memory and T1. The contrast deviation is "
                    "recomputed against a null with those in-chain errors and read with the pre-registered "
