@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Generate notes/cloud_run_results.html, the shareable summary of the 15 October 2026
-ibm_kingston runs, from the run reports in data/cloudrun/ (numbers are read, not retyped).
+"""Generate notes/cloud_run_results.html, the shareable summary of the October 2026 runs
+and the 19 November 2026 ibm_fez eigenstate runs, from the run reports in data/cloudrun/ (numbers are read, not retyped).
 
   python scripts/make_cloud_results_page.py
 """
@@ -177,7 +177,7 @@ rows_s2 = "\n".join(
     + "</td></tr>"
     for i, (v, se) in enumerate(s2))
 
-html = f"""<title>ibm_kingston Persistence Tests</title>
+html = f"""<title>IBM Readout Memory Tests</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
@@ -235,9 +235,9 @@ code {{ font: .85em var(--mono); background: var(--bg); padding: .1em .3em; bord
 </style>
 <main>
 <header>
-  <div class="eyebrow">IBM Quantum cloud runs · 15 October 2026</div>
-  <h1>ibm_kingston Persistence Tests</h1>
-  <p class="lede">Six qubits of IBM's ibm_kingston processor were read out thousands of times in a row to look for a hidden variable that persists between measurements, in two models built for this project. Neither model shows a signal. The ordinary effects the runs uncovered, leakage and readout memory, matter for error correction.</p>
+  <div class="eyebrow">IBM Quantum cloud runs · October and November 2026</div>
+  <h1>IBM Readout Memory Tests</h1>
+  <p class="lede">Six qubits of IBM's ibm_kingston processor were read out thousands of times in a row to look for a hidden variable that persists between measurements, in two models built for this project. Neither model shows a signal. The ordinary effects the runs uncovered, leakage and readout memory, matter for error correction. In November, two runs on ibm_fez read the same memory for qubits near |0⟩ or |1⟩, as an error-correction syndrome qubit is read.</p>
 </header>
 
 <section aria-label="Main results">
@@ -318,7 +318,7 @@ code {{ font: .85em var(--mono); background: var(--bg); padding: .1em .3em; bord
   <p>Leakage that lasts for many readout rounds and readout memory at the 10<sup>−3</sup> level are the kinds of correlated measurement errors that degrade surface-code memory in simulations by Kam and colleagues (Quantum Sci. Technol., 2025). Seeing them took about 10<sup>7</sup> readout pairs per qubit, well within a free cloud allowance.</p>
 </section>
 
-<p class="note">Records, run reports and code are in the project repository: run data under <code>data/cloudrun/</code>, the design notes <code>notes/CLOUD_RUN_DESIGN.md</code> and <code>notes/CLOUD_RUN_FOLLOWUP_DESIGN.md</code>, the results <code>notes/CLOUD_RUN_RESULTS.md</code>, and the analysis in <code>analysis/cloud_run_*.py</code>. The leakage model fitted after the main run is exploratory. This is independent work using a personal IBM Quantum account; no lab or institution has endorsed it.</p>
+<p class="note">Archived on Zenodo, <a href="https://doi.org/10.5281/zenodo.24379286">doi:10.5281/zenodo.24379286</a>. Records, run reports and code are in the project repository: run data under <code>data/cloudrun/</code>, the design notes <code>notes/CLOUD_RUN_DESIGN.md</code> and <code>notes/CLOUD_RUN_FOLLOWUP_DESIGN.md</code>, the results <code>notes/CLOUD_RUN_RESULTS.md</code>, and the analysis in <code>analysis/cloud_run_*.py</code>. The leakage model fitted after the main run is exploratory. This is independent work using a personal IBM Quantum account; no lab or institution has endorsed it.</p>
 </main>
 """
 out = os.path.join(REPO, "notes", "cloud_run_results.html")
