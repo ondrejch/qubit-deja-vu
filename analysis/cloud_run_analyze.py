@@ -6,8 +6,12 @@ manifest (manifest.json), one NPZ file per chain condition (outcomes as int8,
 +1 = |0>, shape (sets, shots, qubits, records), with the phases), and the
 amplitude check (amplitude.npz). analyze() computes the statistics fixed in
 the design note (Section 7) per qubit and pooled, applies its decision rules
-and writes a JSON report. The analysis needs only NumPy and groups records by
-parameter set, so a full main job fits in memory.
+and writes a JSON report. The leak-tagged (`tagged`) and eigenstate
+(`tagged_eig`, analysis/cloud_run_eigenstate.py) chain kinds get their own
+statistics; for `tagged_eig` the report lists the statistics on all three block
+masks and points at the nulls, which are simulated model numbers in
+analysis/cloud_run_eigenstate.json rather than zero. The analysis needs only
+NumPy and groups records by parameter set, so a full main job fits in memory.
 
   python analysis/cloud_run_analyze.py analyze RUN_DIR --output RUN_DIR/report.json
   python analysis/cloud_run_analyze.py selftest          # NumPy only
@@ -39,6 +43,7 @@ import numpy as np
 sys.dont_write_bytecode = True
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cloud_run_design as design  # noqa: E402
+import cloud_run_eigenstate as eigenstate  # noqa: E402
 import cloud_run_followup as followup  # noqa: E402
 
 FIVE = 5.0
@@ -70,12 +75,15 @@ def save_arrays(directory: str, manifest: dict, chains: Dict[str, dict], amplitu
         json.dump(manifest, fh, indent=2, default=str)
 
 
-def save_job(directory: str, built: dict, result, job=None) -> dict:
+def save_job(directory: str, built: dict, result, job=None, missing: dict | None = None) -> dict:
     """Write a finished job to `directory`.
 
     built: the dictionary returned by cloud_run_circuits.build_all() for the job.
-    result: the job's result (one PUB result per entry of built["pubs"]).
+    result: the job's result (one PUB result per entry of built["labels"]).
     job: the job object, optional, for its identifier.
+    missing: for a partly failed run, {"conditions": [...], "jobs": [...]}: the
+    conditions left out of `built["labels"]` because a job holding one of their
+    parts failed, and those jobs' identifiers. analyze() flags them.
     """
     chains, amp_m, amp_r = {}, [], []
     n_qubits = len(built["report"]["layout"])
@@ -104,6 +112,9 @@ def save_job(directory: str, built: dict, result, job=None) -> dict:
                    for label, a in chains.items()},
         "amplitude_pulses": amp_m,
     }
+    if missing:
+        manifest["missing_conditions"] = list(missing["conditions"])
+        manifest["failed_jobs"] = list(missing["jobs"])
     save_arrays(directory, manifest, chains, amplitude)
     return manifest
 
@@ -300,6 +311,11 @@ def _pool(items: List[Tuple[float, float]]) -> Tuple[float, float]:
     return float(vals.mean()), float(math.sqrt(np.sum(ses ** 2)) / len(items))
 
 
+def _round_pairs(stats: dict) -> dict:
+    """(value, se) pairs to 6 decimals, other entries untouched."""
+    return {k: ([round(x, 6) for x in v] if isinstance(v, tuple) else v) for k, v in stats.items()}
+
+
 def analyze(directory: str) -> dict:
     manifest, chains, amplitude = load(directory)
     report = {"run": directory, "job_id": manifest.get("job_id"),
@@ -315,6 +331,14 @@ def analyze(directory: str) -> dict:
         fits = [amplitude_fit(m, r[:, :, q]) for q in range(n_qubits)]
         amp_terms = [(f["A"], f["se_A"]) for f in fits]
         report["amplitude"] = [{k: (round(v, 7) if isinstance(v, float) else v) for k, v in f.items()} for f in fits]
+    # The eigenstate null needs the run's own assignment errors (AS condition)
+    # and the run-day T1 of each layout qubit; both are read before the chains.
+    assign = None
+    for label, arrays in chains.items():
+        if str(arrays["kind"]) == "assign":
+            ra = arrays["r"]
+            assign = [eigenstate.assign_errors(ra[:, :, q, 0], arrays["phi"][:, q, 0]) for q in range(ra.shape[2])]
+    t1_list = (manifest.get("build_report", {}).get("calibration") or {}).get("t1_s")
     for label, arrays in chains.items():
         kind = str(arrays["kind"])
         r = arrays["r"]
@@ -402,6 +426,60 @@ def analyze(directory: str) -> dict:
             for q, (v, se) in enumerate(d_clean):
                 if abs(v) > FIVE * se:
                     report["flags"].append(f"{label}: qubit {q} clean D_fix = {v:.5f} +- {se:.5f} (readout memory or persistence)")
+        elif kind == "tagged_eig":
+            per_q = [eigenstate.eigen_statistics(r[:, :, q, :].reshape(-1, r.shape[3])) for q in range(nq)]
+            entry["reference"] = ("reading fixed in notes/CLOUD_RUN_NEXT_DESIGN.md Section 2G; the nulls are "
+                                  "analysis/cloud_run_eigenstate.json null_reference (a simulated conventional "
+                                  "model), not zero")
+            entry["per_qubit"] = [{m: _round_pairs(st[m]) for m in eigenstate.MASKS}
+                                  | {k: v for k, v in st.items() if not isinstance(v, dict)}
+                                  for st in per_q]
+            entry["pooled"] = {m: _round_pairs(eigenstate.pool_eigen([st[m] for st in per_q]))
+                               for m in eigenstate.MASKS}
+            if assign is None or not t1_list or len(t1_list) != nq:
+                report["flags"].append(f"{label}: no assignment calibration or no run-day T1; "
+                                       "no per-qubit null and no reading")
+            else:
+                sens = eigenstate.load_sensitivities()
+                readings = []
+                for q, st in enumerate(per_q):
+                    if t1_list[q] is None:
+                        # A null without relaxation would read T1 decay as memory.
+                        report["flags"].append(f"{label}: qubit {q} has no run-day T1; "
+                                               "no per-qubit null and no reading")
+                        readings.append(None)
+                        continue
+                    e0, e1 = assign[q]["e0"], assign[q]["e1"]
+                    null = eigenstate.qubit_null(e0[0], e1[0], t1_list[q], float(st["fraction_checks_leaked"]),
+                                                 seed=20261102 + q)
+                    rd = eigenstate.eigen_reading(st, null, sens, (e0[1], e1[1]))
+                    readings.append({"null": {m: _round_pairs(null[m]) for m in eigenstate.MASKS}
+                                     | {"inputs": null["inputs"]}, "reading": rd})
+                    if rd["contrast_reading"] != "consistent with the per-qubit conventional null":
+                        report["flags"].append(f"{label}: qubit {q} {rd['contrast_reading']} "
+                                               f"(contrast z = {rd['clean']['contrast']['z']:+.2f} clean, "
+                                               f"{rd['clean_next']['contrast']['z']:+.2f} clean_next)")
+                entry["per_qubit_null"] = readings
+                entry["reference"] = ("reading fixed in notes/CLOUD_RUN_NEXT_DESIGN.md Section 2G: per-qubit "
+                                      "nulls from eigenstate.qubit_null with the run's AS assignment errors, "
+                                      "run-day T1 and the qubit's own leaked-check fraction; threshold "
+                                      f"{eigenstate.K_SIGMA} combined standard errors on clean and clean_next")
+            for q, st in enumerate(per_q):
+                c, cn = st["clean"]["flip_agree"], st["clean_next"]["flip_agree"]
+                if abs(c[0] - cn[0]) > FIVE * math.hypot(c[1], cn[1]):
+                    report["flags"].append(
+                        f"{label}: qubit {q} clean-mask flip fidelity differs from the clean_next mask by "
+                        f"{c[0] - cn[0]:+.5f}; leaks starting inside R or P are material on this qubit")
+                fc, fa = st["all"]["flip_control"], st["all"]["flip_agree"]
+                if abs(fc[0] - fa[0]) > FIVE * math.hypot(fc[1], fa[1]):
+                    report["flags"].append(
+                        f"{label}: qubit {q} unselected P flip fidelity differs from the F1 control by "
+                        f"{fa[0] - fc[0]:+.5f}; the eigenstate flip step differs from the checked flip step")
+                if st["fraction_blocks_clean"] < 0.5:
+                    report["flags"].append(
+                        f"{label}: qubit {q} only {st['fraction_blocks_clean']:.3f} of blocks clean")
+        elif kind == "assign":
+            entry["per_qubit"] = [{k: [round(v[0], 6), round(v[1], 6)] for k, v in a.items()} for a in assign]
         elif kind == "phase":
             per_q = []
             for q in range(nq):
@@ -415,8 +493,16 @@ def analyze(directory: str) -> dict:
                 report["flags"].append(f"{label}: phase generation shows harmonics above order 2 "
                                        f"(sqrt chi^2 = {zmax})")
         report["conditions"][label] = entry
+    if manifest.get("missing_conditions"):
+        report["flags"].append("incomplete run: conditions not saved because a job failed or was not "
+                               f"retrieved: {manifest['missing_conditions']} (jobs {manifest.get('failed_jobs')})")
     if not report["flags"]:
-        report["flags"].append("none: every primary statistic is within five standard errors of zero")
+        if any(str(a["kind"]) == "tagged_eig" for a in chains.values()):
+            # The eigenstate reading is against a per-qubit null, not zero.
+            report["flags"].append("none: every qubit's eigenstate contrast is consistent with its per-qubit "
+                                   "null, and every other statistic is within five standard errors of zero")
+        else:
+            report["flags"].append("none: every primary statistic is within five standard errors of zero")
     return report
 
 
@@ -575,6 +661,177 @@ def selftest_tagged(chk: Check, rng) -> dict:
     return summary
 
 
+def selftest_tagged_eig(chk: Check, rng) -> dict:
+    """Eigenstate repeat/flip chains through save, load and analyze."""
+    summary = {}
+    with tempfile.TemporaryDirectory() as tmp:
+        cases = (("QM, ideal", "QM", 0.0, {}),
+                 ("QM, leakage", "QM", 0.0, followup.LEAK),
+                 ("QM, leakage + memory +1%", "QM", 0.0, {**followup.LEAK, "mem_pos": 0.01}),
+                 ("D w=0.3, leakage", "D", 0.3, followup.LEAK))
+        base = None
+        for name, model, w, kw in cases:
+            sets, shots, nq, K = 200, 60, 2, 72
+            alpha, beta, phi = eigenstate.tagged_eig_settings(sets * nq, K, rng)
+            rep_phi = np.repeat(phi.reshape(sets, 1, nq, K), shots, axis=1).reshape(-1, K)
+            out = followup.simulate_leaky(model, rep_phi, rng, w=w, **kw)
+            chains = {"E0": {"r": out.reshape(sets, shots, nq, K).astype(np.int8),
+                             "kind": np.array("tagged_eig"), "records": np.array(K),
+                             "alpha": alpha.reshape(sets, nq, K), "beta": beta.reshape(sets, nq, K),
+                             "phi": phi.reshape(sets, nq, K)}}
+            manifest = {"saved": "synthetic", "job_id": None,
+                        "build_report": {"backend": f"synthetic {model}", "layout": list(range(nq))},
+                        "chains": {"E0": {"kind": "tagged_eig", "records": K, "shape": list(chains["E0"]["r"].shape)}},
+                        "amplitude_pulses": []}
+            path = os.path.join(tmp, name.replace(" ", "_").replace("+", "p").replace("%", ""))
+            save_arrays(path, manifest, chains, None)
+            rep = analyze(path)
+            entry = rep["conditions"]["E0"]
+            pooled = entry["pooled"]["clean"]
+            if model == "QM" and not kw:
+                chk.within(f"tagged_eig {name}: repeat agree is 1", *pooled["repeat_agree"], 1.0)
+                chk.within(f"tagged_eig {name}: flip agree is 1", *pooled["flip_agree"], 1.0)
+            if "g1" in kw:
+                chk.true(f"tagged_eig {name}: repeat agree above 0.9", pooled["repeat_agree"][0] > 0.9)
+                chk.true(f"tagged_eig {name}: per-qubit values present", len(entry["per_qubit"]) == nq)
+                chk.true(f"tagged_eig {name}: pooled value is the mean of the per-qubit values",
+                         abs(pooled["flip_agree"][0]
+                             - sum(p["clean"]["flip_agree"][0] for p in entry["per_qubit"]) / nq) < 2e-6)
+                if name == "QM, leakage":
+                    base = pooled
+                if "mem_pos" in kw and base is not None:
+                    moved = pooled["D_flip"][0] - base["D_flip"][0]
+                    se = math.hypot(pooled["D_flip"][1], base["D_flip"][1])
+                    chk.true(f"tagged_eig {name}: readout memory moves the pooled flip covariance",
+                             moved > FIVE * se)
+            if model == "D":
+                want = w * (1.0 - followup.LEAK["e0"] - followup.LEAK["e1"]) ** 2
+                chk.within(f"tagged_eig {name}: clean B lag-1 is w times contrast",
+                           pooled["B_lag1"][0], pooled["B_lag1"][1], want)
+            summary[name] = {"pooled_clean": pooled, "flags": rep["flags"]}
+    return summary
+
+
+class _FakePub:
+    """A PUB result holding bits (sets, shots, clbits), as the Sampler returns them."""
+
+    def __init__(self, bits):
+        self.data = self
+        self.c = self
+        self._bits = bits
+
+    def to_bool_array(self, order="little"):
+        return self._bits
+
+
+def selftest_partial_save(chk: Check, rng) -> dict:
+    """cloud_run_submit.save_results on a duration-split plan with each job
+    failing in turn: every condition whose parts all came back is saved row for
+    row, a condition with a missing part is left out and listed, and analyze()
+    flags the incomplete run and a qubit with no run-day T1."""
+    import cloud_run_submit as submit
+
+    nq, K, shots = 2, 72, 30
+    e_sets, a_sets = 30, 40
+    _, _, e_phi = eigenstate.tagged_eig_settings(e_sets * nq, K, rng)
+    e_out = followup.simulate_leaky("QM", np.repeat(e_phi.reshape(e_sets, 1, nq, K), shots, axis=1)
+                                    .reshape(-1, K), rng, **followup.LEAK)
+    e_r = e_out.reshape(e_sets, shots, nq, K).astype(np.int8)
+    _, _, a_phi = eigenstate.assign_settings(a_sets, nq, rng)
+    ideal = np.where(np.repeat(a_phi.reshape(a_sets, 1, nq, 1), shots, axis=1) == 0, -1, 1)  # phi = 0 flips to |1>
+    a_r = np.where(rng.random(ideal.shape) < 0.01, -ideal, ideal).astype(np.int8)
+    full = {"E0": e_r, "AS": a_r}
+    bits = {k: (v < 0).reshape(v.shape[0], shots, -1) for k, v in full.items()}
+    built = {"labels": ["AS", "E0"],
+             "meta": {"E0": {"kind": "tagged_eig", "records": K, "phi": e_phi.reshape(e_sets, nq, K)},
+                      "AS": {"kind": "assign", "records": 1, "phi": a_phi.reshape(a_sets, nq, 1)}},
+             "report": {"backend": "synthetic", "layout": list(range(nq)),
+                        "calibration": {"t1_s": [None] * nq, "readout_error": [0.01] * nq}}}
+    plan = [[(lab, None, tuple(span)) for lab, span in job]
+            for job in submit.job_plan([("AS", a_sets, 0.01), ("E0", e_sets, 1.0)], max_job_s=10.0)]
+    chk.true("partial save: E0 is split over three jobs and AS packed alone",
+             [[e[0] for e in job] for job in plan] == [["AS"], ["E0"], ["E0"], ["E0"]])
+    results = [[_FakePub(bits[lab][span[0]:span[1]]) for lab, _, span in job] for job in plan]
+    summary = {}
+    with tempfile.TemporaryDirectory() as tmp:
+        # "stopped": submission stopped after two jobs, so the plan read back from
+        # job.json lists only those; E0's one returned part must not pass as all of E0.
+        for fail in (None, 0, 2, "stopped"):
+            name = {None: "all jobs done", "stopped": "submission stopped after job 1"}.get(fail, f"job {fail} failed")
+            n_jobs = 2 if fail == "stopped" else len(plan)
+            res = [None if i == fail else r for i, r in enumerate(results[:n_jobs])]
+            ids = [f"job{i}" for i in range(n_jobs)]
+            path = os.path.join(tmp, name.replace(" ", "_"))
+            report, complete = submit.save_results(path, built, plan[:n_jobs], res, ids)
+            manifest, chains, _ = load(path)
+            lost = [] if fail is None else ["E0"] if fail == "stopped" else sorted({e[0] for e in plan[fail]})
+            chk.true(f"partial save, {name}: complete only when every job came back", complete == (fail is None))
+            chk.true(f"partial save, {name}: saved conditions", sorted(chains) == sorted(set(full) - set(lost)))
+            for lab in chains:
+                chk.true(f"partial save, {name}: {lab} rows match the original sets",
+                         np.array_equal(chains[lab]["r"], full[lab]))
+            chk.true(f"partial save, {name}: manifest lists the missing conditions and job",
+                     manifest.get("missing_conditions", []) == lost
+                     and manifest.get("failed_jobs", []) == ([] if fail in (None, "stopped") else [f"job{fail}"]))
+            chk.true(f"partial save, {name}: incomplete run flagged",
+                     any(f.startswith("incomplete run") for f in report["flags"]) == (fail is not None))
+            if "E0" in chains and "AS" in chains:
+                chk.true(f"partial save, {name}: a qubit with no run-day T1 gets no null and a flag",
+                         report["conditions"]["E0"]["per_qubit_null"] == [None] * nq
+                         and sum("has no run-day T1" in f for f in report["flags"]) == nq)
+            summary[name] = {"saved": sorted(chains), "flags": report["flags"]}
+    return summary
+
+
+def selftest_eig_null(chk: Check, rng) -> dict:
+    """The per-qubit null and reading through analyze(): an E0 chain plus the AS
+    assignment calibration and a run-day T1 in the build report. A conventional
+    run (leakage, T1, asymmetric static readout) must read consistent; the same
+    run with +1 percent readout memory must read positive memory."""
+    summary = {}
+    t1 = eigenstate.T1_S
+    with tempfile.TemporaryDirectory() as tmp:
+        base = {**followup.LEAK, "e0": 0.008, "e1": 0.016, "t1": t1, "period_s": eigenstate.FEZ_PERIOD_S}
+        for name, kw, want in (("conventional", base, "consistent with the per-qubit conventional null"),
+                               ("memory +1%", {**base, "mem_pos": 0.01}, "positive memory on eigenstate readouts")):
+            nq, K = 2, 72
+            sets, shots = 600, 200
+            alpha, beta, phi = eigenstate.tagged_eig_settings(sets * nq, K, rng)
+            rep_phi = np.repeat(phi.reshape(sets, 1, nq, K), shots, axis=1).reshape(-1, K)
+            out = followup.simulate_leaky("QM", rep_phi, rng, **kw)
+            a_sets, a_shots = 200, 400
+            aa, ab, aphi = eigenstate.assign_settings(a_sets, nq, rng)
+            a_rep = np.repeat(aphi.reshape(a_sets, 1, nq, 1), a_shots, axis=1).reshape(-1, 1)
+            a_out = followup.simulate_leaky("QM", a_rep, rng, **{k: v for k, v in kw.items() if k != "mem_pos"})
+            chains = {"E0": {"r": out.reshape(sets, shots, nq, K).astype(np.int8),
+                             "kind": np.array("tagged_eig"), "records": np.array(K),
+                             "alpha": alpha.reshape(sets, nq, K), "beta": beta.reshape(sets, nq, K),
+                             "phi": phi.reshape(sets, nq, K)},
+                      "AS": {"r": a_out.reshape(a_sets, a_shots, nq, 1).astype(np.int8),
+                             "kind": np.array("assign"), "records": np.array(1),
+                             "alpha": aa.reshape(a_sets, nq, 1), "beta": ab.reshape(a_sets, nq, 1),
+                             "phi": aphi.reshape(a_sets, nq, 1)}}
+            manifest = {"saved": "synthetic", "job_id": None,
+                        "build_report": {"backend": "synthetic", "layout": list(range(nq)),
+                                         "calibration": {"t1_s": [t1] * nq, "readout_error": [0.012] * nq}},
+                        "chains": {k: {"kind": str(v["kind"]), "records": int(v["records"]),
+                                       "shape": list(v["r"].shape)} for k, v in chains.items()},
+                        "amplitude_pulses": []}
+            path = os.path.join(tmp, name.replace(" ", "_").replace("+", "p").replace("%", ""))
+            save_arrays(path, manifest, chains, None)
+            rep = analyze(path)
+            assign = rep["conditions"]["AS"]["per_qubit"]
+            for q in range(nq):
+                chk.within(f"eig null {name}: AS recovers e0 on qubit {q}", *assign[q]["e0"], 0.008)
+                chk.within(f"eig null {name}: AS recovers e1 on qubit {q}", *assign[q]["e1"], 0.016)
+            readings = [r["reading"]["contrast_reading"] for r in rep["conditions"]["E0"]["per_qubit_null"]]
+            chk.true(f"eig null {name}: every qubit reads '{want}'", all(r == want for r in readings))
+            summary[name] = {"readings": readings,
+                             "contrast_z": [round(r["reading"]["clean"]["contrast"]["z"], 2)
+                                            for r in rep["conditions"]["E0"]["per_qubit_null"]]}
+    return summary
+
+
 def selftest_aer(chk: Check) -> dict:
     """Circuits of cloud_run_circuits.py on Qiskit Aer, through save_job()."""
     import cloud_run_circuits as circ
@@ -648,7 +905,10 @@ def main() -> int:
             return 0
         chk = Check()
         summary = {"numpy": selftest_numpy(chk, np.random.default_rng(20261015)),
-                   "tagged": selftest_tagged(chk, np.random.default_rng(20261016))}
+                   "tagged": selftest_tagged(chk, np.random.default_rng(20261016)),
+                   "tagged_eig": selftest_tagged_eig(chk, np.random.default_rng(20261101)),
+                   "eig_null": selftest_eig_null(chk, np.random.default_rng(20261102)),
+                   "partial_save": selftest_partial_save(chk, np.random.default_rng(20261119))}
         if args.aer:
             summary["aer"] = selftest_aer(chk)
         summary["checks"] = chk.count

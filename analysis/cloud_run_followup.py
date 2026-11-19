@@ -79,20 +79,28 @@ def tagged_settings(n: int, K: int, rng) -> Tuple[np.ndarray, np.ndarray, np.nda
 def simulate_leaky(model: str, phi: np.ndarray, rng, w: float = 0.0, eps: float = 0.0,
                    e0: float = 0.0, e1: float = 0.0, g0: float = 0.0, g1: float = 0.0,
                    g_dn: float = 0.0, q2: float = 1.0, mem_pos: float = 0.0,
-                   mem_neg: float = 0.0) -> np.ndarray:
+                   mem_neg: float = 0.0, t1: float | None = None,
+                   period_s: float | None = None) -> np.ndarray:
     """Reported outcomes (n, K), +1 = |0>, from |0>.
 
     Levels 0, 1 (computational) and 2 (leaked). Before each step a leaked qubit
-    returns to |1> with probability g_dn. The step leaves <Z> = b S_zz(phi)
-    with S_zz = cos^2 t - sin^2 t cos(phi), t = (pi/2)(1 + eps), and leaves |2>
-    alone. During the readout |0> and |1> leak with probabilities g0 and g1.
+    returns to |1> with probability g_dn, and an excited |1> relaxes to |0> with
+    probability 1 - exp(-period_s / t1) when both are given (no draw is taken
+    otherwise, so leaving t1 unset reproduces earlier streams exactly). The step
+    leaves <Z> = b S_zz(phi) with S_zz = cos^2 t - sin^2 t cos(phi),
+    t = (pi/2)(1 + eps), and leaves |2> alone. During the readout |0> and |1>
+    leak with probabilities g0 and g1.
     The readout reports "1" from |0> with probability e0 (plus mem_pos after a
     reported "1"), "0" from |1> with probability e1 (plus mem_neg after a
     reported "1"), and "1" from |2> with probability q2. model "D" draws the
     computational outcome from the detector variable u with gap persistence w.
+    Populations only: dephasing (T2) is outside this model.
     """
     n, K = phi.shape
     t = 0.5 * math.pi * (1.0 + eps)
+    p_relax = 0.0
+    if t1 and period_s:
+        p_relax = -math.expm1(-period_s / t1)
     level = np.zeros(n, int)
     u = rng.random(n)
     r_prev = np.ones(n)
@@ -102,6 +110,8 @@ def simulate_leaky(model: str, phi: np.ndarray, rng, w: float = 0.0, eps: float 
             redraw = rng.random(n) >= w
             u[redraw] = rng.random(int(redraw.sum()))
         level = np.where((level == 2) & (rng.random(n) < g_dn), 1, level)
+        if p_relax > 0.0:
+            level = np.where((level == 1) & (rng.random(n) < p_relax), 0, level)
         b = np.where(level == 0, 1.0, -1.0)
         sz = b * (math.cos(t) ** 2 - math.sin(t) ** 2 * np.cos(phi[:, k]))
         draw = u if model == "D" else rng.random(n)
@@ -120,10 +130,17 @@ def simulate_leaky(model: str, phi: np.ndarray, rng, w: float = 0.0, eps: float 
 
 # ---------------------------------------------------------------- statistics
 
-def check_states(r: np.ndarray) -> np.ndarray:
-    """r (..., K) -> check outcome per block (..., K // 6): 0 normal, 1 leaked, 2 other."""
+def check_states(r: np.ndarray, block: int = BLOCK) -> np.ndarray:
+    """r (..., K) -> check outcome per block (..., K // block): 0 normal, 1 leaked, 2 other.
+
+    The check is records 3, 4, 5 of each block, so a chain with extra records
+    after the check (analysis/cloud_run_eigenstate.py) selects on the same three
+    records and can share this function.
+    """
     K = r.shape[-1]
-    blocks = r.reshape(r.shape[:-1] + (K // BLOCK, BLOCK)).astype(np.int16)
+    if K % block:
+        raise ValueError("K must be a multiple of the block length")
+    blocks = r.reshape(r.shape[:-1] + (K // block, block)).astype(np.int16)
     x, f1, f2 = blocks[..., 3], blocks[..., 4], blocks[..., 5]
     normal = (f1 == -x) & (f2 == x)
     leaked = (x == -1) & (f1 == -1) & (f2 == -1)
@@ -146,13 +163,13 @@ def _masked_cov(x: np.ndarray, y: np.ndarray, m: np.ndarray) -> Tuple[float, flo
     return float(prod.mean()), float(prod.std() / math.sqrt(prod.size))
 
 
-def tagged_statistics(r: np.ndarray) -> Dict[str, object]:
+def tagged_statistics(r: np.ndarray, block: int = BLOCK) -> Dict[str, object]:
     """r (N, K) outcomes of one qubit, rows are shots (any order)."""
     N, K = r.shape
-    nb = K // BLOCK
-    st = check_states(r)
+    nb = K // block
+    st = check_states(r, block)
     clean = clean_blocks(st)
-    blocks = r.reshape(N, nb, BLOCK)
+    blocks = r.reshape(N, nb, block)
     out: Dict[str, object] = {}
     for name, mask in (("clean", clean), ("all", np.ones_like(clean))):
         res = {}

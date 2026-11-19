@@ -2,9 +2,9 @@
 
 ![Art Deco illustration of a single qubit flipping between two orientations](notes/qubit_deja_vu_art_v3.png)
 
-Reset-free chains of up to 66 mid-circuit readouts per qubit, run on IBM Quantum's ibm_kingston and ibm_fez on 15 and 16 October 2026 (UTC). The chains screen for measurement errors that are correlated from one readout to the next, which matter for quantum error correction. The same data bound two models in which a hidden variable persists between measurements.
+Reset-free chains of up to 72 mid-circuit readouts per qubit, run on IBM Quantum's ibm_kingston and ibm_fez on 15 and 16 October and 19 November 2026 (UTC). The chains screen for measurement errors that are correlated from one readout to the next, which matter for quantum error correction. The same data bound two models in which a hidden variable persists between measurements.
 
-This is independent work by Ondrej Chvala (UT Austin) using a personal IBM Quantum account. No lab or institution has endorsed it.
+This is independent work by Ondrej Chvala (Walker Department of Mechanical Engineering, The University of Texas at Austin; ORCID [0000-0003-4614-6649](https://orcid.org/0000-0003-4614-6649)) using a personal IBM Quantum account. No lab or institution has endorsed it.
 
 ## Results so far
 
@@ -15,6 +15,8 @@ The full write-up is `notes/CLOUD_RUN_RESULTS.md`, and each run's machine-genera
 | Shot-wide readout correlation explained by leakage | removing leak-tagged blocks takes it from 0.001 to 0.0065 per qubit down to 0.0003 ± 0.0002 | kingston follow-up; fez repeat |
 | Leakage enters during idle time as well as during readouts | leaked fraction changes by a factor of 0.6 to 1.3 when the readout rate drops 3.8-fold, between the 0.35 to 0.59 expected if readouts alone caused it and the 1.3 to 2.2 if it built up only with time (buildup model, exploratory); lifetimes about 10 to 120 µs (lower limits) | kingston follow-up; fez repeat |
 | Readout memory after leakage is removed | ±2 to 9 x 10^-3, beyond five standard errors on 6 of 12 qubits; reproduced and level from 1.4 to 5.4 µs on three fez qubits | kingston follow-up; fez runs |
+| First readout of a shot differs from readouts inside a chain | a fresh \|1> is misread 0.1 to 0.6 points more often on the first readout than inside the chain, on all 8 fez qubits; found after the first November run, replicated on all 8 in a pre-registered repeat | fez E0 and E0R |
+| Readout memory on eigenstate inputs (as a syndrome qubit sees them) | against in-chain errors, 0.1 to 0.4 points on 7 of 8 fez qubits, negative on six and positive on one; replicated with the same sign on 7 of 8 in the pre-registered repeat, one inconclusive; equator memory does not predict it qubit by qubit | fez E0 and E0R |
 | Qubit-anchored persistence (Bell-Mermin completion) | `w1 w2 < 5.3e-4` at a 1.44 µs gap (five sigma) | kingston main run |
 | Detector-anchored persistence | no cusp in the angle scan; `w_D < 5.6e-3` | kingston main run |
 
@@ -36,19 +38,14 @@ Each design and its analysis code were committed before the corresponding data e
 notes/CLOUD_RUN_DESIGN.md           Design of the pilot and main run
 notes/CLOUD_RUN_FOLLOWUP_DESIGN.md  Leak-tagged follow-up and the ibm_fez add-ons
 notes/CLOUD_RUN_RESULTS.md          Results of every run
-notes/overview.svg                  Three-panel graphical summary, generated from the run reports
-notes/qubit_deja_vu_art.png         Earlier Futurist / Art Deco cover illustration
-notes/qubit_deja_vu_art_v2.png      Futurist / Art Deco method illustration
 notes/qubit_deja_vu_art_v3.png      Futurist / Art Deco cover illustration: the flipping qubit
-notes/qubit_deja_vu_art_v4.png      Futurist / Art Deco illustration: reset-free readout colonnade
-notes/qubit_deja_vu_art_v5.png      Futurist / Art Deco illustration: leakage caught by caliper blades
-notes/qubit_deja_vu_art_v6.png      Futurist / Art Deco illustration: memoryless versus deja-vu halls
 notes/cloud_run_results.html        One-page summary with figures (open in a browser)
 theory/theorynote.pdf               Theory note: the two completions, predictions, design consequences
 analysis/                           Simulation, circuit builder, submission and analysis code, with self-tests
 data/cloudrun/<date>_<run>/         Run records: manifest.json, one NPZ per condition, amplitude.npz, job.json, report.json, submit.log
-                                    (plus exploratory outputs: leakage_exploratory.json, diagnostics_exploratory.json)
-scripts/make_overview_figure.py     Builds notes/overview.svg from the run reports
+                                    (plus exploratory outputs: leakage_exploratory.json, diagnostics_exploratory.json,
+                                    drift_exploratory.json; and for the November repeat inchain_reading.json, replication.json)
+scripts/make_overview_figure.py     Builds a three-panel summary figure from the run reports (output kept out of the repository)
 scripts/generate_repo_art.py        Generates the Futurist / Art Deco illustrations via Gemini
 scripts/make_cloud_results_page.py  Builds notes/cloud_run_results.html from the reports
 ```
@@ -61,11 +58,20 @@ In each condition file, `r` holds outcomes as int8, +1 = |0>, with shape (parame
 python -m pip install -r requirements.txt                 # numpy, scipy
 python analysis/cloud_run_design.py                       # design checks (46)
 python analysis/cloud_run_followup.py                     # follow-up design checks (26)
-python analysis/cloud_run_analyze.py selftest             # analysis self-tests on synthetic runs (40)
+python analysis/cloud_run_eigenstate.py                   # eigenstate (November) design checks (99)
+python analysis/cloud_run_analyze.py selftest             # analysis self-tests on synthetic runs (86)
 python analysis/cloud_run_analyze.py analyze data/cloudrun/2026-10-15_main --output /tmp/report.json
 ```
 
-The last command reproduces `data/cloudrun/2026-10-15_main/report.json`.
+The last command reproduces `data/cloudrun/2026-10-15_main/report.json`; the same command on any other run directory reproduces its report.
+
+The November eigenstate runs add two steps per block, a repeat and a flip of the post-readout eigenstate, and read the result against a per-qubit simulated null. `analysis/cloud_run_eig_drift.py` estimates each qubit's in-chain readout errors and reads the eigenstate memory against them; it was chosen after the first run's data (exploratory there) and fixed in advance for the repeat. `analysis/cloud_run_eig_replication.py` applies the repeat's pre-registered rules:
+
+```sh
+python analysis/cloud_run_eig_drift.py data/cloudrun/2026-11-19_eigrepeat --output /tmp/inchain.json
+python analysis/cloud_run_eig_replication.py data/cloudrun/2026-11-19_eig/drift_exploratory.json \
+    data/cloudrun/2026-11-19_eigrepeat/inchain_reading.json
+```
 
 Two scripts are exploratory: their statistics were chosen after seeing the data, and their outputs are labeled that way. `analysis/cloud_run_leakage.py` fits a three-level leakage model (`--recovery` repeats its check on synthetic data, output `analysis/cloud_run_leakage_recovery.json`). `analysis/cloud_run_diagnostics.py` computes the descriptive numbers in the results note that are not in `report.json`: long runs of one outcome, flip-step failures, standard errors clustered by shot and by parameter set, and the leak-buildup model.
 

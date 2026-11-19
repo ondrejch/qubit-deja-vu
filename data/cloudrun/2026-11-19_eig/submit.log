@@ -1,0 +1,148 @@
+{
+ "backend": "ibm_fez",
+ "job": "eig",
+ "shots": 400,
+ "layout": [
+  124,
+  144,
+  6,
+  50,
+  23,
+  59,
+  114,
+  132
+ ],
+ "readout_s": 1.34e-06,
+ "estimated_qpu_s": 384.5,
+ "calibration": {
+  "t1_s": [
+   9.43275393362592e-05,
+   0.00012331522500512863,
+   0.00021134758400112884,
+   0.000169377014728591,
+   0.0001205263963264469,
+   0.00015084302911799654,
+   0.00012407598210171267,
+   0.00013000416561730082
+  ],
+  "readout_error": [
+   0.0040283203125,
+   0.0035400390625,
+   0.0035400390625,
+   0.002685546875,
+   0.0032958984375,
+   0.003662109375,
+   0.003662109375,
+   0.00390625
+  ]
+ },
+ "conditions": {
+  "E0": {
+   "sets": 2572,
+   "executions": 1028800,
+   "estimated_qpu_s": 360.0
+  },
+  "C2": {
+   "sets": 40,
+   "executions": 16000,
+   "estimated_qpu_s": 4.0
+  },
+  "AS": {
+   "sets": 199,
+   "executions": 79600,
+   "estimated_qpu_s": 20.0
+  }
+ },
+ "jobs": [
+  {
+   "entries": [
+    "C2",
+    "amplitude_1",
+    "amplitude_9",
+    "amplitude_25",
+    "amplitude_49",
+    "amplitude_97"
+   ],
+   "estimated_qpu_s": 4.5
+  },
+  {
+   "entries": [
+    "AS"
+   ],
+   "estimated_qpu_s": 20.0
+  },
+  {
+   "entries": [
+    "E0"
+   ],
+   "estimated_qpu_s": 51.37
+  },
+  {
+   "entries": [
+    "E0"
+   ],
+   "estimated_qpu_s": 51.37
+  },
+  {
+   "entries": [
+    "E0"
+   ],
+   "estimated_qpu_s": 51.51
+  },
+  {
+   "entries": [
+    "E0"
+   ],
+   "estimated_qpu_s": 51.37
+  },
+  {
+   "entries": [
+    "E0"
+   ],
+   "estimated_qpu_s": 51.51
+  },
+  {
+   "entries": [
+    "E0"
+   ],
+   "estimated_qpu_s": 51.37
+  },
+  {
+   "entries": [
+    "E0"
+   ],
+   "estimated_qpu_s": 51.51
+  }
+ ]
+}
+estimate with overhead: 411.5 s in 9 job(s); per-job estimates [4.5, 20.0, 51.37, 51.37, 51.51, 51.37, 51.51, 51.37, 51.51]
+instance usage remaining: 600 s
+submitted job dbvj5tg13mdc73dfeok0 ['C2', 'amplitude_1', 'amplitude_9', 'amplitude_25', 'amplitude_49', 'amplitude_97']
+submitted job dbvj5tol0c4s739lqkj0 ['AS']
+submitted job dbvj5u813mdc73dfeol0 ['E0']
+submitted job dbvj5ugl0c4s739lqkkg ['E0']
+submitted job dbvj5uo13mdc73dfeon0 ['E0']
+submitted job dbvj5v9cn7vc73eh12gg ['E0']
+submitted job dbvj5vgl0c4s739lqkm0 ['E0']
+submitted job dbvj5vol0c4s739lqkn0 ['E0']
+submitted job dbvj609cn7vc73eh12i0 ['E0']
+results after 426 s
+{
+ "saved": "data/cloudrun/2026-11-19_eig",
+ "flags": [
+  "E0: qubit 1 negative memory on eigenstate readouts (contrast z = +3.56 clean, +3.99 clean_next)",
+  "E0: qubit 2 positive memory on eigenstate readouts (contrast z = -5.63 clean, -4.61 clean_next)",
+  "E0: qubit 5 positive memory on eigenstate readouts (contrast z = -6.67 clean, -5.70 clean_next)",
+  "E0: qubit 6 negative memory on eigenstate readouts (contrast z = +5.83 clean, +6.45 clean_next)",
+  "E0: qubit 0 clean-mask flip fidelity differs from the clean_next mask by -0.00028; leaks starting inside R or P are material on this qubit",
+  "E0: qubit 1 clean-mask flip fidelity differs from the clean_next mask by -0.00049; leaks starting inside R or P are material on this qubit",
+  "E0: qubit 2 clean-mask flip fidelity differs from the clean_next mask by -0.00083; leaks starting inside R or P are material on this qubit",
+  "E0: qubit 3 clean-mask flip fidelity differs from the clean_next mask by -0.00035; leaks starting inside R or P are material on this qubit",
+  "E0: qubit 4 clean-mask flip fidelity differs from the clean_next mask by -0.00175; leaks starting inside R or P are material on this qubit",
+  "E0: qubit 4 unselected P flip fidelity differs from the F1 control by -0.00073; the eigenstate flip step differs from the checked flip step",
+  "E0: qubit 5 clean-mask flip fidelity differs from the clean_next mask by -0.00110; leaks starting inside R or P are material on this qubit",
+  "E0: qubit 5 unselected P flip fidelity differs from the F1 control by -0.00035; the eigenstate flip step differs from the checked flip step",
+  "E0: qubit 6 clean-mask flip fidelity differs from the clean_next mask by -0.00051; leaks starting inside R or P are material on this qubit",
+  "E0: qubit 7 clean-mask flip fidelity differs from the clean_next mask by -0.00037; leaks starting inside R or P are material on this qubit"
+ ]
+}

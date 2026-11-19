@@ -1,0 +1,261 @@
+{
+ "note": "Rules of notes/CLOUD_RUN_NEXT_DESIGN.md Section 2H, fixed before the E0R data and applied here to the saved in-chain readings (clean mask). E0's reading is exploratory; E0R's is the pre-registered primary.",
+ "qubits": {
+  "124": {
+   "e0_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.0031759661510981957,
+     0.00022313175586651597
+    ]
+   },
+   "e0r_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.002877107945729393,
+     0.0002833180401759633
+    ],
+    "z_clean": 10.155046759262055,
+    "z_clean_next": 9.974219949151642
+   },
+   "rule3_reading": "replicated",
+   "rule4_first_readout": {
+    "de1": [
+     -0.004009227782311135,
+     6.607759118861794e-05
+    ],
+    "verdict": "replicated"
+   },
+   "rule6_drift": {
+    "z_difference": -0.8287022116858268,
+    "drifted": false
+   },
+   "e0r_first_readout_reading": "consistent with the per-qubit conventional null"
+  },
+  "144": {
+   "e0_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.002253255689304378,
+     0.0002551177048911027
+    ]
+   },
+   "e0r_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.0013620435223140501,
+     0.00028384218469373104
+    ],
+    "z_clean": 4.798594415356938,
+    "z_clean_next": 4.993187715507039
+   },
+   "rule3_reading": "replicated",
+   "rule4_first_readout": {
+    "de1": [
+     -0.0012368014220659033,
+     9.520308540873395e-05
+    ],
+    "verdict": "replicated"
+   },
+   "rule6_drift": {
+    "z_difference": -2.335198116833189,
+    "drifted": false
+   },
+   "e0r_first_readout_reading": "consistent with the per-qubit conventional null"
+  },
+  "6": {
+   "e0_in_chain": {
+    "reading": "positive memory on eigenstate readouts",
+    "deviation": [
+     -0.002028116470691844,
+     0.00016636361708796885
+    ]
+   },
+   "e0r_in_chain": {
+    "reading": "positive memory on eigenstate readouts",
+    "deviation": [
+     -0.0013248964945664075,
+     0.0002122255407446455
+    ],
+    "z_clean": -6.242870155579212,
+    "z_clean_next": -4.646547419700444
+   },
+   "rule3_reading": "replicated",
+   "rule4_first_readout": {
+    "de1": [
+     -0.002308795020486469,
+     4.922860008710232e-05
+    ],
+    "verdict": "replicated"
+   },
+   "rule6_drift": {
+    "z_difference": 2.6078020131063346,
+    "drifted": false
+   },
+   "e0r_first_readout_reading": "positive memory on eigenstate readouts"
+  },
+  "50": {
+   "e0_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.0008267637120529213,
+     0.00018077665751111156
+    ]
+   },
+   "e0r_in_chain": {
+    "reading": "consistent with the in-chain null",
+    "deviation": [
+     0.00022107497692638953,
+     0.00021194545535963526
+    ],
+    "z_clean": 1.0430748635362954,
+    "z_clean_next": 3.2738439750979063
+   },
+   "rule3_reading": "inconclusive",
+   "rule4_first_readout": {
+    "de1": [
+     -0.0021444484286711964,
+     4.6107958227970385e-05
+    ],
+    "verdict": "replicated"
+   },
+   "rule6_drift": {
+    "z_difference": -2.1742807713424264,
+    "drifted": false
+   },
+   "e0r_first_readout_reading": "positive memory on eigenstate readouts"
+  },
+  "23": {
+   "e0_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.004057595842342523,
+     0.00026808460580868623
+    ]
+   },
+   "e0r_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.003976205773320134,
+     0.0003221003521008584
+    ],
+    "z_clean": 12.344617903662133,
+    "z_clean_next": 13.348330843971258
+   },
+   "rule3_reading": "replicated",
+   "rule4_first_readout": {
+    "de1": [
+     -0.002032607240227127,
+     8.00169670402967e-05
+    ],
+    "verdict": "replicated"
+   },
+   "rule6_drift": {
+    "z_difference": -0.19421685282344517,
+    "drifted": false
+   },
+   "e0r_first_readout_reading": "consistent with the per-qubit conventional null"
+  },
+  "59": {
+   "e0_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.0006919895817557251,
+     0.00022173692806089608
+    ]
+   },
+   "e0r_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.0015736895027561003,
+     0.00027761929565544565
+    ],
+    "z_clean": 5.66851630049956,
+    "z_clean_next": 7.240185298431437
+   },
+   "rule3_reading": "replicated",
+   "rule4_first_readout": {
+    "de1": [
+     -0.0024109722142260205,
+     8.636960597491228e-05
+    ],
+    "verdict": "replicated"
+   },
+   "rule6_drift": {
+    "z_difference": 2.4815484487682054,
+    "drifted": false
+   },
+   "e0r_first_readout_reading": "consistent with the per-qubit conventional null"
+  },
+  "114": {
+   "e0_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.002155863871109615,
+     0.0002483205318775099
+    ]
+   },
+   "e0r_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.003047191621392509,
+     0.00033437944042176876
+    ],
+    "z_clean": 9.112975419627896,
+    "z_clean_next": 9.415683428388773
+   },
+   "rule3_reading": "replicated",
+   "rule4_first_readout": {
+    "de1": [
+     -0.006391539994654143,
+     0.00011081183689307722
+    ],
+    "verdict": "replicated"
+   },
+   "rule6_drift": {
+    "z_difference": 2.1400398621941856,
+    "drifted": false
+   },
+   "e0r_first_readout_reading": "consistent with the per-qubit conventional null"
+  },
+  "132": {
+   "e0_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.002111019912941513,
+     0.00023409687986952152
+    ]
+   },
+   "e0r_in_chain": {
+    "reading": "negative memory on eigenstate readouts",
+    "deviation": [
+     0.001584271915504689,
+     0.000267490145262037
+    ],
+    "z_clean": 5.922730027877156,
+    "z_clean_next": 6.574508094602213
+   },
+   "rule3_reading": "replicated",
+   "rule4_first_readout": {
+    "de1": [
+     -0.0029906030180037522,
+     5.3776832019169085e-05
+    ],
+    "verdict": "replicated"
+   },
+   "rule6_drift": {
+    "z_difference": -1.4818739750260737,
+    "drifted": false
+   },
+   "e0r_first_readout_reading": "consistent with the per-qubit conventional null"
+  }
+ },
+ "summary": {
+  "rule3": {
+   "replicated": 7,
+   "inconclusive": 1
+  },
+  "rule4_replicated": 8,
+  "rule6_drifted": []
+ }
+}

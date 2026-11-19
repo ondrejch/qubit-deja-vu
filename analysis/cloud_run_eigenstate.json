@@ -1,0 +1,1981 @@
+{
+  "status": "PASS",
+  "checks": 99,
+  "simulated_cases": {
+    "QM, ideal": {
+      "all": {
+        "D_repeat": [
+          1.0,
+          0.0
+        ],
+        "D_flip": [
+          -1.0,
+          0.0
+        ],
+        "repeat_agree": [
+          1.0,
+          0.0
+        ],
+        "flip_agree": [
+          1.0,
+          0.0
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          1.0,
+          0.0
+        ],
+        "flip_agree_0": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_1": [
+          1.0,
+          0.0
+        ],
+        "flip_agree_1": [
+          1.0,
+          0.0
+        ],
+        "contrast": [
+          0.0,
+          0.0
+        ],
+        "B_lag1": [
+          -0.00014,
+          0.00056
+        ],
+        "B_lag2": [
+          0.00074,
+          0.00068
+        ],
+        "n_blocks": 1080000
+      },
+      "clean": {
+        "D_repeat": [
+          1.0,
+          0.0
+        ],
+        "D_flip": [
+          -1.0,
+          0.0
+        ],
+        "repeat_agree": [
+          1.0,
+          0.0
+        ],
+        "flip_agree": [
+          1.0,
+          0.0
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          1.0,
+          0.0
+        ],
+        "flip_agree_0": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_1": [
+          1.0,
+          0.0
+        ],
+        "flip_agree_1": [
+          1.0,
+          0.0
+        ],
+        "contrast": [
+          0.0,
+          0.0
+        ],
+        "B_lag1": [
+          -0.00014,
+          0.00056
+        ],
+        "B_lag2": [
+          0.00074,
+          0.00068
+        ],
+        "n_blocks": 1080000
+      },
+      "clean_next": {
+        "D_repeat": [
+          1.0,
+          0.0
+        ],
+        "D_flip": [
+          -1.0,
+          0.0
+        ],
+        "repeat_agree": [
+          1.0,
+          0.0
+        ],
+        "flip_agree": [
+          1.0,
+          0.0
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          1.0,
+          0.0
+        ],
+        "flip_agree_0": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_1": [
+          1.0,
+          0.0
+        ],
+        "flip_agree_1": [
+          1.0,
+          0.0
+        ],
+        "contrast": [
+          0.0,
+          0.0
+        ],
+        "B_lag1": [
+          4e-05,
+          0.00059
+        ],
+        "B_lag2": [
+          0.00072,
+          0.00072
+        ],
+        "n_blocks": 960000
+      },
+      "fraction_checks_leaked": 0.0,
+      "fraction_checks_other": 0.0,
+      "fraction_blocks_clean": 1.0,
+      "fraction_blocks_clean_next": 0.88889,
+      "selection_shift_repeat": 0.0,
+      "selection_shift_flip": 0.0
+    },
+    "QM, leakage": {
+      "all": {
+        "D_repeat": [
+          0.94858,
+          0.00031
+        ],
+        "D_flip": [
+          -0.8533,
+          0.00049
+        ],
+        "repeat_agree": [
+          0.97573,
+          0.00015
+        ],
+        "flip_agree": [
+          0.92528,
+          0.00025
+        ],
+        "flip_control": [
+          0.9282,
+          0.00025
+        ],
+        "repeat_agree_0": [
+          0.97341,
+          0.00022
+        ],
+        "flip_agree_0": [
+          0.97636,
+          0.00021
+        ],
+        "repeat_agree_1": [
+          0.97781,
+          0.0002
+        ],
+        "flip_agree_1": [
+          0.87948,
+          0.00043
+        ],
+        "contrast": [
+          -0.09833,
+          0.00047
+        ],
+        "B_lag1": [
+          0.04357,
+          0.00055
+        ],
+        "B_lag2": [
+          0.04074,
+          0.00068
+        ],
+        "n_blocks": 1080000
+      },
+      "clean": {
+        "D_repeat": [
+          0.97433,
+          0.00023
+        ],
+        "D_flip": [
+          -0.94515,
+          0.00033
+        ],
+        "repeat_agree": [
+          0.98718,
+          0.00012
+        ],
+        "flip_agree": [
+          0.97257,
+          0.00017
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98624,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.97644,
+          0.00022
+        ],
+        "repeat_agree_1": [
+          0.98811,
+          0.00016
+        ],
+        "flip_agree_1": [
+          0.96874,
+          0.00025
+        ],
+        "contrast": [
+          -0.01937,
+          0.0003
+        ],
+        "B_lag1": [
+          0.00135,
+          0.00059
+        ],
+        "B_lag2": [
+          -0.00016,
+          0.00072
+        ],
+        "n_blocks": 951512
+      },
+      "clean_next": {
+        "D_repeat": [
+          0.97617,
+          0.00024
+        ],
+        "D_flip": [
+          -0.95222,
+          0.00034
+        ],
+        "repeat_agree": [
+          0.98809,
+          0.00012
+        ],
+        "flip_agree": [
+          0.97611,
+          0.00017
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98802,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.97645,
+          0.00024
+        ],
+        "repeat_agree_1": [
+          0.98815,
+          0.00017
+        ],
+        "flip_agree_1": [
+          0.97578,
+          0.00024
+        ],
+        "contrast": [
+          -0.01238,
+          0.0003
+        ],
+        "B_lag1": [
+          0.00133,
+          0.00064
+        ],
+        "B_lag2": [
+          -0.00058,
+          0.00079
+        ],
+        "n_blocks": 807406
+      },
+      "fraction_checks_leaked": 0.05358,
+      "fraction_checks_other": 0.03173,
+      "fraction_blocks_clean": 0.88103,
+      "fraction_blocks_clean_next": 0.7476,
+      "selection_shift_repeat": 0.01145,
+      "selection_shift_flip": 0.04729
+    },
+    "QM, leakage + readout memory +1%": {
+      "all": {
+        "D_repeat": [
+          0.93951,
+          0.00034
+        ],
+        "D_flip": [
+          -0.8437,
+          0.0005
+        ],
+        "repeat_agree": [
+          0.97142,
+          0.00016
+        ],
+        "flip_agree": [
+          0.92022,
+          0.00026
+        ],
+        "flip_control": [
+          0.92114,
+          0.00026
+        ],
+        "repeat_agree_0": [
+          0.97338,
+          0.00023
+        ],
+        "flip_agree_0": [
+          0.97607,
+          0.00021
+        ],
+        "repeat_agree_1": [
+          0.96969,
+          0.00023
+        ],
+        "flip_agree_1": [
+          0.87013,
+          0.00045
+        ],
+        "contrast": [
+          -0.09956,
+          0.0005
+        ],
+        "B_lag1": [
+          0.04717,
+          0.00055
+        ],
+        "B_lag2": [
+          0.04024,
+          0.00068
+        ],
+        "n_blocks": 1080000
+      },
+      "clean": {
+        "D_repeat": [
+          0.97411,
+          0.00023
+        ],
+        "D_flip": [
+          -0.9348,
+          0.00037
+        ],
+        "repeat_agree": [
+          0.98707,
+          0.00012
+        ],
+        "flip_agree": [
+          0.96737,
+          0.00018
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.9863,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.97605,
+          0.00023
+        ],
+        "repeat_agree_1": [
+          0.98783,
+          0.00016
+        ],
+        "flip_agree_1": [
+          0.9588,
+          0.00029
+        ],
+        "contrast": [
+          -0.02904,
+          0.00033
+        ],
+        "B_lag1": [
+          0.00447,
+          0.0006
+        ],
+        "B_lag2": [
+          -0.00093,
+          0.00073
+        ],
+        "n_blocks": 929614
+      },
+      "clean_next": {
+        "D_repeat": [
+          0.97575,
+          0.00025
+        ],
+        "D_flip": [
+          -0.94207,
+          0.00038
+        ],
+        "repeat_agree": [
+          0.98788,
+          0.00012
+        ],
+        "flip_agree": [
+          0.97102,
+          0.00019
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98797,
+          0.00018
+        ],
+        "flip_agree_0": [
+          0.97595,
+          0.00025
+        ],
+        "repeat_agree_1": [
+          0.98779,
+          0.00018
+        ],
+        "flip_agree_1": [
+          0.96613,
+          0.00029
+        ],
+        "contrast": [
+          -0.02166,
+          0.00034
+        ],
+        "B_lag1": [
+          0.00451,
+          0.00065
+        ],
+        "B_lag2": [
+          -0.00057,
+          0.0008
+        ],
+        "n_blocks": 779245
+      },
+      "fraction_checks_leaked": 0.05859,
+      "fraction_checks_other": 0.03796,
+      "fraction_blocks_clean": 0.86075,
+      "fraction_blocks_clean_next": 0.72152,
+      "selection_shift_repeat": 0.01564,
+      "selection_shift_flip": 0.04714
+    },
+    "D w=0.3, leakage": {
+      "all": {
+        "D_repeat": [
+          0.94862,
+          0.00031
+        ],
+        "D_flip": [
+          -0.85362,
+          0.00049
+        ],
+        "repeat_agree": [
+          0.97577,
+          0.00015
+        ],
+        "flip_agree": [
+          0.92543,
+          0.00025
+        ],
+        "flip_control": [
+          0.9283,
+          0.00025
+        ],
+        "repeat_agree_0": [
+          0.97335,
+          0.00023
+        ],
+        "flip_agree_0": [
+          0.97664,
+          0.00021
+        ],
+        "repeat_agree_1": [
+          0.97794,
+          0.00019
+        ],
+        "flip_agree_1": [
+          0.87956,
+          0.00043
+        ],
+        "contrast": [
+          -0.09838,
+          0.00047
+        ],
+        "B_lag1": [
+          0.31336,
+          0.00053
+        ],
+        "B_lag2": [
+          0.12146,
+          0.00067
+        ],
+        "n_blocks": 1080000
+      },
+      "clean": {
+        "D_repeat": [
+          0.97408,
+          0.00023
+        ],
+        "D_flip": [
+          -0.94514,
+          0.00033
+        ],
+        "repeat_agree": [
+          0.98705,
+          0.00012
+        ],
+        "flip_agree": [
+          0.97256,
+          0.00017
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98595,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.97672,
+          0.00022
+        ],
+        "repeat_agree_1": [
+          0.98814,
+          0.00016
+        ],
+        "flip_agree_1": [
+          0.96845,
+          0.00025
+        ],
+        "contrast": [
+          -0.0197,
+          0.0003
+        ],
+        "B_lag1": [
+          0.28739,
+          0.00057
+        ],
+        "B_lag2": [
+          0.08583,
+          0.00072
+        ],
+        "n_blocks": 951543
+      },
+      "clean_next": {
+        "D_repeat": [
+          0.97572,
+          0.00024
+        ],
+        "D_flip": [
+          -0.95216,
+          0.00034
+        ],
+        "repeat_agree": [
+          0.98786,
+          0.00012
+        ],
+        "flip_agree": [
+          0.97608,
+          0.00017
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.9877,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.97659,
+          0.00024
+        ],
+        "repeat_agree_1": [
+          0.98802,
+          0.00017
+        ],
+        "flip_agree_1": [
+          0.97558,
+          0.00024
+        ],
+        "contrast": [
+          -0.01244,
+          0.0003
+        ],
+        "B_lag1": [
+          0.28707,
+          0.00062
+        ],
+        "B_lag2": [
+          0.08528,
+          0.00078
+        ],
+        "n_blocks": 807301
+      },
+      "fraction_checks_leaked": 0.05354,
+      "fraction_checks_other": 0.03163,
+      "fraction_blocks_clean": 0.88106,
+      "fraction_blocks_clean_next": 0.7475,
+      "selection_shift_repeat": 0.01128,
+      "selection_shift_flip": 0.04713
+    },
+    "QM, leakage + readout memory -1%": {
+      "all": {
+        "D_repeat": [
+          0.94001,
+          0.00033
+        ],
+        "D_flip": [
+          -0.84348,
+          0.00051
+        ],
+        "repeat_agree": [
+          0.97117,
+          0.00016
+        ],
+        "flip_agree": [
+          0.9206,
+          0.00026
+        ],
+        "flip_control": [
+          0.92607,
+          0.00025
+        ],
+        "repeat_agree_0": [
+          0.97362,
+          0.00022
+        ],
+        "flip_agree_0": [
+          0.96698,
+          0.00025
+        ],
+        "repeat_agree_1": [
+          0.96895,
+          0.00023
+        ],
+        "flip_agree_1": [
+          0.87818,
+          0.00044
+        ],
+        "contrast": [
+          -0.09078,
+          0.00049
+        ],
+        "B_lag1": [
+          0.03852,
+          0.00055
+        ],
+        "B_lag2": [
+          0.04296,
+          0.00068
+        ],
+        "n_blocks": 1080000
+      },
+      "clean": {
+        "D_repeat": [
+          0.96406,
+          0.00027
+        ],
+        "D_flip": [
+          -0.93524,
+          0.00036
+        ],
+        "repeat_agree": [
+          0.98203,
+          0.00014
+        ],
+        "flip_agree": [
+          0.96765,
+          0.00018
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98609,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.967,
+          0.00026
+        ],
+        "repeat_agree_1": [
+          0.97797,
+          0.00021
+        ],
+        "flip_agree_1": [
+          0.96831,
+          0.00026
+        ],
+        "contrast": [
+          -0.00966,
+          0.00033
+        ],
+        "B_lag1": [
+          -0.00376,
+          0.00059
+        ],
+        "B_lag2": [
+          0.00141,
+          0.00073
+        ],
+        "n_blocks": 947813
+      },
+      "clean_next": {
+        "D_repeat": [
+          0.96565,
+          0.00029
+        ],
+        "D_flip": [
+          -0.94235,
+          0.00037
+        ],
+        "repeat_agree": [
+          0.98283,
+          0.00014
+        ],
+        "flip_agree": [
+          0.97119,
+          0.00019
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98786,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.96682,
+          0.00028
+        ],
+        "repeat_agree_1": [
+          0.9778,
+          0.00023
+        ],
+        "flip_agree_1": [
+          0.97565,
+          0.00024
+        ],
+        "contrast": [
+          -0.00215,
+          0.00034
+        ],
+        "B_lag1": [
+          -0.0038,
+          0.00064
+        ],
+        "B_lag2": [
+          0.00129,
+          0.00079
+        ],
+        "n_blocks": 802471
+      },
+      "fraction_checks_leaked": 0.05359,
+      "fraction_checks_other": 0.03364,
+      "fraction_blocks_clean": 0.8776,
+      "fraction_blocks_clean_next": 0.74303,
+      "selection_shift_repeat": 0.01086,
+      "selection_shift_flip": 0.04704
+    },
+    "QM, leakage + T1 relaxation": {
+      "all": {
+        "D_repeat": [
+          0.93727,
+          0.00034
+        ],
+        "D_flip": [
+          -0.84195,
+          0.0005
+        ],
+        "repeat_agree": [
+          0.96964,
+          0.00017
+        ],
+        "flip_agree": [
+          0.91945,
+          0.00026
+        ],
+        "flip_control": [
+          0.92277,
+          0.00026
+        ],
+        "repeat_agree_0": [
+          0.97357,
+          0.00022
+        ],
+        "flip_agree_0": [
+          0.97666,
+          0.00021
+        ],
+        "repeat_agree_1": [
+          0.96608,
+          0.00024
+        ],
+        "flip_agree_1": [
+          0.86663,
+          0.00045
+        ],
+        "contrast": [
+          -0.09946,
+          0.00051
+        ],
+        "B_lag1": [
+          0.04187,
+          0.00055
+        ],
+        "B_lag2": [
+          0.04238,
+          0.00068
+        ],
+        "n_blocks": 1080000
+      },
+      "clean": {
+        "D_repeat": [
+          0.96087,
+          0.00029
+        ],
+        "D_flip": [
+          -0.93163,
+          0.00038
+        ],
+        "repeat_agree": [
+          0.98043,
+          0.00014
+        ],
+        "flip_agree": [
+          0.96599,
+          0.00019
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98597,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.97672,
+          0.00022
+        ],
+        "repeat_agree_1": [
+          0.9749,
+          0.00023
+        ],
+        "flip_agree_1": [
+          0.95502,
+          0.00031
+        ],
+        "contrast": [
+          -0.01988,
+          0.00038
+        ],
+        "B_lag1": [
+          -0.00022,
+          0.0006
+        ],
+        "B_lag2": [
+          0.00137,
+          0.00073
+        ],
+        "n_blocks": 928600
+      },
+      "clean_next": {
+        "D_repeat": [
+          0.96254,
+          0.00031
+        ],
+        "D_flip": [
+          -0.93851,
+          0.00039
+        ],
+        "repeat_agree": [
+          0.98128,
+          0.00015
+        ],
+        "flip_agree": [
+          0.96945,
+          0.0002
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98784,
+          0.00018
+        ],
+        "flip_agree_0": [
+          0.9766,
+          0.00024
+        ],
+        "repeat_agree_1": [
+          0.9747,
+          0.00025
+        ],
+        "flip_agree_1": [
+          0.96209,
+          0.00031
+        ],
+        "contrast": [
+          -0.01261,
+          0.0004
+        ],
+        "B_lag1": [
+          0.0001,
+          0.00065
+        ],
+        "B_lag2": [
+          0.00122,
+          0.0008
+        ],
+        "n_blocks": 777742
+      },
+      "fraction_checks_leaked": 0.05335,
+      "fraction_checks_other": 0.04359,
+      "fraction_blocks_clean": 0.85981,
+      "fraction_blocks_clean_next": 0.72013,
+      "selection_shift_repeat": 0.0108,
+      "selection_shift_flip": 0.04653
+    },
+    "QM, leakage + T1 = 300 us relaxation": {
+      "all": {
+        "D_repeat": [
+          0.9444,
+          0.00032
+        ],
+        "D_flip": [
+          -0.84741,
+          0.0005
+        ],
+        "repeat_agree": [
+          0.97351,
+          0.00015
+        ],
+        "flip_agree": [
+          0.92219,
+          0.00026
+        ],
+        "flip_control": [
+          0.92551,
+          0.00025
+        ],
+        "repeat_agree_0": [
+          0.97324,
+          0.00023
+        ],
+        "flip_agree_0": [
+          0.97629,
+          0.00021
+        ],
+        "repeat_agree_1": [
+          0.97376,
+          0.00021
+        ],
+        "flip_agree_1": [
+          0.87326,
+          0.00044
+        ],
+        "contrast": [
+          -0.10049,
+          0.00049
+        ],
+        "B_lag1": [
+          0.04371,
+          0.00055
+        ],
+        "B_lag2": [
+          0.04227,
+          0.00068
+        ],
+        "n_blocks": 1080000
+      },
+      "clean": {
+        "D_repeat": [
+          0.96937,
+          0.00025
+        ],
+        "D_flip": [
+          -0.94018,
+          0.00035
+        ],
+        "repeat_agree": [
+          0.98468,
+          0.00013
+        ],
+        "flip_agree": [
+          0.97009,
+          0.00018
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98587,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.97634,
+          0.00022
+        ],
+        "repeat_agree_1": [
+          0.9835,
+          0.00019
+        ],
+        "flip_agree_1": [
+          0.96384,
+          0.00027
+        ],
+        "contrast": [
+          -0.01966,
+          0.00033
+        ],
+        "B_lag1": [
+          0.00047,
+          0.00059
+        ],
+        "B_lag2": [
+          8e-05,
+          0.00073
+        ],
+        "n_blocks": 942469
+      },
+      "clean_next": {
+        "D_repeat": [
+          0.97108,
+          0.00027
+        ],
+        "D_flip": [
+          -0.947,
+          0.00036
+        ],
+        "repeat_agree": [
+          0.98554,
+          0.00013
+        ],
+        "flip_agree": [
+          0.97351,
+          0.00018
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98761,
+          0.00018
+        ],
+        "flip_agree_0": [
+          0.97626,
+          0.00024
+        ],
+        "repeat_agree_1": [
+          0.98348,
+          0.0002
+        ],
+        "flip_agree_1": [
+          0.97075,
+          0.00027
+        ],
+        "contrast": [
+          -0.01273,
+          0.00034
+        ],
+        "B_lag1": [
+          0.00043,
+          0.00065
+        ],
+        "B_lag2": [
+          -0.0003,
+          0.00079
+        ],
+        "n_blocks": 795883
+      },
+      "fraction_checks_leaked": 0.05435,
+      "fraction_checks_other": 0.03593,
+      "fraction_blocks_clean": 0.87266,
+      "fraction_blocks_clean_next": 0.73693,
+      "selection_shift_repeat": 0.01117,
+      "selection_shift_flip": 0.0479
+    },
+    "QM, leakage + asymmetric readout (e0 0.8%, e1 1.6%)": {
+      "all": {
+        "D_repeat": [
+          0.94922,
+          0.00031
+        ],
+        "D_flip": [
+          -0.84995,
+          0.0005
+        ],
+        "repeat_agree": [
+          0.97562,
+          0.00015
+        ],
+        "flip_agree": [
+          0.92391,
+          0.00026
+        ],
+        "flip_control": [
+          0.92733,
+          0.00025
+        ],
+        "repeat_agree_0": [
+          0.97332,
+          0.00022
+        ],
+        "flip_agree_0": [
+          0.96859,
+          0.00024
+        ],
+        "repeat_agree_1": [
+          0.97772,
+          0.0002
+        ],
+        "flip_agree_1": [
+          0.88316,
+          0.00043
+        ],
+        "contrast": [
+          -0.09456,
+          0.00047
+        ],
+        "B_lag1": [
+          0.04304,
+          0.00055
+        ],
+        "B_lag2": [
+          0.04314,
+          0.00068
+        ],
+        "n_blocks": 1080000
+      },
+      "clean": {
+        "D_repeat": [
+          0.97387,
+          0.00023
+        ],
+        "D_flip": [
+          -0.94446,
+          0.00034
+        ],
+        "repeat_agree": [
+          0.98696,
+          0.00012
+        ],
+        "flip_agree": [
+          0.97224,
+          0.00017
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98991,
+          0.00014
+        ],
+        "flip_agree_0": [
+          0.96863,
+          0.00025
+        ],
+        "repeat_agree_1": [
+          0.98398,
+          0.00018
+        ],
+        "flip_agree_1": [
+          0.97593,
+          0.00022
+        ],
+        "contrast": [
+          -0.00805,
+          0.00029
+        ],
+        "B_lag1": [
+          -0.00119,
+          0.00059
+        ],
+        "B_lag2": [
+          7e-05,
+          0.00073
+        ],
+        "n_blocks": 950775
+      },
+      "clean_next": {
+        "D_repeat": [
+          0.97581,
+          0.00024
+        ],
+        "D_flip": [
+          -0.95185,
+          0.00034
+        ],
+        "repeat_agree": [
+          0.98794,
+          0.00012
+        ],
+        "flip_agree": [
+          0.97591,
+          0.00017
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.99176,
+          0.00014
+        ],
+        "flip_agree_0": [
+          0.96866,
+          0.00027
+        ],
+        "repeat_agree_1": [
+          0.98407,
+          0.0002
+        ],
+        "flip_agree_1": [
+          0.98335,
+          0.0002
+        ],
+        "contrast": [
+          -0.00072,
+          0.00028
+        ],
+        "B_lag1": [
+          -0.00145,
+          0.00064
+        ],
+        "B_lag2": [
+          0.00062,
+          0.00079
+        ],
+        "n_blocks": 806763
+      },
+      "fraction_checks_leaked": 0.05263,
+      "fraction_checks_other": 0.03361,
+      "fraction_blocks_clean": 0.88035,
+      "fraction_blocks_clean_next": 0.747,
+      "selection_shift_repeat": 0.01134,
+      "selection_shift_flip": 0.04833
+    },
+    "QM, leakage + readout e0 1.6%": {
+      "all": {
+        "D_repeat": [
+          0.94099,
+          0.00033
+        ],
+        "D_flip": [
+          -0.84738,
+          0.0005
+        ],
+        "repeat_agree": [
+          0.97209,
+          0.00016
+        ],
+        "flip_agree": [
+          0.92214,
+          0.00026
+        ],
+        "flip_control": [
+          0.92507,
+          0.00025
+        ],
+        "repeat_agree_0": [
+          0.96924,
+          0.00024
+        ],
+        "flip_agree_0": [
+          0.9765,
+          0.00021
+        ],
+        "repeat_agree_1": [
+          0.97464,
+          0.00021
+        ],
+        "flip_agree_1": [
+          0.87371,
+          0.00044
+        ],
+        "contrast": [
+          -0.10093,
+          0.00049
+        ],
+        "B_lag1": [
+          0.04148,
+          0.00055
+        ],
+        "B_lag2": [
+          0.04173,
+          0.00068
+        ],
+        "n_blocks": 1080000
+      },
+      "clean": {
+        "D_repeat": [
+          0.97032,
+          0.00025
+        ],
+        "D_flip": [
+          -0.93768,
+          0.00036
+        ],
+        "repeat_agree": [
+          0.98519,
+          0.00012
+        ],
+        "flip_agree": [
+          0.96881,
+          0.00018
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98207,
+          0.00019
+        ],
+        "flip_agree_0": [
+          0.97655,
+          0.00022
+        ],
+        "repeat_agree_1": [
+          0.98827,
+          0.00016
+        ],
+        "flip_agree_1": [
+          0.96124,
+          0.00028
+        ],
+        "contrast": [
+          -0.02703,
+          0.00032
+        ],
+        "B_lag1": [
+          -1e-05,
+          0.0006
+        ],
+        "B_lag2": [
+          0.0009,
+          0.00073
+        ],
+        "n_blocks": 941491
+      },
+      "clean_next": {
+        "D_repeat": [
+          0.97212,
+          0.00026
+        ],
+        "D_flip": [
+          -0.94476,
+          0.00037
+        ],
+        "repeat_agree": [
+          0.98608,
+          0.00013
+        ],
+        "flip_agree": [
+          0.97238,
+          0.00018
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98385,
+          0.0002
+        ],
+        "flip_agree_0": [
+          0.97667,
+          0.00024
+        ],
+        "repeat_agree_1": [
+          0.98829,
+          0.00017
+        ],
+        "flip_agree_1": [
+          0.96816,
+          0.00028
+        ],
+        "contrast": [
+          -0.02013,
+          0.00033
+        ],
+        "B_lag1": [
+          -0.00041,
+          0.00065
+        ],
+        "B_lag2": [
+          0.00041,
+          0.00079
+        ],
+        "n_blocks": 794290
+      },
+      "fraction_checks_leaked": 0.0551,
+      "fraction_checks_other": 0.03523,
+      "fraction_blocks_clean": 0.87175,
+      "fraction_blocks_clean_next": 0.73545,
+      "selection_shift_repeat": 0.0131,
+      "selection_shift_flip": 0.04667
+    },
+    "QM, leakage + readout e1 1.6%": {
+      "all": {
+        "D_repeat": [
+          0.94119,
+          0.00033
+        ],
+        "D_flip": [
+          -0.84524,
+          0.0005
+        ],
+        "repeat_agree": [
+          0.97177,
+          0.00016
+        ],
+        "flip_agree": [
+          0.92145,
+          0.00026
+        ],
+        "flip_control": [
+          0.9251,
+          0.00025
+        ],
+        "repeat_agree_0": [
+          0.96947,
+          0.00024
+        ],
+        "flip_agree_0": [
+          0.96838,
+          0.00024
+        ],
+        "repeat_agree_1": [
+          0.97386,
+          0.00021
+        ],
+        "flip_agree_1": [
+          0.87893,
+          0.00043
+        ],
+        "contrast": [
+          -0.09494,
+          0.00048
+        ],
+        "B_lag1": [
+          0.04293,
+          0.00055
+        ],
+        "B_lag2": [
+          0.04311,
+          0.00068
+        ],
+        "n_blocks": 1080000
+      },
+      "clean": {
+        "D_repeat": [
+          0.96972,
+          0.00025
+        ],
+        "D_flip": [
+          -0.93688,
+          0.00036
+        ],
+        "repeat_agree": [
+          0.98486,
+          0.00013
+        ],
+        "flip_agree": [
+          0.96844,
+          0.00018
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98591,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.96844,
+          0.00025
+        ],
+        "repeat_agree_1": [
+          0.98381,
+          0.00018
+        ],
+        "flip_agree_1": [
+          0.96845,
+          0.00026
+        ],
+        "contrast": [
+          -0.01536,
+          0.00031
+        ],
+        "B_lag1": [
+          0.00023,
+          0.00059
+        ],
+        "B_lag2": [
+          0.00149,
+          0.00073
+        ],
+        "n_blocks": 941761
+      },
+      "clean_next": {
+        "D_repeat": [
+          0.97142,
+          0.00027
+        ],
+        "D_flip": [
+          -0.94388,
+          0.00037
+        ],
+        "repeat_agree": [
+          0.98572,
+          0.00013
+        ],
+        "flip_agree": [
+          0.97193,
+          0.00019
+        ],
+        "flip_control": [
+          1.0,
+          0.0
+        ],
+        "repeat_agree_0": [
+          0.98772,
+          0.00017
+        ],
+        "flip_agree_0": [
+          0.96829,
+          0.00028
+        ],
+        "repeat_agree_1": [
+          0.9837,
+          0.0002
+        ],
+        "flip_agree_1": [
+          0.97562,
+          0.00025
+        ],
+        "contrast": [
+          -0.00809,
+          0.00032
+        ],
+        "B_lag1": [
+          0.00046,
+          0.00065
+        ],
+        "B_lag2": [
+          0.00178,
+          0.00079
+        ],
+        "n_blocks": 794794
+      },
+      "fraction_checks_leaked": 0.05335,
+      "fraction_checks_other": 0.03697,
+      "fraction_blocks_clean": 0.872,
+      "fraction_blocks_clean_next": 0.73592,
+      "selection_shift_repeat": 0.01309,
+      "selection_shift_flip": 0.047
+    }
+  },
+  "null_reference": {
+    "case": "QM, leakage + T1 relaxation",
+    "meaning": "the conventional null (leakage plus T1 relaxation, no readout memory), on the same masks the fidelities are reported on",
+    "clean": {
+      "repeat_agree": [
+        0.98043,
+        0.00014
+      ],
+      "flip_agree": [
+        0.96599,
+        0.00019
+      ],
+      "D_flip": [
+        -0.93163,
+        0.00038
+      ],
+      "B_lag1": [
+        -0.00022,
+        0.0006
+      ]
+    },
+    "clean_next": {
+      "repeat_agree": [
+        0.98128,
+        0.00015
+      ],
+      "flip_agree": [
+        0.96945,
+        0.0002
+      ],
+      "D_flip": [
+        -0.93851,
+        0.00039
+      ],
+      "B_lag1": [
+        0.0001,
+        0.00065
+      ]
+    },
+    "all": {
+      "repeat_agree": [
+        0.96964,
+        0.00017
+      ],
+      "flip_agree": [
+        0.91945,
+        0.00026
+      ],
+      "flip_control": [
+        0.92277,
+        0.00026
+      ],
+      "B_lag1": [
+        0.04187,
+        0.00055
+      ]
+    },
+    "fraction_checks_leaked": 0.05335,
+    "fraction_blocks_clean": 0.85981,
+    "reading": "Design reference only. A run's null is built per qubit by qubit_null from its own AS assignment errors, run-day T1 and leaked-check fraction, and read by eigen_reading: the contrast flip_agree_1 - repeat_agree_1 deviating by more than 3.0 combined standard errors on both clean and clean_next, with one sign, is assignment-like memory on eigenstate readouts (negative deviation: positive memory). Absolute fidelities are secondary and need K_SIGMA plus the difference between measured and null selection shifts."
+  },
+  "sensitivity": {
+    "repeat_agree": [
+      -0.4975,
+      -0.5785
+    ],
+    "flip_agree": [
+      -0.9379,
+      -1.0304
+    ],
+    "repeat_agree_0": [
+      -1.042,
+      -0.082
+    ],
+    "repeat_agree_1": [
+      0.0414,
+      -1.0737
+    ],
+    "flip_agree_0": [
+      0.0288,
+      -1.9991
+    ],
+    "flip_agree_1": [
+      -1.8737,
+      -0.072
+    ],
+    "contrast": [
+      -1.9152,
+      1.0017
+    ]
+  },
+  "sensitivity_meaning": "change of each clean-mask statistic per unit e0 and per unit e1 (finite differences at e = 0.012 + 0.004); the analysis uses them to propagate the AS calibration's standard errors into the reading",
+  "readings_on_simulated_cases": {
+    "QM, leakage + readout memory +1%": {
+      "contrast_z_clean": -7.37,
+      "contrast_z_clean_next": -7.64,
+      "reading": "positive memory on eigenstate readouts"
+    },
+    "QM, leakage + readout memory -1%": {
+      "contrast_z_clean": 8.91,
+      "contrast_z_clean_next": 9.35,
+      "reading": "negative memory on eigenstate readouts"
+    },
+    "QM, leakage + T1 relaxation": {
+      "contrast_z_clean": -0.58,
+      "contrast_z_clean_next": -0.14,
+      "reading": "consistent with the per-qubit conventional null"
+    },
+    "QM, leakage + T1 relaxation, null at 1.5 x T1": {
+      "contrast_z_clean": -0.17,
+      "contrast_z_clean_next": 0.05,
+      "reading": "consistent with the per-qubit conventional null"
+    }
+  },
+  "contrast_reach": {
+    "as_shots_per_preparation_per_qubit": 39800,
+    "assignment_error_se_at_1.2pct": 0.000546,
+    "contrast_null_se_from_calibration": 0.00118,
+    "contrast_shift_per_1pct_memory": 0.00967,
+    "memory_at_K_SIGMA_from_calibration_alone_pct": 0.366
+  },
+  "sign_convention": {
+    "contrast": "negative deviation from the null is positive memory (a reported 1 makes the next readout of |0> report 1), positive deviation is negative memory",
+    "D_flip": "magnitude only: the ideal value sits at the -1 floor, so either sign of readout memory moves it the same way",
+    "repeat_agree": "carries the sign, as does the sign of the B lag-1 covariance"
+  },
+  "budget": {
+    "conditions": [
+      {
+        "label": "E0",
+        "kind": "tagged_eig",
+        "records": 72,
+        "period_us": 1.388,
+        "sets": 2572,
+        "pub_parts": 7,
+        "part_qpu_s": [
+          51.4,
+          51.4,
+          51.5,
+          51.4,
+          51.5,
+          51.4,
+          51.5
+        ],
+        "qpu_s": 360.0,
+        "neighbor_pairs_per_qubit": "2.778e+07",
+        "five_sigma_per_qubit_if_all_clean": 0.000949,
+        "five_sigma_pooled_if_all_clean": 0.000335,
+        "five_sigma_per_qubit_at_simulated_clean": 0.001011,
+        "five_sigma_pooled_at_simulated_clean": 0.000357
+      },
+      {
+        "label": "C2",
+        "kind": "phase",
+        "records": 1,
+        "period_us": 1.388,
+        "sets": 40,
+        "pub_parts": 1,
+        "part_qpu_s": [
+          4.0
+        ],
+        "qpu_s": 4.0
+      },
+      {
+        "label": "AS",
+        "kind": "assign",
+        "records": 1,
+        "period_us": 1.388,
+        "sets": 199,
+        "pub_parts": 1,
+        "part_qpu_s": [
+          20.0
+        ],
+        "qpu_s": 20.0
+      }
+    ],
+    "amplitude_check_s": 0.51,
+    "jobs": [
+      {
+        "entries": [
+          "C2",
+          "amplitude_1",
+          "amplitude_9",
+          "amplitude_25",
+          "amplitude_49",
+          "amplitude_97"
+        ],
+        "estimated_qpu_s": 4.53
+      },
+      {
+        "entries": [
+          "AS"
+        ],
+        "estimated_qpu_s": 20.01
+      },
+      {
+        "entries": [
+          "E0"
+        ],
+        "estimated_qpu_s": 51.37
+      },
+      {
+        "entries": [
+          "E0"
+        ],
+        "estimated_qpu_s": 51.37
+      },
+      {
+        "entries": [
+          "E0"
+        ],
+        "estimated_qpu_s": 51.51
+      },
+      {
+        "entries": [
+          "E0"
+        ],
+        "estimated_qpu_s": 51.37
+      },
+      {
+        "entries": [
+          "E0"
+        ],
+        "estimated_qpu_s": 51.51
+      },
+      {
+        "entries": [
+          "E0"
+        ],
+        "estimated_qpu_s": 51.37
+      },
+      {
+        "entries": [
+          "E0"
+        ],
+        "estimated_qpu_s": 51.51
+      }
+    ],
+    "n_jobs": 9,
+    "max_job_qpu_s": 51.51,
+    "total_qpu_s": 384.6,
+    "overhead_s": 27.0,
+    "total_with_overhead_s": 411.6,
+    "fits_600s_window": true,
+    "spare_in_window_s": 188.4,
+    "october_overhead_range_s": [
+      2.5,
+      5.1
+    ],
+    "total_at_worst_october_overhead_s": 430.5,
+    "spare_at_worst_october_overhead_s": 169.5,
+    "max_job_at_worst_october_overhead_s": 56.6,
+    "qubits": 8,
+    "readouts_per_shot": 576,
+    "supersedes": {
+      "label": "A",
+      "records": 66,
+      "qpu_s": 60.0,
+      "sets": 439,
+      "period_us": 1.388,
+      "five_sigma_per_qubit_if_all_clean": 0.002077,
+      "five_sigma_pooled_if_all_clean": 0.000848,
+      "note": "Candidate A of the note; E0 replaces it as the fresh-qubit condition, so A's reach does not carry over to E0 and A is not in the total above."
+    },
+    "note": "Job plan from analysis/cloud_run_submit.job_plan at a 60 s per-job cap; sets follow the builder's formula, so the live build's estimate is authoritative. Submit needs author go-ahead."
+  },
+  "repeat_budget": {
+    "conditions": [
+      {
+        "label": "E0",
+        "kind": "tagged_eig",
+        "records": 72,
+        "period_us": 1.388,
+        "sets": 700,
+        "pub_parts": 2,
+        "part_qpu_s": [
+          49.0,
+          49.0
+        ],
+        "qpu_s": 98.0,
+        "neighbor_pairs_per_qubit": "7.560e+06",
+        "five_sigma_per_qubit_if_all_clean": 0.001818,
+        "five_sigma_pooled_if_all_clean": 0.000643
+      },
+      {
+        "label": "C2",
+        "kind": "phase",
+        "records": 1,
+        "period_us": 1.388,
+        "sets": 40,
+        "pub_parts": 1,
+        "part_qpu_s": [
+          4.0
+        ],
+        "qpu_s": 4.0
+      },
+      {
+        "label": "AS",
+        "kind": "assign",
+        "records": 1,
+        "period_us": 1.388,
+        "sets": 199,
+        "pub_parts": 1,
+        "part_qpu_s": [
+          20.0
+        ],
+        "qpu_s": 20.0
+      }
+    ],
+    "jobs": [
+      {
+        "entries": [
+          "C2",
+          "amplitude_1",
+          "amplitude_9",
+          "amplitude_25",
+          "amplitude_49",
+          "amplitude_97"
+        ],
+        "estimated_qpu_s": 4.53
+      },
+      {
+        "entries": [
+          "AS"
+        ],
+        "estimated_qpu_s": 20.01
+      },
+      {
+        "entries": [
+          "E0"
+        ],
+        "estimated_qpu_s": 48.99
+      },
+      {
+        "entries": [
+          "E0"
+        ],
+        "estimated_qpu_s": 48.99
+      }
+    ],
+    "n_jobs": 4,
+    "max_job_qpu_s": 48.99,
+    "total_qpu_s": 122.5,
+    "total_with_overhead_s": 134.5,
+    "total_at_worst_october_overhead_s": 142.9,
+    "max_job_at_worst_october_overhead_s": 54.1,
+    "window_left_s": 185.0,
+    "usage_margin_s": 138.75,
+    "layout": [
+      124,
+      144,
+      6,
+      50,
+      23,
+      59,
+      114,
+      132
+    ]
+  },
+  "wiring": {
+    "circuits": "draw_settings(kind='tagged_eig', ...) via tagged_eig_settings; chain_circuit (K, n_qubits, delay_dt, use_measure_2) unchanged",
+    "submit": "cloud_run_submit.py --job eig --backend ibm_fez --max-job-s: conditions = EIG_CONDITIONS, split by job_plan so no job exceeds the cap; --submit needs author go-ahead",
+    "analyze": "save_job() unchanged (alpha/beta/phi stored); analyze() has a tagged_eig branch with eigen_statistics() per qubit and pool_eigen() over qubits (the unweighted mean of per-qubit values, as the October reports pool); report.json stays the source"
+  },
+  "note": "Simulated design checks; nothing here is experimental data."
+}

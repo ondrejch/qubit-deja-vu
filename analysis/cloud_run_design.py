@@ -43,6 +43,12 @@ np.polynomial.legendre.leggauss = functools.lru_cache(maxsize=None)(np.polynomia
 
 TWO_PI = 2.0 * math.pi
 
+# The amplitude check (design note Section 5): readout after m consecutive sx
+# pulses. m = 1 mod 4 keeps the expectation linear in the fractional sx
+# over-rotation, with gain m. Kept here (NumPy only) so the builder and the
+# QPU-budget scripts share one list.
+AMPLITUDE_PULSES = (1, 9, 25, 49, 97)
+
 # ---------------------------------------------------------------- geometry
 
 

@@ -1,6 +1,6 @@
-# Cloud run results: ibm_kingston, 15 October 2026
+# Cloud run results: ibm_kingston and ibm_fez, October and November 2026
 
-These are the first experimental data in the package. The records and machine-generated reports are in `data/cloudrun/2026-10-15_pilot/`, `data/cloudrun/2026-10-15_main/` and `data/cloudrun/2026-10-15_followup/`; this note summarizes `report.json` in each. Sections 1 to 5 cover the pilot and main run, Section 6 an exploratory leakage analysis, and Section 7 the leak-tagged follow-up. The design and analysis were committed before the runs (commit 85a36c6; `notes/CLOUD_RUN_DESIGN.md`). The results bound the theory note's two completions of the Donadi-Hossenfelder rule for this processor and readout at the stated gaps. They are not a test of superdeterminism in general, of Hossenfelder's 2025 model, or of any proposal by Donadi or Hossenfelder.
+These are the first experimental data in the package. The records and machine-generated reports are in `data/cloudrun/2026-10-15_pilot/`, `data/cloudrun/2026-10-15_main/` and `data/cloudrun/2026-10-15_followup/`; this note summarizes `report.json` in each. Sections 1 to 5 cover the pilot and main run, Section 6 an exploratory leakage analysis, and Section 7 the leak-tagged follow-up. Sections 8 and 9 cover the ibm_fez add-on and paid repeat of the same day, Section 10 covers the eigenstate repeat/flip run on ibm_fez of 19 November 2026 (`data/cloudrun/2026-11-19_eig/`, design in `notes/CLOUD_RUN_NEXT_DESIGN.md`), and Section 11 its pre-registered repeat of the same day (`data/cloudrun/2026-11-19_eigrepeat/`). The design and analysis were committed before the runs (commit 85a36c6; `notes/CLOUD_RUN_DESIGN.md`). The results bound the theory note's two completions of the Donadi-Hossenfelder rule for this processor and readout at the stated gaps. They are not a test of superdeterminism in general, of Hossenfelder's 2025 model, or of any proposal by Donadi or Hossenfelder.
 
 ## 1. What ran
 
@@ -53,7 +53,7 @@ Several features are noteworthy:
 
 ## 5. Status
 
-The main run is complete as designed. The leak-tagged follow-up of Section 7 then used 178 s, leaving 20 s of the 600 s rolling allowance until the 15 October charges age out on 12 November 2026.
+The main run is complete as designed. The leak-tagged follow-up of Section 7 then used 178 s, leaving 20 s of the 600 s open-plan allowance. IBM counts the allowance over a rolling 28-day window (the API reports the window as the 28 days before each query), so the 15 October charges leave it on 12 November 2026.
 
 ## 6. Leakage analysis (exploratory, after the run)
 
@@ -127,7 +127,7 @@ Several features are noteworthy:
    | 6 | +0.0051 ± 0.0010 (flagged) | |
 
    The pooled value is +0.0017 ± 0.0004. Only qubit 6 is beyond five standard errors; qubits 124 and 144 are at 3.8 and 4.0. At a fixed angle these positive values are readout memory or detector-anchored persistence, and only a shape scan on these qubits would separate them. On ibm_kingston, positive memory appeared on one qubit (109), alongside negative memory on three others.
-4. **Allowance.** The rolling allowance now stands at 595 s consumed and 5 s remaining.
+4. **Allowance.** The rolling 28-day window then stood at 595 s consumed and 5 s remaining; these charges leave it on 12 November 2026.
 
 ## 9. Paid ibm_fez repeat (pre-registered)
 
@@ -154,3 +154,163 @@ All values are clean neighbor covariances. The pre-registered readings give the 
 2. **Level with spacing.** From G0 to G1 the six qubits change by +1.39, +2.03, +1.31, -1.18, +0.58 and +0.56 combined standard errors (qubits 124, 26, 86, 144, 2 and 6), and none rises by the threshold of three fixed in advance. The rule fixed in advance therefore excludes the detector-anchored completion on none of them. A level value fits both conventional readout memory and a persistence time much longer than 5 µs. Only a shape scan on these qubits can separate the two.
 3. **S1 and S4 hold.** The clean cross-block covariance is consistent with zero at both spacings (-0.0003 ± 0.0002 and +0.0003 ± 0.0003). Leaked checks are 0.18% to 0.74% at both spacings. The G1-to-G0 ratio of 0.99 to 1.87 per qubit is closer to the buildup model's prediction for leakage that enters with elapsed time (1.3 to 2.3) than for leakage only during readouts (0.34 to 0.59).
 
+
+## 10. Eigenstate repeat/flip on ibm_fez, 19 November 2026 (pre-registered)
+
+The design is candidate G (E0) of `notes/CLOUD_RUN_NEXT_DESIGN.md`, Section 2G, committed before the data in ed166a4 (2 November 2026). Commit 693e4f4 changed the submit script's failure handling, the missing-T1 flag and the wording of the no-flag summary after an outside pre-submission review, also before the data; no statistic or threshold changed. The records and report are in `data/cloudrun/2026-11-19_eig/`, and every number below comes from its `report.json` or `job.json`.
+
+### 10.1 What ran
+
+The run was submitted at 12:33 EST on 19 November 2026 as one batch of nine jobs, all done, with results after 426 s. IBM charged 415 s against the 411.5 s estimate:
+
+| Job | IBM job IDs | Contents | QPU time charged |
+|---|---|---|---|
+| Checks | dbvj5tg13mdc73dfeok0 | C2 phase check (40 sets), amplitude check | 7 s |
+| AS | dbvj5tol0c4s739lqkj0 | assignment calibration, 199 sets | 23 s |
+| E0, seven parts | dbvj5u813mdc73dfeol0, dbvj5ugl0c4s739lqkkg, dbvj5uo13mdc73dfeon0, dbvj5v9cn7vc73eh12gg, dbvj5vgl0c4s739lqkm0, dbvj5vol0c4s739lqkn0, dbvj609cn7vc73eh12i0 | 2572 sets of the 72-record chain, rejoined when saved | 7 x 55 = 385 s |
+
+Every condition ran 400 shots per set. Eight qubits ran in parallel, 576 mid-circuit readouts per shot, which the October runs (at most 384) had not tried; IBM accepted it. The controls 124, 144 and 6 are the October fez positives. The builder's rule picked the five fresh qubits 50, 23, 59, 114 and 132 from the calibration at submission, with the other October fez qubits 26, 86 and 2 excluded. That calibration listed readout errors of 0.27% to 0.39% and T1 of 94 to 211 µs. `measure_2` took 1.34 µs and the record period was 1.39 µs, the period of the October F0 and G0 conditions.
+
+### 10.2 Pre-registered reading
+
+The primary statistic is the contrast `flip_agree_1 - repeat_agree_1` on each qubit, read against that qubit's own simulated conventional null. The null is built from the qubit's AS assignment errors, its run-day T1 and its leaked-check fraction. A reading needs a deviation beyond 3 combined standard errors on both the clean and clean_next masks, with one sign. A negative deviation is positive memory (a reported "1" makes the next readout of |0> report "1"), and a positive deviation is negative memory (a reported "1" makes the next readout of |1> report "0").
+
+| Physical qubit | Role | Contrast, clean | Null | Deviation, clean | z, clean / clean_next | Reading |
+|---|---|---|---|---|---|---|
+| 124 | control | +0.0056 | +0.0046 | +0.0010 ± 0.0006 | +1.69 / +1.86 | consistent with the null |
+| 144 | control | +0.0033 | +0.0003 | +0.0031 ± 0.0009 | +3.56 / +3.99 | negative memory |
+| 6 | control | -0.0029 | -0.0003 | -0.0026 ± 0.0005 | -5.63 / -4.61 | positive memory |
+| 50 | fresh | -0.0002 | +0.0007 | -0.0009 ± 0.0005 | -1.79 / -1.51 | consistent with the null |
+| 23 | fresh | -0.0082 | -0.0089 | +0.0007 ± 0.0009 | +0.77 / +1.69 | consistent with the null |
+| 59 | fresh | +0.0012 | +0.0060 | -0.0048 ± 0.0007 | -6.67 / -5.70 | positive memory |
+| 114 | fresh | +0.0071 | +0.0022 | +0.0049 ± 0.0008 | +5.83 / +6.45 | negative memory |
+| 132 | fresh | -0.0013 | -0.0034 | +0.0021 ± 0.0008 | +2.79 / +3.18 | consistent with the null |
+
+Several features are noteworthy:
+
+1. Four of the eight qubits read memory on eigenstate readouts, two of each sign: 144 and 114 negative, 6 and 59 positive. Two of the three controls and two of the five fresh qubits read memory, so on this device the effect is not confined to the qubits the October runs selected. This answers the device-specificity question E0 was designed for.
+2. Qubit 132 misses the threshold on the clean mask (+2.79) and passes it on clean_next (+3.18). The rule needs both, so it reads consistent.
+3. The deviation's standard error (5e-4 to 9e-4) is mostly the null's. The contrast itself has a statistical error of about 1e-4 per qubit. The null's error is dominated by the AS calibration propagated through the saved sensitivities, as the design anticipated.
+4. The null contrast ranges from -0.0089 (qubit 23) to +0.0060 (qubit 59) across qubits. That spread comes mainly from the static readout asymmetry (`e1 - e0` of -0.03% to +0.94% from AS). It is larger than every deviation in the table, which is why the design builds the null per qubit.
+
+### 10.3 Equator comparison and secondary statistics
+
+The clean B lag-1 covariance on the equator steps of the same chain is the October statistic at the same 1.39 µs period. All values are ± 0.0002:
+
+| Physical qubit | 124 | 144 | 6 | 50 | 23 | 59 | 114 | 132 |
+|---|---|---|---|---|---|---|---|---|
+| Clean B lag-1 | +0.0035 | +0.0052 | +0.0051 | -0.0013 | 0.0000 | +0.0060 | -0.0001 | -0.0004 |
+
+Several features are noteworthy:
+
+1. On the controls the equator values repeat the October G0 values five weeks later (+0.0041, +0.0055 and +0.0052 ± 0.0006 in Section 9.2).
+2. The equator and eigenstate readings do not line up qubit by qubit:
+   - Qubit 124 has a positive equator covariance and an eigenstate contrast at its null. That is the design's B-only case (pulse-through memory with a different eigenstate mapping, or persistence), and a fixed angle cannot separate those two.
+   - Qubit 144 is positive on the equator and reads negative memory on eigenstates.
+   - Qubit 114 has no equator covariance and the largest negative eigenstate reading.
+   - Qubits 6 and 59 are positive in both.
+
+   The equator covariance does not separate memory from persistence, so this is no contradiction, but the October equator values would not have predicted the eigenstate readings.
+3. The repeat fidelities on the clean mask are 0.9847 to 0.9933 and the flip fidelities 0.9798 to 0.9910. On the secondary fidelity rule, repeat fidelity falls below the null on qubits 144 and 50, and flip fidelity on qubit 50.
+4. The in-run assignment errors from AS are e0 = 0.12% to 0.67% and e1 = 0.34% to 1.16%. Leaked checks are 0.17% to 1.56% (qubit 23 highest), and 92.5% to 95.9% of blocks are clean.
+5. The checks are clean. The amplitude terms are at most 3.3e-5, and the phase check's largest harmonic above order 2 is 2.42 (flag at 5).
+
+### 10.4 Flags and limits
+
+The report raises two kinds of flags beyond the readings:
+
+1. On all eight qubits, the clean-mask flip fidelity is 0.0003 to 0.0018 below the clean_next value. This means leaks starting inside R or P are material on this device. The reading already requires both masks, and the four readings hold on both.
+2. On qubits 23 and 59, the unselected P flip fidelity differs from the F1 control flip by -0.0007 and -0.0004. On qubit 59 that difference is less than a tenth of the contrast deviation.
+
+Three limits bound what the readings mean. These are judgement calls stated after seeing the data, not pre-registered tests:
+
+1. The null is a model built here. Its leak-return and leaked-level readout values (`NULL_LEAK`) were set by hand in the design, and its T1 is the calibration value, not one measured in the run.
+2. AS measures each qubit's assignment errors on the first readout of a shot, while E0's readouts come up to 72 records into a chain, and the contrast is as sensitive to readout asymmetry as to memory (design Section 2G, item 4.3). Section 10.5 tests this after the data and finds the first-readout calibration was the null's main error.
+3. A reading is memory on eigenstate readouts relative to that conventional model, on this processor and readout at a 1.39 µs period. It is device-level readout behavior relevant to repeated syndrome measurement. It is not a test of superdeterminism or of any completion of the Donadi-Hossenfelder rule beyond what Sections 8 and 9 state.
+
+### 10.5 First-readout calibration versus in-chain readouts (exploratory)
+
+This analysis was chosen after seeing the data. The script is `analysis/cloud_run_eig_drift.py`, and every number below is from its output, `data/cloudrun/2026-11-19_eig/drift_exploratory.json`. In the chain model, memory acts only after a reported "1" and T1 acts only on a held |1>. Two fidelities are then free of both:
+
+- `repeat_agree_0`: F2 read "0" and R repeats |0>;
+- `flip_agree_0`: R read "0" and P flips to a fresh |1>.
+
+These two give each qubit's in-chain static errors. The contrast deviation is then recomputed against a null with those in-chain errors, where T1 cancels to first order. Derivatives come from per-qubit simulations with common random numbers, and data errors from a bootstrap over parameter sets. A recovery check on a synthetic chain passes before the data are read. It has shifted static errors, +0.4% positive memory, and a T1 of 70 µs against the null's 120 µs, and the analysis recovers the shifts and the memory's contrast effect (-0.0044 ± 0.0003 against -0.0040).
+
+| Physical qubit | In-chain e0 minus AS | In-chain e1 minus AS | Contrast deviation, in-chain null | z, clean / clean_next | Reading against the in-chain null |
+|---|---|---|---|---|---|
+| 124 | -0.08% | -0.39% | +0.0032 ± 0.0002 | +14.23 / +14.07 | negative memory |
+| 144 | -0.12% | -0.12% | +0.0023 ± 0.0003 | +8.83 / +9.08 | negative memory |
+| 6 | -0.07% | -0.21% | -0.0020 ± 0.0002 | -12.19 / -6.41 | positive memory |
+| 50 | -0.02% | -0.20% | +0.0008 ± 0.0002 | +4.57 / +6.76 | negative memory |
+| 23 | +0.07% | -0.20% | +0.0041 ± 0.0003 | +15.14 / +16.62 | negative memory |
+| 59 | +0.05% | -0.43% | +0.0007 ± 0.0002 | +3.12 / +5.85 | negative memory |
+| 114 | -0.19% | -0.10% | +0.0022 ± 0.0003 | +8.68 / +9.99 | negative memory |
+| 132 | -0.17% | -0.33% | +0.0021 ± 0.0002 | +9.02 / +9.28 | negative memory |
+
+The standard errors of the in-chain shifts are 0.004% to 0.009%. Several features are noteworthy:
+
+1. The first readout of a shot differs from the readouts inside the chain. On every qubit, a fresh |1> inside the chain is misread 0.10 to 0.43 points less often than AS found on the first readout. The in-chain e0 is within 0.19 points of AS. Per block, neither shift trends along the chain (all trend |z| at most 2.9, on qubit 59's e0), and block 0 begins at record 0. So the difference sets in by the first R and P readouts (records 6 and 7) and then stays level.
+2. That first-readout e1 was the pre-registered null's main error. With the null rebuilt from in-chain errors, the calibration term leaves the uncertainty, and the deviations' errors drop from 5e-4 to 9e-4 to about 2e-4 to 3e-4.
+3. Against the in-chain null, 7 of 8 qubits read negative memory and qubit 6 reads positive memory. Qubit 59 reverses sign relative to its pre-registered reading, and qubits 124, 50, 23 and 132 change from consistent to negative memory.
+4. Stated without the memory model, the finding is this: on 7 of 8 qubits a |1> read again after a "1" fails more often than a freshly flipped |1> read after a "0", by more than the T1 relaxation that also hits the flip from |1>. That is an outcome-dependent readout error at the 0.1 to 0.4 point level, the error a syndrome qubit sees when its state repeats between rounds.
+5. The attribution rests on the chain model. A memory that also acts after a reported "0", for instance one that improves the next readout of |1>, would raise `flip_agree_0` as a lower in-chain e1 does, and this run cannot tell them apart. Both are history-dependent readout errors absent from a first-readout calibration.
+
+The pre-registered reading of Section 10.2 stands as the pre-registered result. This section shows it was dominated by a miscalibrated null. A repeat with the in-chain reading fixed in advance (E0R) is pre-registered in `notes/CLOUD_RUN_NEXT_DESIGN.md` Section 2H.
+
+### 10.6 Allowance
+
+After the run, the rolling 28-day window stood at 415 s consumed and 185 s remaining. These charges leave the window on 17 December 2026.
+
+## 11. Pre-registered repeat of E0 (E0R), 19 November 2026
+
+The design is Section 2H of `notes/CLOUD_RUN_NEXT_DESIGN.md`, committed before the data in 2dbca4f (18:31 UTC). It fixes the in-chain reading of Section 10.5 as the primary reading, with replication, first-readout and drift rules. The records are in `data/cloudrun/2026-11-19_eigrepeat/`. The numbers below come from three saved outputs there:
+
+- `report.json`, the first-readout reading;
+- `inchain_reading.json`, the primary reading from `analysis/cloud_run_eig_drift.py`;
+- `replication.json`, the Section 2H rules applied by `analysis/cloud_run_eig_replication.py`.
+
+### 11.1 What ran
+
+The run was submitted at 13:37 EST, with the first job created at 18:37 UTC, as four jobs, all done, with results after 148 s:
+
+| Job | IBM job ID | Contents | QPU time charged |
+|---|---|---|---|
+| Checks | dbvk3r9cn7vc73eh2m6g | C2 phase check, amplitude check | 7 s |
+| AS | dbvk3rhcn7vc73eh2m7g | assignment calibration, 199 sets | 23 s |
+| E0, two parts | dbvk3rsii22c73cki5s0, dbvk3s813mdc73dfgcpg | 700 sets of the 72-record chain | 2 x 53 = 106 s |
+
+The run used the same eight qubits as E0, pinned by layout, with 400 shots per set. The calibration listed the same T1 values as for E0 (94 to 211 µs) and readout errors of 0.27% to 1.10%. E0R was charged 136 s against the 134.5 s estimate, which leaves 49 s in the window until the 19 November charges expire on 17 December 2026.
+
+### 11.2 Pre-registered reading: the in-chain null
+
+| Physical qubit | In-chain e1 minus AS | Contrast deviation, in-chain null | z, clean / clean_next | E0R reading | Rule 3 against E0 | Drift z, E0R minus E0 |
+|---|---|---|---|---|---|---|
+| 124 | -0.40% | +0.0029 ± 0.0003 | +10.16 / +9.97 | negative memory | replicated | -0.83 |
+| 144 | -0.12% | +0.0014 ± 0.0003 | +4.80 / +4.99 | negative memory | replicated | -2.34 |
+| 6 | -0.23% | -0.0013 ± 0.0002 | -6.24 / -4.65 | positive memory | replicated | +2.61 |
+| 50 | -0.21% | +0.0002 ± 0.0002 | +1.04 / +3.27 | consistent | inconclusive | -2.17 |
+| 23 | -0.20% | +0.0040 ± 0.0003 | +12.34 / +13.35 | negative memory | replicated | -0.19 |
+| 59 | -0.24% | +0.0016 ± 0.0003 | +5.67 / +7.24 | negative memory | replicated | +2.48 |
+| 114 | -0.64% | +0.0030 ± 0.0003 | +9.11 / +9.42 | negative memory | replicated | +2.14 |
+| 132 | -0.30% | +0.0016 ± 0.0003 | +5.92 / +6.57 | negative memory | replicated | -1.48 |
+
+The pre-registered rules give the following:
+
+1. Rule 3 (the reading): seven of eight qubits replicate E0's in-chain reading with the same sign. Qubits 124, 144, 23, 59, 114 and 132 read negative memory, and qubit 6 reads positive memory. Qubit 50 is inconclusive, as Section 2H anticipated: it reads consistent, and its 3-sigma interval includes the E0 value.
+2. Rule 4 (the first-readout effect): it replicates on all eight qubits. Inside the chain a fresh |1> is misread 0.12 to 0.64 points less often than AS finds on the first readout of a shot, with standard errors of 0.005% to 0.011%.
+3. Rule 6 (drift between runs): no qubit's in-chain deviation changed by more than 3 combined standard errors. The largest change is 2.61 on qubit 6, where the positive memory fell from -0.0020 to -0.0013.
+
+### 11.3 Secondary readings and checks
+
+1. Against the first-readout null (`report.json`), E0R reads positive memory on qubits 6 and 50 and is consistent elsewhere. E0 read four qubits there, and only qubit 6 agrees between the two runs. The first-readout reading is the one Section 10.5 showed to be miscalibrated, and its disagreement between runs fits that.
+2. The equator B lag-1 covariance repeats E0 on the controls: +0.0038, +0.0055 and +0.0055 on qubits 124, 144 and 6. It is +0.0058 on qubit 59 and within 0.0012 of zero on the other fresh qubits.
+3. Two flags fire: the clean-mask flip fidelity falls 0.0019 and 0.0013 below clean_next on qubits 23 and 59, the two with the most leakage (1.83% and 1.22% of checks leaked).
+4. Per block, the in-chain e0 trends along the chain on qubits 124 and 59 (trend z of +3.6 and +3.1). Neither e1 nor the contrast deviation trends on any qubit (all |z| at most 2.4). This is not a pre-registered statistic.
+5. The amplitude terms are at most 6.6e-5. The phase check's largest harmonic above order 2 is 3.53 (flag at 5).
+
+### 11.4 What E0 and E0R establish together
+
+1. On these eight ibm_fez qubits, the first mid-circuit readout of a shot misreads |1> more often than readouts inside a chain, by 0.1 to 0.6 points. This was found after E0's data and confirmed in a run fixed in advance. Any per-qubit error model built from first-readout assignment data carries this offset into the rounds after the first.
+2. Against in-chain errors, eigenstate readouts carry a history-dependent error of 0.1 to 0.4 points on seven of eight qubits (Section 10.5, item 4, gives the model-light statement). It has a stable sign per qubit and is negative on six of them. The attribution to memory after a reported "1" rests on the chain model: memory that also acts after a "0" cannot be separated from an in-chain static shift with these chains.
+3. The pre-registered first-readout reading of Section 10.2 stands as recorded. It is superseded as a measurement of memory by the in-chain reading, which is pre-registered for E0R.

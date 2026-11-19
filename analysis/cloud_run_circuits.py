@@ -33,6 +33,7 @@ import numpy as np
 sys.dont_write_bytecode = True
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cloud_run_design as design  # noqa: E402
+import cloud_run_eigenstate as eigenstate  # noqa: E402
 import cloud_run_followup as followup  # noqa: E402
 
 from qiskit import QuantumCircuit, qpy, transpile  # noqa: E402
@@ -44,7 +45,7 @@ try:
 except ImportError:  # pragma: no cover
     MidCircuitMeasure = None
 
-AMPLITUDE_PULSES = (1, 9, 25, 49, 97)  # sx counts = 1 mod 4: linear gain in amplitude error
+AMPLITUDE_PULSES = design.AMPLITUDE_PULSES  # sx counts = 1 mod 4: linear gain in amplitude error
 
 
 def chain_circuit(K: int, n_qubits: int, delay_dt: int, use_measure_2: bool) -> QuantumCircuit:
@@ -114,6 +115,12 @@ def draw_settings(kind: str, K: int, n_qubits: int, n_sets: int, seed: int):
     elif kind == "tagged":
         alpha, beta, phi = followup.tagged_settings(n, K, rng)
         extra = {"phi": phi.reshape(n_sets, n_qubits, K)}
+    elif kind == "tagged_eig":
+        alpha, beta, phi = eigenstate.tagged_eig_settings(n, K, rng)
+        extra = {"phi": phi.reshape(n_sets, n_qubits, K)}
+    elif kind == "assign":
+        alpha, beta, phi = eigenstate.assign_settings(n_sets, n_qubits, rng)
+        extra = {"phi": phi.reshape(n_sets, n_qubits, K)}
     elif kind == "phase":
         alpha = rng.uniform(0.0, 2 * math.pi, (n, K))
         phi = rng.uniform(0.0, 2 * math.pi, (n, K))
@@ -160,8 +167,13 @@ def check_step_convention(steps: int = 3) -> float:
     return worst
 
 
-def pick_qubits(backend, n_qubits: int, use_measure_2: bool) -> list:
-    """Lowest readout error, pairwise non-adjacent, measure_2 available if used."""
+def pick_qubits(backend, n_qubits: int, use_measure_2: bool, include=(), exclude=()) -> list:
+    """Lowest readout error, pairwise non-adjacent, measure_2 available if used.
+
+    include: qubits placed first (controls kept from an earlier run); they must
+    satisfy the same rule. exclude: qubits never picked (earlier-run qubits that
+    the ranking would otherwise hand back as fresh).
+    """
     props = backend.properties()
     target = backend.target
     edges = set()
@@ -170,7 +182,15 @@ def pick_qubits(backend, n_qubits: int, use_measure_2: bool) -> list:
         edges.add((b, a))
     ranked = sorted(range(backend.num_qubits), key=lambda q: props.readout_error(q))
     chosen = []
+    for q in include:
+        if use_measure_2 and (q,) not in target["measure_2"]:
+            raise ValueError(f"control qubit {q} has no measure_2")
+        if any((q, c) in edges for c in chosen):
+            raise ValueError(f"control qubit {q} is adjacent to another control")
+        chosen.append(q)
     for q in ranked:
+        if q in chosen or q in exclude:
+            continue
         if use_measure_2 and (q,) not in target["measure_2"]:
             continue
         if any((q, c) in edges for c in chosen):
@@ -193,7 +213,8 @@ PILOT_CONDITIONS = [("P0", "probe", 0.0, 64, None), ("C2", "phase", 0.0, 1, 2.4)
 
 def build_all(backend, n_qubits: int = 6, shots: int = 400, seed: int = 20261013, layout=None,
               pilot: bool = False, pilot_sets: int = 64, followup_job: bool = False,
-              conditions: list | None = None, amplitude: bool = True) -> dict:
+              conditions: list | None = None, amplitude: bool = True,
+              include=(), exclude=()) -> dict:
     """Transpile every condition for `backend` (a live or fake BackendV2).
 
     Returns {"pubs": [(isa, values, shots)], "labels", "meta", "report"}. The
@@ -203,13 +224,17 @@ def build_all(backend, n_qubits: int = 6, shots: int = 400, seed: int = 20261013
     target = backend.target
     use_m2 = "measure_2" in target.operation_names and MidCircuitMeasure is not None
     meas_name = "measure_2" if use_m2 else "measure"
-    layout = layout or pick_qubits(backend, n_qubits, use_m2)
+    layout = layout or pick_qubits(backend, n_qubits, use_m2, include=include, exclude=exclude)
     dt = target.dt
     rep_delay = getattr(backend, "default_rep_delay", None) or design.HARDWARE["rep_delay_s"]
     t_meas = target[meas_name][(layout[0],)].duration
     t_sx = target["sx"][(layout[0],)].duration
     report = {"backend": backend.name, "measure": meas_name, "layout": list(layout), "dt_s": dt,
               "rep_delay_s": rep_delay, "readout_s": t_meas, "sx_s": t_sx, "shots": shots, "checks": []}
+    props = backend.properties()
+    if props is not None:  # run-day calibration of the layout; the eigenstate null uses its T1
+        report["calibration"] = {"t1_s": [props.t1(q) for q in layout],
+                                 "readout_error": [props.readout_error(q) for q in layout]}
 
     def ok(label: str, cond: bool) -> None:
         report["checks"].append(label)
@@ -312,18 +337,26 @@ def aer_end_to_end(seed: int = 3) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--backend", default="FakeKingston", help="fake backend class for the offline check")
-    parser.add_argument("--qubits", type=int, default=6)
+    parser.add_argument("--qubits", type=int, help="qubits in parallel (default 6; eig: EIG_QUBITS)")
     parser.add_argument("--shots", type=int, default=400)
     parser.add_argument("--seed", type=int, default=20261013)
     parser.add_argument("--pilot", action="store_true", help="build the pilot job instead of the main job")
+    parser.add_argument("--conditions", choices=("main", "pilot", "followup", "eig"), default="main",
+                        help="build a named condition set (analysis/cloud_run_eigenstate.EIG_CONDITIONS and friends)")
     parser.add_argument("--aer", action="store_true", help="also run the end-to-end check on Qiskit Aer")
     parser.add_argument("--out", help="directory for circuits (QPY), parameter values and settings (NPZ)")
     args = parser.parse_args()
 
     import qiskit_ibm_runtime.fake_provider as fake_provider
 
+    conditions = {"pilot": PILOT_CONDITIONS, "followup": followup.FOLLOWUP_CONDITIONS,
+                  "eig": eigenstate.EIG_CONDITIONS}.get(args.conditions)
     backend = getattr(fake_provider, args.backend)()
-    built = build_all(backend, args.qubits, args.shots, args.seed, pilot=args.pilot)
+    eig = args.conditions == "eig"
+    n_qubits = args.qubits or (eigenstate.EIG_QUBITS if eig else 6)
+    built = build_all(backend, n_qubits, args.shots, args.seed, pilot=args.pilot, conditions=conditions,
+                      include=eigenstate.EIG_CONTROLS if eig else (),
+                      exclude=eigenstate.EIG_EXCLUDE if eig else ())
     report = built["report"]
     if args.aer:
         e2e = aer_end_to_end()

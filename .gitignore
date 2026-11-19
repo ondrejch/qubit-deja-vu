@@ -1,3 +1,10 @@
 .ibm
 __pycache__/
 *.pyc
+# Local illustrations, not published (the README uses qubit_deja_vu_art_v3.png only)
+notes/overview.svg
+notes/qubit_deja_vu_art.png
+notes/qubit_deja_vu_art_v2.png
+notes/qubit_deja_vu_art_v4.png
+notes/qubit_deja_vu_art_v5.png
+notes/qubit_deja_vu_art_v6.png

@@ -1,0 +1,15 @@
+{
+  "title": "qubit-deja-vu: time-correlated mid-circuit readout errors on IBM Heron processors (run records and analysis code)",
+  "upload_type": "dataset",
+  "description": "<p>Reset-free chains of up to 72 mid-circuit readouts per qubit on IBM Quantum's ibm_kingston and ibm_fez (15 and 16 October and 19 November 2026), screening for measurement errors correlated between consecutive readouts on the same qubit: leakage episodes, readout memory for equator and eigenstate inputs, and the difference between the first readout of a shot and readouts inside a chain. The archive holds every run's raw per-shot outcomes, manifests, submission records and machine-generated analysis reports, the pre-registered design and analysis code with its self-tests, and the results note. Designs and analysis code were committed before each run's data (PREREGISTRATION.md); analyses chosen after the data are labeled exploratory.</p><p>Independent work using a personal IBM Quantum account; no lab or institution has endorsed it. Data, notes and theory note: CC BY 4.0. Code in analysis/ and scripts/: MIT.</p>",
+  "creators": [
+    {
+      "name": "Chvala, Ondrej",
+      "affiliation": "Walker Department of Mechanical Engineering, The University of Texas at Austin",
+      "orcid": "0000-0003-4614-6649"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "keywords": ["quantum error correction", "mid-circuit measurement", "readout error", "leakage", "superconducting qubits", "IBM Quantum", "pre-registration"],
+  "notes": "We acknowledge the use of IBM Quantum services for this work. The views expressed are those of the author, and do not reflect the official policy or position of IBM or the IBM Quantum team."
+}
