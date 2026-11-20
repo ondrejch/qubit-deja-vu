@@ -52,6 +52,8 @@ data/cloudrun/<date>_<run>/         Run records: manifest.json, one NPZ per cond
 scripts/make_overview_figure.py     Builds a three-panel summary figure from the run reports (output kept out of the repository)
 scripts/generate_repo_art.py        Generates the Futurist / Art Deco illustrations via Gemini
 scripts/make_cloud_results_page.py  Builds notes/cloud_run_results.html from the reports
+scripts/make_paper_figures.py       Builds the manuscript's data figures (figures/*.pdf) from the saved run outputs, checking each plotted value
+figures/                            The three data figures of the journal manuscript
 ```
 
 In each condition file, `r` holds outcomes as int8, +1 = |0>, with shape (parameter sets, shots, qubits, records). `alpha`, `beta` and `phi` hold the phases per set, qubit and record.
