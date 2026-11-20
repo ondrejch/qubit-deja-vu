@@ -87,8 +87,8 @@ Amplitude terms were at most 4.7e-5, and the phase check was clean (largest `sqr
    |---|---|---|---|
    | 21 | +0.0007 ± 0.0004 (limit 2.8e-3) | +0.0014 ± 0.0006 (4.2e-3) | -0.0010 ± 0.0019 (8.3e-3) |
    | 154 | -0.0027 ± 0.0004 (flagged) | -0.0012 ± 0.0006 (1.8e-3) | -0.0025 ± 0.0019 (7.0e-3) |
-   | 11 | -0.0086 ± 0.0004 (flagged) | -0.0075 ± 0.0006 (flagged) | -0.0030 ± 0.0019 (6.3e-3) |
-   | 149 | -0.0017 ± 0.0004 (-3.9 sigma) | -0.0013 ± 0.0006 (1.6e-3) | +0.0018 ± 0.0020 (1.2e-2) |
+   | 11 | -0.0085 ± 0.0004 (flagged) | -0.0074 ± 0.0006 (flagged) | -0.0030 ± 0.0019 (6.3e-3) |
+   | 149 | -0.0017 ± 0.0004 (-3.9 sigma) | -0.0013 ± 0.0006 (1.7e-3) | +0.0018 ± 0.0020 (1.2e-2) |
    | 109 | +0.0060 ± 0.0004 (flagged) | +0.0065 ± 0.0006 (flagged) | +0.0125 ± 0.0020 (flagged) |
    | 89 | -0.0001 ± 0.0004 (2.1e-3) | +0.0007 ± 0.0006 (3.6e-3) | +0.0036 ± 0.0019 (1.3e-2) |
 
@@ -119,12 +119,12 @@ Several features are noteworthy:
 
    | Physical qubit | Clean neighbor covariance | Five-sigma upper limit |
    |---|---|---|
-   | 124 | +0.0036 ± 0.0010 | 8.4e-3 |
+   | 124 | +0.0036 ± 0.0009 | 8.4e-3 |
    | 26 | +0.0001 ± 0.0010 | 4.9e-3 |
-   | 86 | -0.0008 ± 0.0010 | 4.0e-3 |
+   | 86 | -0.0008 ± 0.0009 | 4.0e-3 |
    | 144 | +0.0038 ± 0.0010 | 8.6e-3 |
    | 2 | -0.0017 ± 0.0009 | 3.0e-3 |
-   | 6 | +0.0051 ± 0.0010 (flagged) | |
+   | 6 | +0.0051 ± 0.0009 (flagged) | |
 
    The pooled value is +0.0017 ± 0.0004. Only qubit 6 is beyond five standard errors; qubits 124 and 144 are at 3.8 and 4.0. At a fixed angle these positive values are readout memory or detector-anchored persistence, and only a shape scan on these qubits would separate them. On ibm_kingston, positive memory appeared on one qubit (109), alongside negative memory on three others.
 4. **Allowance.** The rolling 28-day window then stood at 595 s consumed and 5 s remaining; these charges leave it on 12 November 2026.
@@ -141,12 +141,12 @@ The author raised the instance's cost limit to $250. The same job then ran as db
 
 | Physical qubit | F0, 1.39 µs | G0, 1.39 µs | G1, 5.39 µs |
 |---|---|---|---|
-| 124 | +0.0036 ± 0.0010 | +0.0041 ± 0.0006 (flagged) | +0.0056 ± 0.0009 (flagged) |
+| 124 | +0.0036 ± 0.0009 | +0.0041 ± 0.0006 (flagged) | +0.0056 ± 0.0009 (flagged) |
 | 26 | +0.0001 ± 0.0010 | -0.0007 ± 0.0006 | +0.0015 ± 0.0009 |
-| 86 | -0.0008 ± 0.0010 | -0.0009 ± 0.0006 | +0.0005 ± 0.0009 |
-| 144 | +0.0038 ± 0.0010 | +0.0055 ± 0.0006 (flagged) | +0.0042 ± 0.0009 |
-| 2 | -0.0017 ± 0.0009 | -0.0029 ± 0.0006 | -0.0023 ± 0.0009 |
-| 6 | +0.0051 ± 0.0010 (flagged) | +0.0052 ± 0.0006 (flagged) | +0.0058 ± 0.0009 (flagged) |
+| 86 | -0.0008 ± 0.0009 | -0.0009 ± 0.0006 | +0.0005 ± 0.0009 |
+| 144 | +0.0038 ± 0.0010 | +0.0054 ± 0.0006 (flagged) | +0.0042 ± 0.0009 |
+| 2 | -0.0017 ± 0.0009 | -0.0029 ± 0.0006 | -0.0023 ± 0.0008 |
+| 6 | +0.0051 ± 0.0009 (flagged) | +0.0051 ± 0.0006 (flagged) | +0.0057 ± 0.0009 (flagged) |
 
 All values are clean neighbor covariances. The pre-registered readings give the following:
 
@@ -203,7 +203,7 @@ The clean B lag-1 covariance on the equator steps of the same chain is the Octob
 
 Several features are noteworthy:
 
-1. On the controls the equator values repeat the October G0 values five weeks later (+0.0041, +0.0055 and +0.0052 ± 0.0006 in Section 9.2).
+1. On the controls the equator values repeat the October G0 values five weeks later (+0.0041, +0.0054 and +0.0051 ± 0.0006 in Section 9.2).
 2. The equator and eigenstate readings do not line up qubit by qubit:
    - Qubit 124 has a positive equator covariance and an eigenstate contrast at its null. That is the design's B-only case (pulse-through memory with a different eigenstate mapping, or persistence), and a fixed angle cannot separate those two.
    - Qubit 144 is positive on the equator and reads negative memory on eigenstates.
