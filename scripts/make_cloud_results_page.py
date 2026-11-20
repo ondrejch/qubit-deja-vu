@@ -246,7 +246,7 @@ code {{ font: .85em var(--mono); background: var(--bg); padding: .1em .3em; bord
 <header>
   <div class="eyebrow">IBM Quantum cloud runs · October and November 2026</div>
   <h1>IBM Readout Memory Tests</h1>
-  <p class="lede">Six qubits of IBM's ibm_kingston processor were read out thousands of times in a row to look for a hidden variable that persists between measurements, in two models built for this project. Neither model shows a signal. The ordinary effects the runs uncovered, leakage and readout memory, matter for error correction. In November, two runs on ibm_fez read the same memory for qubits near |0⟩ or |1⟩, as an error-correction syndrome qubit is read.</p>
+  <p class="lede">Six qubits of IBM's ibm_kingston processor were read out thousands of times in a row to look for a hidden variable that persists between measurements, in two models built for this project. Neither model shows a signal. The ordinary effects the runs uncovered, leakage and readout memory, matter for error correction. In November, two runs on ibm_fez read qubits at |0⟩ or |1⟩, as an error-correction syndrome qubit is read, and found that the readout memory seen on superposition states does not reach those readouts.</p>
 </header>
 
 <section aria-label="Main results">
@@ -256,7 +256,7 @@ code {{ font: .85em var(--mono); background: var(--bg); padding: .1em .3em; bord
     <div class="card"><div class="k">Detector-anchored model</div><div class="v">w<sub>D</sub> &lt; {fmt(wd4)}</div>
       <p>No cusp in the angle scan. With leaked blocks removed, qubits 21 and 89 give {fmt(lim21)} and {fmt(lim89)}, assuming ordinary effects never push the correlation negative.</p></div>
     <div class="card"><div class="k">What the hardware showed</div><div class="v">Leakage and readout memory</div>
-      <p>Leakage episodes lasting tens of microseconds, entering during idle time as well as during readouts, plus readout memory of either sign on four qubits.</p></div>
+      <p>Leakage episodes lasting tens of microseconds, not entering during readouts alone, plus readout memory of either sign on superposition states, absent from eigenstate readouts.</p></div>
   </div>
 </section>
 
