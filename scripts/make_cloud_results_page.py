@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate notes/cloud_run_results.html, the shareable summary of the October 2026 runs
-and the 19 November 2026 ibm_fez eigenstate runs, from the run reports in data/cloudrun/ (numbers are read, not retyped).
+and the 19 November 2026 ibm_fez eigenstate runs (with the 20 November reanalysis), from the run reports in data/cloudrun/ (numbers are read, not retyped).
 
   python scripts/make_cloud_results_page.py
 """
@@ -53,17 +53,18 @@ eig_dev = [(n["reading"]["clean"]["contrast"]["deviation"], n["reading"]["clean"
             n["reading"]["clean_next"]["contrast"]["z"], n["reading"]["contrast_reading"]) for n in eig_null]
 eig_blag = [pq["clean"]["B_lag1"] for pq in eig["conditions"]["E0"]["per_qubit"]]
 EIG_CONTROLS = (124, 144, 6)
-drift = json.load(open(ROOT + "2026-11-19_eig/drift_exploratory.json"))["qubits"]
-de1 = [drift[str(q)]["clean"]["de1"][0] for q in eig_layout]
-inchain = [drift[str(q)]["reading_in_chain_null"] for q in eig_layout]
-n_neg_in = sum("negative" in s for s in inchain)
-n_pos_in = sum("positive" in s for s in inchain)
-repl = json.load(open(ROOT + "2026-11-19_eigrepeat/replication.json"))
-repl_n = repl["summary"]["rule3"].get("replicated", 0)
-repl_de1 = [v["rule4_first_readout"]["de1"][0] for v in repl["qubits"].values()]
+# 20 November 2026 reanalysis of E0 and E0R (notes/CLOUD_RUN_RESULTS.md Section 13): memoryless-instrument fit.
+inst = {run: json.load(open(ROOT + f"2026-11-19_{run}/instrument_reading.json"))["qubits"] for run in ("eig", "eigrepeat")}
+derv = {run: json.load(open(ROOT + f"2026-11-19_{run}/instrument_derived.json"))["qubits"] for run in ("eig", "eigrepeat")}
+rep_r = json.load(open(ROOT + "2026-11-19_eigrepeat/report.json"))
+blag = {"eig": eig_blag, "eigrepeat": [pq["clean"]["B_lag1"] for pq in rep_r["conditions"]["E0"]["per_qubit"]]}
+pn = {run: {q: inst[run][str(q)]["prev_next"] for q in eig_layout} for run in inst}
+m_max = max(abs(pn[r][q][k]["value"]) for r in pn for q in eig_layout for k in ("m0", "m1"))
+ul_max = max(v["prev_next"]["upper_limit_3sigma"][k] for r in derv for v in derv[r].values() for k in ("m0", "m1"))
+off = [pn[r][q]["first_readout_offset_e1"]["in_chain_minus_AS"] for r in pn for q in eig_layout]
+assert m_max < 3e-4 and ul_max < 5.5e-4, (m_max, ul_max)   # the limits the page states
 repl_job = json.load(open(ROOT + "2026-11-19_eigrepeat/job.json"))
 repl_charged = sum(j["metrics"]["usage"]["qpu_charge_time_seconds"] for j in repl_job["jobs"])
-
 
 # ------------------------------------------------------------------ charts
 def bar_chart_memory():
@@ -126,50 +127,58 @@ def bar_chart_cross():
 
 
 def bar_chart_eig():
-    """Contrast deviation from each qubit's own null, clean mask, whiskers at +-3 combined SE."""
+    """Per qubit (E0): 2D, the eigenstate repeat bias a repeating readout would give, against the measured m0 - m1."""
     W, H, L, R, T, B = 640, 300, 64, 16, 16, 44
-    lo, hi = -0.0080, 0.0080
+    lo, hi = -0.004, 0.013
     def y(v):
         return T + (hi - v) / (hi - lo) * (H - T - B)
     n = len(eig_layout)
     slot = (W - L - R) / n
     out = [f'<svg viewBox="0 0 {W} {H}" role="img" aria-labelledby="fig3t">',
-           '<title id="fig3t">Eigenstate contrast deviation from each qubit\'s conventional null, ibm_fez, 19 November 2026</title>']
-    for t in (-0.006, -0.003, 0.0, 0.003, 0.006):
+           '<title id="fig3t">Equator covariance against eigenstate repeat bias per qubit, ibm_fez, 19 November 2026</title>']
+    for t in (-0.003, 0.0, 0.003, 0.006, 0.009, 0.012):
         yy = y(t)
         out.append(f'<line class="{"axis" if t == 0 else "grid"}" x1="{L}" x2="{W - R}" y1="{yy:.1f}" y2="{yy:.1f}"/>')
         out.append(f'<text class="tick" x="{L - 8}" y="{yy + 4:.1f}" text-anchor="end">{num(t, 3) if t else "0"}</text>')
-    for i, (v, se, _, reading) in enumerate(eig_dev):
+    for i, q in enumerate(eig_layout):
         cx = L + slot * (i + 0.5)
-        flagged = "memory" in reading
-        top, bot = y(max(v, 0)), y(min(v, 0))
-        out.append(f'<rect class="{"bar-flag" if flagged else "bar-ok"}" x="{cx - slot * 0.28:.1f}" y="{top:.1f}" '
-                   f'width="{slot * 0.56:.1f}" height="{max(bot - top, 1):.1f}"/>')
-        y1, y2 = y(v + 3 * se), y(v - 3 * se)
-        out.append(f'<line class="whisker" x1="{cx:.1f}" x2="{cx:.1f}" y1="{y1:.1f}" y2="{y2:.1f}"/>')
-        for yy in (y1, y2):
-            out.append(f'<line class="whisker" x1="{cx - 6:.1f}" x2="{cx + 6:.1f}" y1="{yy:.1f}" y2="{yy:.1f}"/>')
-        label_y = y1 - 6 if v >= 0 else y2 + 14
-        out.append(f'<text class="val" x="{cx:.1f}" y="{label_y:.1f}" text-anchor="middle">{num(v, 4)}</text>')
-        tag = "*" if eig_layout[i] in EIG_CONTROLS else ""
-        out.append(f'<text class="cat" x="{cx:.1f}" y="{H - B + 20:.1f}" text-anchor="middle">{eig_layout[i]}{tag}</text>')
+        d2 = 2 * eig_blag[i][0]
+        r = pn["eig"][q]
+        mb = r["m0"]["value"] - r["m1"]["value"]
+        mse = (r["m0"]["se"] ** 2 + r["m1"]["se"] ** 2) ** 0.5
+        for v, cls, dx in ((d2, "bar-raw", -0.16), (mb, "bar-ok", 0.16)):
+            top, bot = y(max(v, 0)), y(min(v, 0))
+            out.append(f'<rect class="{cls}" x="{cx + slot * dx - slot * 0.14:.1f}" y="{top:.1f}" '
+                       f'width="{slot * 0.28:.1f}" height="{max(bot - top, 1):.1f}"/>')
+        x2 = cx + slot * 0.16
+        y1, y2 = y(mb + 3 * mse), y(mb - 3 * mse)
+        out.append(f'<line class="whisker" x1="{x2:.1f}" x2="{x2:.1f}" y1="{y1:.1f}" y2="{y2:.1f}"/>')
+        tag = "*" if q in EIG_CONTROLS else ""
+        out.append(f'<text class="cat" x="{cx:.1f}" y="{H - B + 20:.1f}" text-anchor="middle">{q}{tag}</text>')
     out.append(f'<text class="axis-title" x="{(L + W - R) / 2:.0f}" y="{H - 6}" text-anchor="middle">physical qubit (* October control)</text>')
     out.append("</svg>")
     return "\n".join(out)
 
 
-def eig_reading_text(reading):
-    return {"positive memory on eigenstate readouts": "positive memory",
-            "negative memory on eigenstate readouts": "negative memory"}.get(reading, "consistent with its null")
+def rnd(v, scale, d, sign=True):
+    """Round half away from zero from the saved decimal value, as in the paper's tables; signed, '0' unsigned."""
+    from decimal import Decimal, ROUND_HALF_UP
+    x = (Decimal(str(v)) * Decimal(str(scale))).quantize(Decimal(1).scaleb(-d), ROUND_HALF_UP)
+    if x == 0:
+        return f"{abs(x)}"
+    return (f"+{x}" if x > 0 else f"−{abs(x)}") if sign else f"{abs(x)}"
+
+
+def pm(r, k, scale=10000, d=1):
+    return f"{rnd(r[k]['value'], scale, d)} ± {rnd(r[k]['se'], scale, d, sign=False)}"
 
 
 rows_eig = "\n".join(
-    f"<tr><td>{eig_layout[i]}</td><td>{'control' if eig_layout[i] in EIG_CONTROLS else 'fresh'}</td>"
-    f"<td>{num(v, 4)} ± {se:.4f}</td><td>{v / se:+.1f} / {zn:+.1f}</td><td>{num(eig_blag[i][0], 4)}</td>"
-    f"<td>{eig_reading_text(rd)}</td></tr>"
-    for i, (v, se, zn, rd) in enumerate(eig_dev))
+    f"<tr><td>{q}{'*' if q in EIG_CONTROLS else ''}</td><td>{lab}</td><td>{rnd(blag[run][i][0], 1, 4)}</td>"
+    f"<td>{pm(pn[run][q], 'm1')}</td><td>{pm(pn[run][q], 'm0')}</td>"
+    f"<td>{rnd(pn[run][q]['first_readout_offset_e1']['in_chain_minus_AS'], 100, 2)}</td></tr>"
+    for i, q in enumerate(eig_layout) for run, lab in (("eig", "E0"), ("eigrepeat", "E0R")))
 eig_charged = sum(j["metrics"]["usage"]["qpu_charge_time_seconds"] for j in eig_job["jobs"])
-n_mem = sum("memory" in d[3] for d in eig_dev)
 
 rows_s2 = "\n".join(
     f"<tr><td>{layout[i]}</td><td>{num(v, 4)} ± {se:.4f}</td><td>"
@@ -295,27 +304,27 @@ code {{ font: .85em var(--mono); background: var(--bg); padding: .1em .3em; bord
 </section>
 
 <section>
-  <h2>19 November: memory on eigenstate readouts</h2>
-  <p>A syndrome qubit in error correction is read out near a definite state, |0⟩ or |1⟩, rather than on the equator as in October. On 19 November 2026 a pre-registered run on eight ibm_fez qubits added a repeat step and a flip step after each leak check: the three October fez qubits with positive equator memory as controls, and five fresh qubits. Each qubit's result is read against its own simulated conventional null, built from readout errors measured in the same run, its T1 and its leakage. A qubit reads memory only beyond three standard errors on both selection masks with one sign.</p>
+  <h2>19 November: eigenstate readouts do not share the equator memory</h2>
+  <p>A syndrome qubit in error correction is read out at a definite state, |0⟩ or |1⟩, rather than on the equator as in October. On 19 November 2026 two runs on eight ibm_fez qubits (E0, {eig_charged} s of QPU time, and its repeat E0R, {repl_charged} s) added a repeat step and a flip step after each leak check: the three October fez qubits with positive equator memory as controls, and five fresh qubits. The equator readouts and the eigenstate readouts of each qubit come from the same shots.</p>
+  <p>The eigenstate readouts were analyzed on 20 November with a readout model that has no memory but allows decay during the readout, fitted to the outcome patterns of each block, with memory added as a free parameter. The model and its synthetic tests were committed before it was applied to the records. Memory on eigenstate readouts stays below 3 × 10<sup>−4</sup> on every qubit in both runs (3σ upper limits below 5.5 × 10<sup>−4</sup>), while the equator covariance of the same shots repeats the October values on the controls.</p>
   <figure>
-    <div class="legend"><span><span class="sw" style="background:var(--accent)"></span>consistent with its null</span><span><span class="sw" style="background:var(--flag)"></span>reads memory</span></div>
+    <div class="legend"><span><span class="sw" style="background:var(--raw)"></span>2D: what a readout repeating its report would give</span><span><span class="sw" style="background:var(--accent)"></span>measured eigenstate repeat bias m<sub>0</sub> − m<sub>1</sub></span></div>
     <div class="scroll">{bar_chart_eig()}</div>
-    <figcaption><b>Figure 3.</b> Eigenstate contrast (flip fidelity minus repeat fidelity, both from state |1⟩) minus each qubit's conventional null, on blocks whose leak checks are normal, ibm_fez, 19 November 2026 (E0, 2572 sets × 400 shots, 1.39 µs record period). Whiskers span ±3 combined standard errors (data, simulation and the readout calibration). Negative values are positive memory: a reported "1" makes the next readout of |0⟩ report "1". Positive values are negative memory.</figcaption>
+    <figcaption><b>Figure 3.</b> Per qubit, ibm_fez, E0 (19 November 2026, 2572 sets × 400 shots, 1.39 µs record period). Grey: twice the clean equator covariance D of the balanced readouts, which is the eigenstate repeat bias a readout that tends to repeat its previous report would show. Teal: the measured eigenstate repeat bias from the instrument fit (blocks whose neighboring leak checks are normal), with whiskers at ±3 standard errors. The equator covariance does not reach the eigenstate readouts.</figcaption>
   </figure>
   <div class="table-wrap"><table>
-    <thead><tr><th>Qubit</th><th>Role</th><th>Deviation</th><th>z clean / next</th><th>Equator memory</th><th>Reading</th></tr></thead>
+    <thead><tr><th>Qubit</th><th>Run</th><th>Equator D</th><th>m<sub>1</sub> (10<sup>−4</sup>)</th><th>m<sub>0</sub> (10<sup>−4</sup>)</th><th>In-chain minus first-readout e<sub>1</sub> (points)</th></tr></thead>
     <tbody>
 {rows_eig}
     </tbody>
   </table></div>
-  <p>{n_mem} of the 8 qubits read memory on eigenstate readouts, of both signs, among the fresh qubits as well as the controls, so on this device the effect is not limited to qubits picked for it. On the controls, the equator values repeat October's five weeks later, but they do not predict the eigenstate readings qubit by qubit. The run used {eig_charged} s of QPU time in nine jobs. The null is a model built here, and its readout errors came from the first readout of each shot.</p>
-  <p>An exploratory test chosen after the data shows that this calibration was the null's main error. On every qubit, the first readout of a shot misreads |1⟩ {-max(de1) * 100:.2f} to {-min(de1) * 100:.2f} percentage points more often than the readouts inside the chain, with no trend along the chain. Against a null built from in-chain errors, {n_neg_in} of the 8 qubits read negative memory and {n_pos_in} positive: a |1⟩ read again after a "1" fails more often than a freshly flipped |1⟩, beyond T1 relaxation. That attribution assumes memory acts only after a "1".</p>
-  <p>A repeat on the same qubits the same afternoon, with this reading and its replication rules committed before the data ({repl_charged} s of QPU time), confirmed it. {repl_n} of the 8 qubits replicate the in-chain reading with the same sign, one is inconclusive at the repeat's smaller sample, and none drifted between the runs. The first-readout offset replicates on all 8 qubits, at {-max(repl_de1) * 100:.2f} to {-min(repl_de1) * 100:.2f} points.</p>
+  <p>Inside the chain, a freshly flipped |1⟩ is misread within {max(abs(v) for v in off) * 100:.2f} percentage points of the first-readout calibration of the same run, with either sign. On four of the eight qubits nearly every misread |1⟩ has decayed during the readout rather than been misread in place.</p>
+  <p class="note"><b>Withdrawn readings.</b> This page earlier reported eigenstate memory of 0.1 to 0.4 points on seven of eight qubits and a first-readout offset on every qubit, replicated in E0R. Those readings came from a null model that treated decay during the readout as a misread that leaves the qubit in |1⟩; on simulated chains without memory it reports the same signal. A null built from the separately measured first-readout calibration, which drifts by up to 0.9 points within hours, gave the pre-registered E0 reading, which did not repeat. Both are withdrawn (results note, Section 13).</p>
 </section>
 
 <section>
   <h2>Why it matters beyond the models</h2>
-  <p>Leakage that lasts for many readout rounds and readout memory at the 10<sup>−3</sup> level are the kinds of correlated measurement errors that degrade surface-code memory in simulations by Kam and colleagues (Quantum Sci. Technol., 2025). Seeing them took about 10<sup>7</sup> readout pairs per qubit, well within a free cloud allowance.</p>
+  <p>Leakage that lasts for many readout rounds is the kind of correlated measurement error that degrades surface-code memory in simulations by Kam and colleagues (Quantum Sci. Technol., 2025); in a repetition-code simulation with the measured leakage scale, the logical error rate at distance 7 is 3 to 19 times that of independent errors at the same rate. The equator correlations at the 10<sup>−3</sup> level do not reach eigenstate readouts, so they matter less for syndrome extraction than a superposition-based screen suggests. Seeing either took about 10<sup>7</sup> readout pairs per qubit, well within a free cloud allowance.</p>
 </section>
 
 <p class="note">Archived on Zenodo, <a href="https://doi.org/10.5281/zenodo.24379286">doi:10.5281/zenodo.24379286</a>. Records, run reports and code are in the project repository: run data under <code>data/cloudrun/</code>, the design notes <code>notes/CLOUD_RUN_DESIGN.md</code> and <code>notes/CLOUD_RUN_FOLLOWUP_DESIGN.md</code>, the results <code>notes/CLOUD_RUN_RESULTS.md</code>, and the analysis in <code>analysis/cloud_run_*.py</code>. The leakage model fitted after the main run is exploratory. This is independent work using a personal IBM Quantum account; no lab or institution has endorsed it.</p>

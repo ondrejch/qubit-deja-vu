@@ -15,13 +15,14 @@ The full write-up is `notes/CLOUD_RUN_RESULTS.md`, and each run's machine-genera
 | Finding | Value | Where |
 |---|---|---|
 | Shot-wide readout correlation explained by leakage | removing leak-tagged blocks takes it from 0.001 to 0.0065 per qubit down to 0.0003 ± 0.0002 | kingston follow-up; fez repeat |
-| Leakage enters during idle time as well as during readouts | leaked fraction changes by a factor of 0.6 to 1.3 when the readout rate drops 3.8-fold, between the 0.35 to 0.59 expected if readouts alone caused it and the 1.3 to 2.2 if it built up only with time (buildup model, exploratory); lifetimes about 10 to 120 µs (lower limits) | kingston follow-up; fez repeat |
-| Readout memory after leakage is removed | ±2 to 9 x 10^-3, beyond five standard errors on 6 of 12 qubits; reproduced and level from 1.4 to 5.4 µs on three fez qubits | kingston follow-up; fez runs |
-| First readout of a shot differs from readouts inside a chain | a fresh \|1> is misread 0.1 to 0.6 points more often on the first readout than inside the chain, on all 8 fez qubits; found after the first November run, replicated on all 8 in a pre-registered repeat | fez E0 and E0R |
+| Leakage does not enter during readouts alone | leaked fraction changes by a factor of 0.6 to 1.3 when the readout rate drops 3.8-fold, between the 0.35 to 0.59 expected if readouts alone caused it and the 1.3 to 2.2 if it built up only with time (buildup model, exploratory); lifetimes about 10 to 120 µs (lower limits) | kingston follow-up; fez repeat |
+| Equator covariance after leakage is removed (readouts of equal superpositions) | ±3 to 9 x 10^-3, beyond five standard errors on 6 of 12 qubits, sign varies by qubit; reproduced and level from 1.4 to 5.4 µs on three fez qubits, and repeated five weeks later | kingston follow-up; fez runs; fez E0 and E0R |
 | Heralded calibration of the first readout | heralding lowers the pooled first-readout e1 by 0.16 ± 0.03 points, mostly on one qubit; consistent with an initialization population on the pooled test; first-readout calibrations drift by up to 0.9 points within hours | fez AH |
-| Readout memory on eigenstate inputs (as a syndrome qubit sees them) | against in-chain errors, 0.1 to 0.4 points on 7 of 8 fez qubits, negative on six and positive on one; replicated with the same sign on 7 of 8 in the pre-registered repeat, one inconclusive; equator memory does not predict it qubit by qubit | fez E0 and E0R |
+| Readout memory on eigenstate inputs (as a syndrome qubit sees them), in the same shots | below 3 x 10^-4 on all 8 fez qubits in both runs (3-sigma upper limits below 5.5 x 10^-4): the equator covariance does not reach eigenstate readouts; in-chain readouts of a fresh \|1> match the first-readout calibration to within 0.23 points; on 4 of 8 qubits nearly every misread \|1> has decayed (memoryless-instrument fit of 20 November, chosen after the data, committed before it was applied) | fez E0 and E0R |
 | Qubit-anchored persistence (Bell-Mermin completion) | `w1 w2 < 5.3e-4` at a 1.44 µs gap (five sigma) | kingston main run |
 | Detector-anchored persistence | no cusp in the angle scan; `w_D < 5.6e-3` | kingston main run |
+
+**Withdrawn readings (20 November 2026).** Earlier versions of this table reported eigenstate memory of 0.1 to 0.4 points on 7 of 8 qubits and a first-readout offset of 0.1 to 0.6 points on all 8, each replicated in the pre-registered repeat E0R. The null behind them treated decay during the readout as a misread that leaves the qubit in |1>, and on simulated chains without memory it reports the same signal. Both readings are withdrawn; `notes/CLOUD_RUN_RESULTS.md` Section 13 gives the reasons and the reanalysis.
 
 The two hidden-variable models are completions of the Donadi-Hossenfelder outcome rule constructed for this project (`theory/theorynote.pdf`), not proposals by Donadi or Hossenfelder. The limits bound those models on these processors and readouts at the stated gaps. They are not a test of superdeterminism in general. The question of hidden order in repeated measurements of one atom was tested in quantum-jump data in 1985 to 1990 and in 2004; the novelty here is methodological.
 
@@ -71,12 +72,12 @@ python analysis/cloud_run_analyze.py analyze data/cloudrun/2026-10-15_main --out
 
 The last command reproduces `data/cloudrun/2026-10-15_main/report.json`; the same command on any other run directory reproduces its report.
 
-The November eigenstate runs add two steps per block, a repeat and a flip of the post-readout eigenstate, and read the result against a per-qubit simulated null. `analysis/cloud_run_eig_drift.py` estimates each qubit's in-chain readout errors and reads the eigenstate memory against them; it was chosen after the first run's data (exploratory there) and fixed in advance for the repeat. `analysis/cloud_run_eig_replication.py` applies the repeat's pre-registered rules:
+The November eigenstate runs add two steps per block, a repeat and a flip of the post-readout eigenstate. `analysis/cloud_run_eig_instrument.py` fits each qubit's outcome patterns with a memoryless readout instrument that allows decay during the readout, with memory as a free parameter; `selftest` runs its synthetic tests, `legacy` shows the bias of the withdrawn in-chain estimator (`analysis/cloud_run_eig_drift.py`, kept for the record with `analysis/cloud_run_eig_replication.py`), and `derived` writes the upper limits, residuals and implied T1:
 
 ```sh
-python analysis/cloud_run_eig_drift.py data/cloudrun/2026-11-19_eigrepeat --output /tmp/inchain.json
-python analysis/cloud_run_eig_replication.py data/cloudrun/2026-11-19_eig/drift_exploratory.json \
-    data/cloudrun/2026-11-19_eigrepeat/inchain_reading.json
+python analysis/cloud_run_eig_instrument.py selftest
+python analysis/cloud_run_eig_instrument.py analyze data/cloudrun/2026-11-19_eigrepeat --output /tmp/instrument.json
+python analysis/cloud_run_eig_instrument.py derived data/cloudrun/2026-11-19_eigrepeat --output /tmp/derived.json
 ```
 
 Two scripts are exploratory: their statistics were chosen after seeing the data, and their outputs are labeled that way. `analysis/cloud_run_leakage.py` fits a three-level leakage model (`--recovery` repeats its check on synthetic data, output `analysis/cloud_run_leakage_recovery.json`). `analysis/cloud_run_diagnostics.py` computes the descriptive numbers in the results note that are not in `report.json`: long runs of one outcome, flip-step failures, standard errors clustered by shot and by parameter set, and the leak-buildup model.

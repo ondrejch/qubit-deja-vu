@@ -209,95 +209,89 @@ code { font: .85em var(--mono); background: var(--bg); padding: .1em .3em; borde
 </section>
 
 <section>
-  <h2>19 November: memory on eigenstate readouts</h2>
-  <p>A syndrome qubit in error correction is read out near a definite state, |0⟩ or |1⟩, rather than on the equator as in October. On 19 November 2026 a pre-registered run on eight ibm_fez qubits added a repeat step and a flip step after each leak check: the three October fez qubits with positive equator memory as controls, and five fresh qubits. Each qubit's result is read against its own simulated conventional null, built from readout errors measured in the same run, its T1 and its leakage. A qubit reads memory only beyond three standard errors on both selection masks with one sign.</p>
+  <h2>19 November: eigenstate readouts do not share the equator memory</h2>
+  <p>A syndrome qubit in error correction is read out at a definite state, |0⟩ or |1⟩, rather than on the equator as in October. On 19 November 2026 two runs on eight ibm_fez qubits (E0, 415 s of QPU time, and its repeat E0R, 136 s) added a repeat step and a flip step after each leak check: the three October fez qubits with positive equator memory as controls, and five fresh qubits. The equator readouts and the eigenstate readouts of each qubit come from the same shots.</p>
+  <p>The eigenstate readouts were analyzed on 20 November with a readout model that has no memory but allows decay during the readout, fitted to the outcome patterns of each block, with memory added as a free parameter. The model and its synthetic tests were committed before it was applied to the records. Memory on eigenstate readouts stays below 3 × 10<sup>−4</sup> on every qubit in both runs (3σ upper limits below 5.5 × 10<sup>−4</sup>), while the equator covariance of the same shots repeats the October values on the controls.</p>
   <figure>
-    <div class="legend"><span><span class="sw" style="background:var(--accent)"></span>consistent with its null</span><span><span class="sw" style="background:var(--flag)"></span>reads memory</span></div>
+    <div class="legend"><span><span class="sw" style="background:var(--raw)"></span>2D: what a readout repeating its report would give</span><span><span class="sw" style="background:var(--accent)"></span>measured eigenstate repeat bias m<sub>0</sub> − m<sub>1</sub></span></div>
     <div class="scroll"><svg viewBox="0 0 640 300" role="img" aria-labelledby="fig3t">
-<title id="fig3t">Eigenstate contrast deviation from each qubit's conventional null, ibm_fez, 19 November 2026</title>
-<line class="grid" x1="64" x2="624" y1="226.0" y2="226.0"/>
-<text class="tick" x="56" y="230.0" text-anchor="end">−0.006</text>
-<line class="grid" x1="64" x2="624" y1="181.0" y2="181.0"/>
-<text class="tick" x="56" y="185.0" text-anchor="end">−0.003</text>
-<line class="axis" x1="64" x2="624" y1="136.0" y2="136.0"/>
-<text class="tick" x="56" y="140.0" text-anchor="end">0</text>
-<line class="grid" x1="64" x2="624" y1="91.0" y2="91.0"/>
-<text class="tick" x="56" y="95.0" text-anchor="end">+0.003</text>
-<line class="grid" x1="64" x2="624" y1="46.0" y2="46.0"/>
-<text class="tick" x="56" y="50.0" text-anchor="end">+0.006</text>
-<rect class="bar-ok" x="79.4" y="120.8" width="39.2" height="15.2"/>
-<line class="whisker" x1="99.0" x2="99.0" y1="93.7" y2="147.8"/>
-<line class="whisker" x1="93.0" x2="105.0" y1="93.7" y2="93.7"/>
-<line class="whisker" x1="93.0" x2="105.0" y1="147.8" y2="147.8"/>
-<text class="val" x="99.0" y="87.7" text-anchor="middle">+0.0010</text>
+<title id="fig3t">Equator covariance against eigenstate repeat bias per qubit, ibm_fez, 19 November 2026</title>
+<line class="grid" x1="64" x2="624" y1="241.9" y2="241.9"/>
+<text class="tick" x="56" y="245.9" text-anchor="end">−0.003</text>
+<line class="axis" x1="64" x2="624" y1="199.5" y2="199.5"/>
+<text class="tick" x="56" y="203.5" text-anchor="end">0</text>
+<line class="grid" x1="64" x2="624" y1="157.2" y2="157.2"/>
+<text class="tick" x="56" y="161.2" text-anchor="end">+0.003</text>
+<line class="grid" x1="64" x2="624" y1="114.8" y2="114.8"/>
+<text class="tick" x="56" y="118.8" text-anchor="end">+0.006</text>
+<line class="grid" x1="64" x2="624" y1="72.5" y2="72.5"/>
+<text class="tick" x="56" y="76.5" text-anchor="end">+0.009</text>
+<line class="grid" x1="64" x2="624" y1="30.1" y2="30.1"/>
+<text class="tick" x="56" y="34.1" text-anchor="end">+0.012</text>
+<rect class="bar-raw" x="78.0" y="99.7" width="19.6" height="99.9"/>
+<rect class="bar-ok" x="100.4" y="199.5" width="19.6" height="1.0"/>
+<line class="whisker" x1="110.2" x2="110.2" y1="198.9" y2="200.6"/>
 <text class="cat" x="99.0" y="276.0" text-anchor="middle">124*</text>
-<rect class="bar-flag" x="149.4" y="90.2" width="39.2" height="45.8"/>
-<line class="whisker" x1="169.0" x2="169.0" y1="51.6" y2="128.8"/>
-<line class="whisker" x1="163.0" x2="175.0" y1="51.6" y2="51.6"/>
-<line class="whisker" x1="163.0" x2="175.0" y1="128.8" y2="128.8"/>
-<text class="val" x="169.0" y="45.6" text-anchor="middle">+0.0031</text>
+<rect class="bar-raw" x="148.0" y="52.7" width="19.6" height="146.8"/>
+<rect class="bar-ok" x="170.4" y="198.8" width="19.6" height="1.0"/>
+<line class="whisker" x1="180.2" x2="180.2" y1="195.4" y2="202.2"/>
 <text class="cat" x="169.0" y="276.0" text-anchor="middle">144*</text>
-<rect class="bar-flag" x="219.4" y="136.0" width="39.2" height="39.1"/>
-<line class="whisker" x1="239.0" x2="239.0" y1="154.3" y2="196.0"/>
-<line class="whisker" x1="233.0" x2="245.0" y1="154.3" y2="154.3"/>
-<line class="whisker" x1="233.0" x2="245.0" y1="196.0" y2="196.0"/>
-<text class="val" x="239.0" y="210.0" text-anchor="middle">−0.0026</text>
+<rect class="bar-raw" x="218.0" y="56.1" width="19.6" height="143.5"/>
+<rect class="bar-ok" x="240.4" y="199.5" width="19.6" height="1.0"/>
+<line class="whisker" x1="250.2" x2="250.2" y1="197.9" y2="202.7"/>
 <text class="cat" x="239.0" y="276.0" text-anchor="middle">6*</text>
-<rect class="bar-ok" x="289.4" y="136.0" width="39.2" height="13.1"/>
-<line class="whisker" x1="309.0" x2="309.0" y1="127.1" y2="171.0"/>
-<line class="whisker" x1="303.0" x2="315.0" y1="127.1" y2="127.1"/>
-<line class="whisker" x1="303.0" x2="315.0" y1="171.0" y2="171.0"/>
-<text class="val" x="309.0" y="185.0" text-anchor="middle">−0.0009</text>
+<rect class="bar-raw" x="288.0" y="199.5" width="19.6" height="36.6"/>
+<rect class="bar-ok" x="310.4" y="199.5" width="19.6" height="1.0"/>
+<line class="whisker" x1="320.2" x2="320.2" y1="199.6" y2="201.3"/>
 <text class="cat" x="309.0" y="276.0" text-anchor="middle">50</text>
-<rect class="bar-ok" x="359.4" y="125.7" width="39.2" height="10.3"/>
-<line class="whisker" x1="379.0" x2="379.0" y1="85.3" y2="166.1"/>
-<line class="whisker" x1="373.0" x2="385.0" y1="85.3" y2="85.3"/>
-<line class="whisker" x1="373.0" x2="385.0" y1="166.1" y2="166.1"/>
-<text class="val" x="379.0" y="79.3" text-anchor="middle">+0.0007</text>
+<rect class="bar-raw" x="358.0" y="199.5" width="19.6" height="1.0"/>
+<rect class="bar-ok" x="380.4" y="194.2" width="19.6" height="5.3"/>
+<line class="whisker" x1="390.2" x2="390.2" y1="191.5" y2="196.9"/>
 <text class="cat" x="379.0" y="276.0" text-anchor="middle">23</text>
-<rect class="bar-flag" x="429.4" y="136.0" width="39.2" height="72.1"/>
-<line class="whisker" x1="449.0" x2="449.0" y1="175.6" y2="240.5"/>
-<line class="whisker" x1="443.0" x2="455.0" y1="175.6" y2="175.6"/>
-<line class="whisker" x1="443.0" x2="455.0" y1="240.5" y2="240.5"/>
-<text class="val" x="449.0" y="254.5" text-anchor="middle">−0.0048</text>
+<rect class="bar-raw" x="428.0" y="29.9" width="19.6" height="169.6"/>
+<rect class="bar-ok" x="450.4" y="199.5" width="19.6" height="1.0"/>
+<line class="whisker" x1="460.2" x2="460.2" y1="196.9" y2="202.3"/>
 <text class="cat" x="449.0" y="276.0" text-anchor="middle">59</text>
-<rect class="bar-flag" x="499.4" y="63.0" width="39.2" height="73.0"/>
-<line class="whisker" x1="519.0" x2="519.0" y1="25.5" y2="100.5"/>
-<line class="whisker" x1="513.0" x2="525.0" y1="25.5" y2="25.5"/>
-<line class="whisker" x1="513.0" x2="525.0" y1="100.5" y2="100.5"/>
-<text class="val" x="519.0" y="19.5" text-anchor="middle">+0.0049</text>
+<rect class="bar-raw" x="498.0" y="199.5" width="19.6" height="3.8"/>
+<rect class="bar-ok" x="520.4" y="198.1" width="19.6" height="1.4"/>
+<line class="whisker" x1="530.2" x2="530.2" y1="194.1" y2="202.2"/>
 <text class="cat" x="519.0" y="276.0" text-anchor="middle">114</text>
-<rect class="bar-ok" x="569.4" y="104.4" width="39.2" height="31.6"/>
-<line class="whisker" x1="589.0" x2="589.0" y1="70.4" y2="138.4"/>
-<line class="whisker" x1="583.0" x2="595.0" y1="70.4" y2="70.4"/>
-<line class="whisker" x1="583.0" x2="595.0" y1="138.4" y2="138.4"/>
-<text class="val" x="589.0" y="64.4" text-anchor="middle">+0.0021</text>
+<rect class="bar-raw" x="568.0" y="199.5" width="19.6" height="9.8"/>
+<rect class="bar-ok" x="590.4" y="199.5" width="19.6" height="1.3"/>
+<line class="whisker" x1="600.2" x2="600.2" y1="199.1" y2="202.5"/>
 <text class="cat" x="589.0" y="276.0" text-anchor="middle">132</text>
 <text class="axis-title" x="344" y="294" text-anchor="middle">physical qubit (* October control)</text>
 </svg></div>
-    <figcaption><b>Figure 3.</b> Eigenstate contrast (flip fidelity minus repeat fidelity, both from state |1⟩) minus each qubit's conventional null, on blocks whose leak checks are normal, ibm_fez, 19 November 2026 (E0, 2572 sets × 400 shots, 1.39 µs record period). Whiskers span ±3 combined standard errors (data, simulation and the readout calibration). Negative values are positive memory: a reported "1" makes the next readout of |0⟩ report "1". Positive values are negative memory.</figcaption>
+    <figcaption><b>Figure 3.</b> Per qubit, ibm_fez, E0 (19 November 2026, 2572 sets × 400 shots, 1.39 µs record period). Grey: twice the clean equator covariance D of the balanced readouts, which is the eigenstate repeat bias a readout that tends to repeat its previous report would show. Teal: the measured eigenstate repeat bias from the instrument fit (blocks whose neighboring leak checks are normal), with whiskers at ±3 standard errors. The equator covariance does not reach the eigenstate readouts.</figcaption>
   </figure>
   <div class="table-wrap"><table>
-    <thead><tr><th>Qubit</th><th>Role</th><th>Deviation</th><th>z clean / next</th><th>Equator memory</th><th>Reading</th></tr></thead>
+    <thead><tr><th>Qubit</th><th>Run</th><th>Equator D</th><th>m<sub>1</sub> (10<sup>−4</sup>)</th><th>m<sub>0</sub> (10<sup>−4</sup>)</th><th>In-chain minus first-readout e<sub>1</sub> (points)</th></tr></thead>
     <tbody>
-<tr><td>124</td><td>control</td><td>+0.0010 ± 0.0006</td><td>+1.7 / +1.9</td><td>+0.0035</td><td>consistent with its null</td></tr>
-<tr><td>144</td><td>control</td><td>+0.0031 ± 0.0009</td><td>+3.6 / +4.0</td><td>+0.0052</td><td>negative memory</td></tr>
-<tr><td>6</td><td>control</td><td>−0.0026 ± 0.0005</td><td>-5.6 / -4.6</td><td>+0.0051</td><td>positive memory</td></tr>
-<tr><td>50</td><td>fresh</td><td>−0.0009 ± 0.0005</td><td>-1.8 / -1.5</td><td>−0.0013</td><td>consistent with its null</td></tr>
-<tr><td>23</td><td>fresh</td><td>+0.0007 ± 0.0009</td><td>+0.8 / +1.7</td><td>−0.0000</td><td>consistent with its null</td></tr>
-<tr><td>59</td><td>fresh</td><td>−0.0048 ± 0.0007</td><td>-6.7 / -5.7</td><td>+0.0060</td><td>positive memory</td></tr>
-<tr><td>114</td><td>fresh</td><td>+0.0049 ± 0.0008</td><td>+5.8 / +6.4</td><td>−0.0001</td><td>negative memory</td></tr>
-<tr><td>132</td><td>fresh</td><td>+0.0021 ± 0.0008</td><td>+2.8 / +3.2</td><td>−0.0003</td><td>consistent with its null</td></tr>
+<tr><td>124*</td><td>E0</td><td>+0.0035</td><td>+0.2 ± 0.2</td><td>+0.1 ± 0.1</td><td>−0.04</td></tr>
+<tr><td>124*</td><td>E0R</td><td>+0.0038</td><td>−0.1 ± 0.3</td><td>0.0 ± 0.5</td><td>−0.09</td></tr>
+<tr><td>144*</td><td>E0</td><td>+0.0052</td><td>−1.0 ± 0.7</td><td>−0.5 ± 0.4</td><td>+0.09</td></tr>
+<tr><td>144*</td><td>E0R</td><td>+0.0055</td><td>+1.1 ± 1.2</td><td>0.0 ± 0.9</td><td>+0.04</td></tr>
+<tr><td>6*</td><td>E0</td><td>+0.0051</td><td>+0.5 ± 0.1</td><td>0.0 ± 0.6</td><td>−0.05</td></tr>
+<tr><td>6*</td><td>E0R</td><td>+0.0055</td><td>+0.8 ± 0.2</td><td>+0.5 ± 0.2</td><td>−0.03</td></tr>
+<tr><td>50</td><td>E0</td><td>−0.0013</td><td>+0.3 ± 0.1</td><td>−0.3 ± 0.2</td><td>0.00</td></tr>
+<tr><td>50</td><td>E0R</td><td>−0.0012</td><td>+0.4 ± 0.1</td><td>−0.1 ± 0.8</td><td>−0.03</td></tr>
+<tr><td>23</td><td>E0</td><td>0.0000</td><td>−2.0 ± 0.4</td><td>+1.7 ± 0.5</td><td>+0.07</td></tr>
+<tr><td>23</td><td>E0R</td><td>−0.0003</td><td>−2.8 ± 0.9</td><td>+0.4 ± 0.8</td><td>+0.15</td></tr>
+<tr><td>59</td><td>E0</td><td>+0.0060</td><td>−0.3 ± 0.5</td><td>−0.4 ± 0.4</td><td>−0.23</td></tr>
+<tr><td>59</td><td>E0R</td><td>+0.0058</td><td>−2.0 ± 0.9</td><td>−1.1 ± 0.8</td><td>+0.02</td></tr>
+<tr><td>114</td><td>E0</td><td>−0.0001</td><td>−1.0 ± 0.8</td><td>0.0 ± 0.6</td><td>+0.15</td></tr>
+<tr><td>114</td><td>E0R</td><td>+0.0001</td><td>−1.2 ± 1.2</td><td>−0.8 ± 1.0</td><td>−0.18</td></tr>
+<tr><td>132</td><td>E0</td><td>−0.0003</td><td>+0.6 ± 0.1</td><td>−0.4 ± 0.4</td><td>−0.13</td></tr>
+<tr><td>132</td><td>E0R</td><td>0.0000</td><td>+0.1 ± 0.1</td><td>−0.6 ± 0.8</td><td>−0.12</td></tr>
     </tbody>
   </table></div>
-  <p>4 of the 8 qubits read memory on eigenstate readouts, of both signs, among the fresh qubits as well as the controls, so on this device the effect is not limited to qubits picked for it. On the controls, the equator values repeat October's five weeks later, but they do not predict the eigenstate readings qubit by qubit. The run used 415 s of QPU time in nine jobs. The null is a model built here, and its readout errors came from the first readout of each shot.</p>
-  <p>An exploratory test chosen after the data shows that this calibration was the null's main error. On every qubit, the first readout of a shot misreads |1⟩ 0.10 to 0.43 percentage points more often than the readouts inside the chain, with no trend along the chain. Against a null built from in-chain errors, 7 of the 8 qubits read negative memory and 1 positive: a |1⟩ read again after a "1" fails more often than a freshly flipped |1⟩, beyond T1 relaxation. That attribution assumes memory acts only after a "1".</p>
-  <p>A repeat on the same qubits the same afternoon, with this reading and its replication rules committed before the data (136 s of QPU time), confirmed it. 7 of the 8 qubits replicate the in-chain reading with the same sign, one is inconclusive at the repeat's smaller sample, and none drifted between the runs. The first-readout offset replicates on all 8 qubits, at 0.12 to 0.64 points.</p>
+  <p>Inside the chain, a freshly flipped |1⟩ is misread within 0.23 percentage points of the first-readout calibration of the same run, with either sign. On four of the eight qubits nearly every misread |1⟩ has decayed during the readout rather than been misread in place.</p>
+  <p class="note"><b>Withdrawn readings.</b> This page earlier reported eigenstate memory of 0.1 to 0.4 points on seven of eight qubits and a first-readout offset on every qubit, replicated in E0R. Those readings came from a null model that treated decay during the readout as a misread that leaves the qubit in |1⟩; on simulated chains without memory it reports the same signal. A null built from the separately measured first-readout calibration, which drifts by up to 0.9 points within hours, gave the pre-registered E0 reading, which did not repeat. Both are withdrawn (results note, Section 13).</p>
 </section>
 
 <section>
   <h2>Why it matters beyond the models</h2>
-  <p>Leakage that lasts for many readout rounds and readout memory at the 10<sup>−3</sup> level are the kinds of correlated measurement errors that degrade surface-code memory in simulations by Kam and colleagues (Quantum Sci. Technol., 2025). Seeing them took about 10<sup>7</sup> readout pairs per qubit, well within a free cloud allowance.</p>
+  <p>Leakage that lasts for many readout rounds is the kind of correlated measurement error that degrades surface-code memory in simulations by Kam and colleagues (Quantum Sci. Technol., 2025); in a repetition-code simulation with the measured leakage scale, the logical error rate at distance 7 is 3 to 19 times that of independent errors at the same rate. The equator correlations at the 10<sup>−3</sup> level do not reach eigenstate readouts, so they matter less for syndrome extraction than a superposition-based screen suggests. Seeing either took about 10<sup>7</sup> readout pairs per qubit, well within a free cloud allowance.</p>
 </section>
 
 <p class="note">Archived on Zenodo, <a href="https://doi.org/10.5281/zenodo.24379286">doi:10.5281/zenodo.24379286</a>. Records, run reports and code are in the project repository: run data under <code>data/cloudrun/</code>, the design notes <code>notes/CLOUD_RUN_DESIGN.md</code> and <code>notes/CLOUD_RUN_FOLLOWUP_DESIGN.md</code>, the results <code>notes/CLOUD_RUN_RESULTS.md</code>, and the analysis in <code>analysis/cloud_run_*.py</code>. The leakage model fitted after the main run is exploratory. This is independent work using a personal IBM Quantum account; no lab or institution has endorsed it.</p>

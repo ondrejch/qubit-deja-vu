@@ -15,3 +15,5 @@ The designs and analysis code were developed in the author's private repository 
 The design note for the November runs (sections 2G and 2H) is kept in the private repository with the commits above and can be shown on request; `notes/CLOUD_RUN_RESULTS.md` Sections 10 and 11 summarize it.
 
 Analyses chosen after seeing the data are labeled exploratory: `analysis/cloud_run_leakage.py`, Sections 4 and 6 of `notes/CLOUD_RUN_RESULTS.md`, the run-length counts in Section 4, and the in-chain test of the first November run (`analysis/cloud_run_eig_drift.py`, Section 10.5), which is the pre-registered primary reading of its repeat (Section 11).
+
+The eigenstate reanalysis of 20 November 2026 (`analysis/cloud_run_eig_instrument.py`, `notes/CLOUD_RUN_RESULTS.md` Section 13) was chosen after the E0, E0R and AH data and an outside referee report. Its model, synthetic tests and reading rule were committed in 66ef280 (2026-11-20 15:20:56 UTC) before it was applied to the records in 7a0b555 (15:33:43 UTC). It withdraws the in-chain readings of Sections 10.5 and 11 and the first-readout reading of Section 10.2.

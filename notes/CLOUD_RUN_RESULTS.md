@@ -1,6 +1,6 @@
 # Cloud run results: ibm_kingston and ibm_fez, October and November 2026
 
-These are the first experimental data in the package. The records and machine-generated reports are in `data/cloudrun/2026-10-15_pilot/`, `data/cloudrun/2026-10-15_main/` and `data/cloudrun/2026-10-15_followup/`; this note summarizes `report.json` in each. Sections 1 to 5 cover the pilot and main run, Section 6 an exploratory leakage analysis, and Section 7 the leak-tagged follow-up. Sections 8 and 9 cover the ibm_fez add-on and paid repeat of the same day, Section 10 covers the eigenstate repeat/flip run on ibm_fez of 19 November 2026 (`data/cloudrun/2026-11-19_eig/`, design in `notes/CLOUD_RUN_NEXT_DESIGN.md`), Section 11 its pre-registered repeat of the same day (`data/cloudrun/2026-11-19_eigrepeat/`), and Section 12 the heralded assignment calibration of the same evening (`data/cloudrun/2026-11-19_herald/`). The design and analysis were committed before the runs (commit 85a36c6; `notes/CLOUD_RUN_DESIGN.md`). The results bound the theory note's two completions of the Donadi-Hossenfelder rule for this processor and readout at the stated gaps. They are not a test of superdeterminism in general, of Hossenfelder's 2025 model, or of any proposal by Donadi or Hossenfelder.
+These are the first experimental data in the package. The records and machine-generated reports are in `data/cloudrun/2026-10-15_pilot/`, `data/cloudrun/2026-10-15_main/` and `data/cloudrun/2026-10-15_followup/`; this note summarizes `report.json` in each. Sections 1 to 5 cover the pilot and main run, Section 6 an exploratory leakage analysis, and Section 7 the leak-tagged follow-up. Sections 8 and 9 cover the ibm_fez add-on and paid repeat of the same day, Section 10 covers the eigenstate repeat/flip run on ibm_fez of 19 November 2026 (`data/cloudrun/2026-11-19_eig/`, design in `notes/CLOUD_RUN_NEXT_DESIGN.md`), Section 11 its pre-registered repeat of the same day (`data/cloudrun/2026-11-19_eigrepeat/`), Section 12 the heralded assignment calibration of the same evening (`data/cloudrun/2026-11-19_herald/`), and Section 13 the reanalysis of E0 and E0R of 20 November 2026, which withdraws the eigenstate readings of Sections 10.2, 10.5 and 11 and the in-chain offset they report. Sections 10 to 12 are kept as the record of what was read at the time. The design and analysis were committed before the runs (commit 85a36c6; `notes/CLOUD_RUN_DESIGN.md`). The results bound the theory note's two completions of the Donadi-Hossenfelder rule for this processor and readout at the stated gaps. They are not a test of superdeterminism in general, of Hossenfelder's 2025 model, or of any proposal by Donadi or Hossenfelder.
 
 ## 1. What ran
 
@@ -173,6 +173,8 @@ Every condition ran 400 shots per set. Eight qubits ran in parallel, 576 mid-cir
 
 ### 10.2 Pre-registered reading
 
+**Withdrawn 20 November 2026 (Section 13).** The null of this reading takes its errors from AS, which drifts by up to 0.93 points within hours; the reanalysis finds no eigenstate memory above 3e-4 on any qubit.
+
 The primary statistic is the contrast `flip_agree_1 - repeat_agree_1` on each qubit, read against that qubit's own simulated conventional null. The null is built from the qubit's AS assignment errors, its run-day T1 and its leaked-check fraction. A reading needs a deviation beyond 3 combined standard errors on both the clean and clean_next masks, with one sign. A negative deviation is positive memory (a reported "1" makes the next readout of |0> report "1"), and a positive deviation is negative memory (a reported "1" makes the next readout of |1> report "0").
 
 | Physical qubit | Role | Contrast, clean | Null | Deviation, clean | z, clean / clean_next | Reading |
@@ -230,6 +232,8 @@ Three limits bound what the readings mean. These are judgement calls stated afte
 
 ### 10.5 First-readout calibration versus in-chain readouts (exploratory)
 
+**Withdrawn 20 November 2026 (Section 13).** The in-chain null omits decay during the readout and reads such decay as negative memory and a low in-chain e1; on memoryless synthetic chains it reads "negative memory" at z of 5.6 to 9.9. Neither the offset nor the memory below holds.
+
 This analysis was chosen after seeing the data. The script is `analysis/cloud_run_eig_drift.py`, and every number below is from its output, `data/cloudrun/2026-11-19_eig/drift_exploratory.json`. In the chain model, memory acts only after a reported "1" and T1 acts only on a held |1>. Two fidelities are then free of both:
 
 - `repeat_agree_0`: F2 read "0" and R repeats |0>;
@@ -284,6 +288,8 @@ The run used the same eight qubits as E0, pinned by layout, with 400 shots per s
 
 ### 11.2 Pre-registered reading: the in-chain null
 
+**Withdrawn 20 November 2026 (Section 13).** This reading uses the estimator of Section 10.5, so its replication shows that the statistic repeats, not that its reading holds.
+
 | Physical qubit | In-chain e1 minus AS | Contrast deviation, in-chain null | z, clean / clean_next | E0R reading | Rule 3 against E0 | Drift z, E0R minus E0 |
 |---|---|---|---|---|---|---|
 | 124 | -0.40% | +0.0029 ± 0.0003 | +10.16 / +9.97 | negative memory | replicated | -0.83 |
@@ -310,6 +316,8 @@ The pre-registered rules give the following:
 5. The amplitude terms are at most 6.6e-5. The phase check's largest harmonic above order 2 is 3.53 (flag at 5).
 
 ### 11.4 What E0 and E0R establish together
+
+**Withdrawn 20 November 2026 (Section 13).** Items 1 and 2 are withdrawn; Section 13 gives what the two runs establish.
 
 1. On these eight ibm_fez qubits, the first mid-circuit readout of a shot misreads |1> more often than readouts inside a chain, by 0.1 to 0.6 points. This was found after E0's data and confirmed in a run fixed in advance. Any per-qubit error model built from first-readout assignment data carries this offset into the rounds after the first.
 2. Against in-chain errors, eigenstate readouts carry a history-dependent error of 0.1 to 0.4 points on seven of eight qubits (Section 10.5, item 4, gives the model-light statement). It has a stable sign per qubit and is negative on six of them. The attribution to memory after a reported "1" rests on the chain model: memory that also acts after a "0" cannot be separated from an in-chain static shift with these chains.
@@ -343,8 +351,66 @@ All differences are in percentage points. Several features are noteworthy:
 1. Qubit 6 carries most of the pooled excess. Its d1 is +0.95 points (11 standard errors) and its d1 - d0 is +0.86 points (9 standard errors), so on that qubit an initialization population does not explain the first-readout e1 excess. On every other qubit, d1 lies within 2.7 standard errors of zero.
 2. On most qubits, heralding lowers e0 by 0.06 to 0.32 points. This is what an excited population left after the shot's initialization would do. On those qubits it is the same size as d1.
 3. The first-readout calibration drifted within the day. Between E0R and AH, the AS e1 changed by -0.48, +0.93 and -0.79 points on qubits 144, 6 and 114 (6 to 11 standard errors), and qubit 6's AS e1 rose from 0.43% to 1.36%. Comparisons across sessions are therefore not informative: the secondary 2-of-8 match, and any comparison of AH with the E0 and E0R in-chain values. Within-session differences are the reliable ones.
-4. The uniform in-chain e1 offset of E0 and E0R (0.10 to 0.64 points on every qubit, inferred through the chain model) is not reproduced as a uniform first-readout excess here. Heralding a single readout recovers the excess on qubit 6 only. The two measurements differ in session, in calibration state, and in what they compare: a second readout against the in-chain readouts deep in a 72-record chain. This run does not settle which of these explains the difference.
+4. (The in-chain offset compared here is withdrawn; Section 13.) The uniform in-chain e1 offset of E0 and E0R (0.10 to 0.64 points on every qubit, inferred through the chain model) is not reproduced as a uniform first-readout excess here. Heralding a single readout recovers the excess on qubit 6 only. The two measurements differ in session, in calibration state, and in what they compare: a second readout against the in-chain readouts deep in a 72-record chain. This run does not settle which of these explains the difference.
 
 ### 12.3 What it means
 
-The pre-registered pooled readings stand: heralding lowers e1, and the pooled pattern does not exclude an initialization population. Per qubit, the effect is heterogeneous and drifts within hours. An initialization population of up to about 0.3 points is visible in e0 on several qubits, and qubit 6 shows a large e1 excess that heralding removes and initialization does not explain. For error models of rounds after the first, the practical conclusion is unchanged and now rests on two methods: calibrate assignment errors after a heralding readout, in the same session. The mechanism of the in-chain offset remains open.
+The pre-registered pooled readings stand: heralding lowers e1, and the pooled pattern does not exclude an initialization population. Per qubit, the effect is heterogeneous and drifts within hours. An initialization population of up to about 0.3 points is visible in e0 on several qubits, and qubit 6 shows a large e1 excess that heralding removes and initialization does not explain. For error models of rounds after the first, the practical conclusion is unchanged and now rests on two methods: calibrate assignment errors after a heralding readout, in the same session. The mechanism of the in-chain offset remains open. (Superseded: Section 13 finds no uniform in-chain offset; within each run, in-chain readouts of a fresh |1> match AS to within 0.23 points, with either sign.)
+
+## 13. Reanalysis of E0 and E0R with a memoryless readout instrument, 20 November 2026
+
+An outside referee report (20 November 2026) showed that the in-chain estimator of Sections 10.5 and 11 is biased. Its simulator lets a |1> decay only after the readout has reported it, so a decay during the readout (report "0", state |0>) counts as a misread that leaves |1>. A misread that leaves |1> is followed by a failed flip at P, while a decay is followed by a successful one, so the estimator turns decay into a low in-chain e1 and a positive contrast deviation. On memoryless synthetic chains of the E0R size with part of each period's decay early in the readout (T1 100 to 200 µs), it returns in-chain e1 shifts of -0.13 to -0.33 points and "negative memory" at z of 5.6 to 9.9 (`analysis/cloud_run_eig_instrument_legacy.json`, from `analysis/cloud_run_eig_instrument.py legacy`).
+
+The reanalysis was chosen after the E0, E0R and AH data and that report. Its model, synthetic tests and reading rule were committed (66ef280) before it was applied to the records (7a0b555). Outputs: `instrument_reading.json` and `instrument_derived.json` in each run directory, and `instrument_reading_gdn0.005.json` and `_gdn0.05.json` for E0R.
+
+### 13.1 Method
+
+- Data: per block, the 32 outcome patterns of the five eigenstate-linked records (x = record 3, F1, F2, R, P), on two masks that use only the neighboring blocks' checks: prev (previous check normal) and prev_next (previous and next checks normal). The block's own records are not selected.
+- Model: a memoryless readout instrument on the populations of |0>, |1> and a leaked level. For input |s> a readout reports wrong and leaves the state (e_s), or reports wrong and moves to the other level (d_s, separately at the flip steps and at R; decay during the readout or a pulse error). Leak-in g_s, leaked readout q2, leak return fixed at 0.015 per step, free joint distribution after x, and on prev_next a free weight for blocks that end leaked.
+- Memory: m_s = e_s after a reported "1" minus e_s after a reported "0". m0 > 0 biases toward repeating a "1", m1 > 0 toward switching from it.
+- Gauge: a level change just before a readout and one during it give the same patterns, so all transitions between reports go into d_s; m_s, e_s and the total misread of a fresh |1> do not depend on this.
+- Errors: the larger of the Fisher error and a jackknife over 16 contiguous groups of sets. Reading rule: |m_s| beyond 3 standard errors on both masks with one sign.
+- Synthetic tests (`analysis/cloud_run_eig_instrument_selftest.json`, 240,000 shots each): no memory read on two memoryless chains with decay during the readout (|m_s| < 1e-4); injected m1 = 3e-3 recovered as (2.94 ± 0.10)e-3 and (2.99 ± 0.12)e-3; m0 = +2e-3 with m1 = -1.5e-3 recovered within 5e-5.
+
+### 13.2 Results (prev_next mask; m in units of 1e-4; Delta e1 = in-chain fresh-|1> misread minus the run's AS e1, in points)
+
+| Qubit | Run | Equator D_clean | m1 | m0 | Delta e1 |
+|---|---|---|---|---|---|
+| 124 (control) | E0 | +0.0035 ± 0.0002 | +0.2 ± 0.2 | +0.1 ± 0.1 | -0.04 ± 0.04 |
+| | E0R | +0.0038 ± 0.0004 | -0.1 ± 0.3 | 0.0 ± 0.5 | -0.09 ± 0.05 |
+| 144 (control) | E0 | +0.0052 ± 0.0002 | -1.0 ± 0.7 | -0.5 ± 0.4 | +0.09 ± 0.05 |
+| | E0R | +0.0055 ± 0.0004 | +1.1 ± 1.2 | 0.0 ± 0.9 | +0.04 ± 0.06 |
+| 6 (control) | E0 | +0.0051 ± 0.0002 | +0.5 ± 0.1 | 0.0 ± 0.6 | -0.05 ± 0.03 |
+| | E0R | +0.0055 ± 0.0004 | +0.8 ± 0.2 | +0.5 ± 0.2 | -0.03 ± 0.03 |
+| 50 | E0 | -0.0013 ± 0.0002 | +0.3 ± 0.1 | -0.3 ± 0.2 | 0.00 ± 0.03 |
+| | E0R | -0.0012 ± 0.0004 | +0.4 ± 0.1 | -0.1 ± 0.8 | -0.03 ± 0.03 |
+| 23 | E0 | 0.0000 ± 0.0002 | -2.0 ± 0.4 | +1.7 ± 0.5 | +0.07 ± 0.04 |
+| | E0R | -0.0003 ± 0.0004 | -2.8 ± 0.9 | +0.4 ± 0.8 | +0.15 ± 0.05 |
+| 59 | E0 | +0.0060 ± 0.0002 | -0.3 ± 0.5 | -0.4 ± 0.4 | -0.23 ± 0.05 |
+| | E0R | +0.0058 ± 0.0004 | -2.0 ± 0.9 | -1.1 ± 0.8 | +0.02 ± 0.05 |
+| 114 | E0 | -0.0001 ± 0.0002 | -1.0 ± 0.8 | 0.0 ± 0.6 | +0.15 ± 0.05 |
+| | E0R | +0.0001 ± 0.0004 | -1.2 ± 1.2 | -0.8 ± 1.0 | -0.18 ± 0.07 |
+| 132 | E0 | -0.0003 ± 0.0002 | +0.6 ± 0.1 | -0.4 ± 0.4 | -0.13 ± 0.04 |
+| | E0R | 0.0000 ± 0.0004 | +0.1 ± 0.1 | -0.6 ± 0.8 | -0.12 ± 0.04 |
+
+Several features are noteworthy:
+
+1. Eigenstate memory stays below 3e-4 on every qubit in both runs (largest m1 = (-2.8 ± 0.9)e-4, qubit 23, E0R), with 3-sigma upper limits below 5.5e-4. The rule flags m1 of +0.3e-4 to +0.6e-4 on qubits 6, 50 and 132 in E0 and +0.8e-4 on qubit 6 in E0R, all where the state-preserving e1 sits near zero, and qubit 23 in E0 (m1 = -2.0e-4, m0 = +1.7e-4), which E0R does not repeat under the rule. On the looser prev mask m0 reaches +7e-4 on qubit 6 and +4e-4 on qubit 23, from leaks that start inside the block.
+2. The equator covariance of the same shots does not reach the eigenstate readouts. A readout that tends to repeat its report gives m0 - m1 = 2D; on the four qubits with equator covariance (124, 144, 6, 59) m0 - m1 is at most 1.1e-4 in magnitude, against 2D of 7.0e-3 to 1.2e-2.
+3. On qubits 124, 6, 50 and 132 nearly every misread of |1> changes the state (state-preserving share below 7%); the share is about 30% on qubit 23 and 42% to 70% on qubits 144, 59 and 114. A |1> held through one more period gains 0.84% to 1.91% of state-flipping error, which read as decay implies T1 of 72 to 165 µs, 0.55 to 1.14 times the calibration values.
+4. In-chain readouts of a fresh |1> match the run's AS to within 0.23 points, with either sign; beyond 3 standard errors only on qubit 59 (E0), 23 (E0R) and 132 (both runs, -0.13 and -0.12).
+5. Fit quality: the memoryless fits give deviances of 21 to 288 on 17 degrees of freedom on prev_next and fail a goodness-of-fit test on most qubits; with memory freed, 18 to 230 on 15, and the largest pattern-frequency difference is 1.5e-4.
+6. Changing the fixed leak return from 0.015 to 0.005 or 0.05 moves m_s on prev_next by at most 5e-5 in E0R and changes no reading.
+
+### 13.3 What is withdrawn and why
+
+1. The pre-registered first-readout reading (Section 10.2; E0R's in 11.3): its null contrast moves by +1.00 per unit change of e1 and -1.92 per unit of e0 (`analysis/cloud_run_eigenstate.json`), so an AS e1 off by 0.2 to 0.5 points moves it by the 2e-3 to 5e-3 of the reported deviations, and AS drifted by up to 0.93 points within hours (Section 12).
+2. The in-chain reading and the first-readout offset (Sections 10.5 and 11): biased by decay during the readout, as above. E0R used the same estimator, so its replication shows that the statistic repeats.
+3. The secondary AH comparison with E0R's in-chain e1 (Section 12.1, item 3): the in-chain value is from the withdrawn estimator.
+
+What stands: the equator covariance of the same shots and its five-week repeat on the controls; the AH readings and the drift of first-readout calibrations; all October results.
+
+### 13.4 Repetition-code estimate, updated
+
+`analysis/qec_memory_impact.py` now compares each case with a rate-matched control (independent errors at the same average misread rate). Readout memory of 0.2% and 0.4%, 4 to 7 times the upper limits above, gives ratios of 0.88 to 1.19, within 2.1 standard errors of 1. Leakage at the reference values gives 8.5 ± 0.9 times the matched control at d = 7 (11.3 times the static reference), and 3.1 to 18.5 across the sweep.
+

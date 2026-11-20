@@ -1,0 +1,347 @@
+{
+ "note": "Synthetic chains of the E0 design (simulations, not data), 240,000 shots each; the fit must recover the memory of each case within 4 standard errors plus 2e-4, read none where there is none, and fit within 5 sigma of its deviance.",
+ "status": "pass",
+ "failures": [],
+ "cases": {
+  "decay during readout, no memory (the referee's case)": {
+   "truth": {
+    "e0": 0.002,
+    "e1": 0.003,
+    "d0": 0.0002,
+    "d1": 0.0045,
+    "c0": 0.0001,
+    "c1": 0.0045,
+    "g0": 4e-05,
+    "g1": 0.0002,
+    "q2": 0.99,
+    "eps_f": 0.0002,
+    "eps_id": 0.0001,
+    "m0": 0.0,
+    "m1": 0.0
+   },
+   "fit": {
+    "prev": {
+     "m0": {
+      "value": -4e-05,
+      "se": 0.000141,
+      "fisher_se": 0.000141,
+      "jackknife_se": 9.9e-05,
+      "z": -0.28
+     },
+     "m1": {
+      "value": -1.6e-05,
+      "se": 7.7e-05,
+      "fisher_se": 6.9e-05,
+      "jackknife_se": 7.7e-05,
+      "z": -0.21
+     },
+     "memoryless": {
+      "deviance": 8.8,
+      "dof": 18,
+      "converged": true
+     },
+     "with_memory": {
+      "deviance": 8.66,
+      "dof": 16,
+      "converged": true
+     },
+     "fresh1_misread": {
+      "value": 0.007789,
+      "se": 6.1e-05,
+      "note": "flip step after a readout that left |0> and reported '0', reporting '0'"
+     }
+    },
+    "prev_next": {
+     "m0": {
+      "value": -8.1e-05,
+      "se": 0.000149,
+      "fisher_se": 0.000149,
+      "jackknife_se": 7.7e-05,
+      "z": -0.55
+     },
+     "m1": {
+      "value": -1.7e-05,
+      "se": 7.8e-05,
+      "fisher_se": 7.4e-05,
+      "jackknife_se": 7.8e-05,
+      "z": -0.22
+     },
+     "memoryless": {
+      "deviance": 7.87,
+      "dof": 17,
+      "converged": true
+     },
+     "with_memory": {
+      "deviance": 6.45,
+      "dof": 15,
+      "converged": true
+     },
+     "fresh1_misread": {
+      "value": 0.007773,
+      "se": 7.9e-05,
+      "note": "flip step after a readout that left |0> and reported '0', reporting '0'"
+     }
+    }
+   },
+   "readings": {
+    "m0": "consistent with the memoryless instrument",
+    "m1": "consistent with the memoryless instrument"
+   }
+  },
+  "decay during readout, T1 short, no memory": {
+   "truth": {
+    "e0": 0.002,
+    "e1": 0.002,
+    "d0": 0.0002,
+    "d1": 0.007,
+    "c0": 0.0001,
+    "c1": 0.007,
+    "g0": 4e-05,
+    "g1": 0.0002,
+    "q2": 0.99,
+    "eps_f": 0.0002,
+    "eps_id": 0.0001,
+    "m0": 0.0,
+    "m1": 0.0
+   },
+   "fit": {
+    "prev": {
+     "m0": {
+      "value": 3e-05,
+      "se": 5.7e-05,
+      "fisher_se": 5.7e-05,
+      "jackknife_se": 4.8e-05,
+      "z": 0.52
+     },
+     "m1": {
+      "value": 4.7e-05,
+      "se": 6e-05,
+      "fisher_se": 5.8e-05,
+      "jackknife_se": 6e-05,
+      "z": 0.79
+     },
+     "memoryless": {
+      "deviance": 8.37,
+      "dof": 18,
+      "converged": true
+     },
+     "with_memory": {
+      "deviance": 7.45,
+      "dof": 16,
+      "converged": true
+     },
+     "fresh1_misread": {
+      "value": 0.009322,
+      "se": 6.8e-05,
+      "note": "flip step after a readout that left |0> and reported '0', reporting '0'"
+     }
+    },
+    "prev_next": {
+     "m0": {
+      "value": 6.1e-05,
+      "se": 6.9e-05,
+      "fisher_se": 6.9e-05,
+      "jackknife_se": 5.4e-05,
+      "z": 0.89
+     },
+     "m1": {
+      "value": 6.1e-05,
+      "se": 6.8e-05,
+      "fisher_se": 6.3e-05,
+      "jackknife_se": 6.8e-05,
+      "z": 0.89
+     },
+     "memoryless": {
+      "deviance": 9.55,
+      "dof": 17,
+      "converged": true
+     },
+     "with_memory": {
+      "deviance": 7.56,
+      "dof": 15,
+      "converged": true
+     },
+     "fresh1_misread": {
+      "value": 0.009345,
+      "se": 7.4e-05,
+      "note": "flip step after a readout that left |0> and reported '0', reporting '0'"
+     }
+    }
+   },
+   "readings": {
+    "m0": "consistent with the memoryless instrument",
+    "m1": "consistent with the memoryless instrument"
+   }
+  },
+  "negative memory on |1>": {
+   "truth": {
+    "e0": 0.002,
+    "e1": 0.003,
+    "d0": 0.0002,
+    "d1": 0.0045,
+    "c0": 0.0001,
+    "c1": 0.0045,
+    "g0": 4e-05,
+    "g1": 0.0002,
+    "q2": 0.99,
+    "eps_f": 0.0002,
+    "eps_id": 0.0001,
+    "m0": 0.0,
+    "m1": 0.003
+   },
+   "fit": {
+    "prev": {
+     "m0": {
+      "value": -4.8e-05,
+      "se": 6.7e-05,
+      "fisher_se": 5.7e-05,
+      "jackknife_se": 6.7e-05,
+      "z": -0.71
+     },
+     "m1": {
+      "value": 0.002937,
+      "se": 0.000101,
+      "fisher_se": 9e-05,
+      "jackknife_se": 0.000101,
+      "z": 29.21
+     },
+     "memoryless": {
+      "deviance": 1303.25,
+      "dof": 18,
+      "converged": true
+     },
+     "with_memory": {
+      "deviance": 12.34,
+      "dof": 16,
+      "converged": true
+     },
+     "fresh1_misread": {
+      "value": 0.007919,
+      "se": 6.1e-05,
+      "note": "flip step after a readout that left |0> and reported '0', reporting '0'"
+     }
+    },
+    "prev_next": {
+     "m0": {
+      "value": 1.5e-05,
+      "se": 6.9e-05,
+      "fisher_se": 6.8e-05,
+      "jackknife_se": 6.9e-05,
+      "z": 0.21
+     },
+     "m1": {
+      "value": 0.00299,
+      "se": 0.000117,
+      "fisher_se": 9.7e-05,
+      "jackknife_se": 0.000117,
+      "z": 25.49
+     },
+     "memoryless": {
+      "deviance": 1162.22,
+      "dof": 17,
+      "converged": true
+     },
+     "with_memory": {
+      "deviance": 15.36,
+      "dof": 15,
+      "converged": true
+     },
+     "fresh1_misread": {
+      "value": 0.007922,
+      "se": 6.6e-05,
+      "note": "flip step after a readout that left |0> and reported '0', reporting '0'"
+     }
+    }
+   },
+   "readings": {
+    "m0": "consistent with the memoryless instrument",
+    "m1": "negative memory (state-preserving error after a '1' exceeds that after a '0')"
+   }
+  },
+  "positive memory on |0> with negative on |1>": {
+   "truth": {
+    "e0": 0.002,
+    "e1": 0.003,
+    "d0": 0.0002,
+    "d1": 0.0045,
+    "c0": 0.0001,
+    "c1": 0.0045,
+    "g0": 4e-05,
+    "g1": 0.0008,
+    "q2": 0.99,
+    "eps_f": 0.0002,
+    "eps_id": 0.0001,
+    "m0": 0.002,
+    "m1": -0.0015
+   },
+   "fit": {
+    "prev": {
+     "m0": {
+      "value": 0.002026,
+      "se": 0.000176,
+      "fisher_se": 0.000176,
+      "jackknife_se": 0.000151,
+      "z": 11.49
+     },
+     "m1": {
+      "value": -0.001491,
+      "se": 5.9e-05,
+      "fisher_se": 5.7e-05,
+      "jackknife_se": 5.9e-05,
+      "z": -25.24
+     },
+     "memoryless": {
+      "deviance": 1362.97,
+      "dof": 18,
+      "converged": true
+     },
+     "with_memory": {
+      "deviance": 7.13,
+      "dof": 16,
+      "converged": true
+     },
+     "fresh1_misread": {
+      "value": 0.007809,
+      "se": 7.2e-05,
+      "note": "flip step after a readout that left |0> and reported '0', reporting '0'"
+     }
+    },
+    "prev_next": {
+     "m0": {
+      "value": 0.002042,
+      "se": 0.000125,
+      "fisher_se": 7.9e-05,
+      "jackknife_se": 0.000125,
+      "z": 16.3
+     },
+     "m1": {
+      "value": -0.001484,
+      "se": 6.1e-05,
+      "fisher_se": 6.1e-05,
+      "jackknife_se": 5.9e-05,
+      "z": -24.27
+     },
+     "memoryless": {
+      "deviance": 1133.24,
+      "dof": 17,
+      "converged": true
+     },
+     "with_memory": {
+      "deviance": 8.77,
+      "dof": 15,
+      "converged": true
+     },
+     "fresh1_misread": {
+      "value": 0.007783,
+      "se": 7.9e-05,
+      "note": "flip step after a readout that left |0> and reported '0', reporting '0'"
+     }
+    }
+   },
+   "readings": {
+    "m0": "positive memory (state-preserving error after a '1' exceeds that after a '0')",
+    "m1": "opposite sign: state-preserving error after a '1' below that after a '0'"
+   }
+  }
+ }
+}

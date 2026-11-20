@@ -1,0 +1,176 @@
+{
+ "note": "Simulations, not data: memoryless chains (700 sets x 400 shots, E0R size) with T1 decay split between early in the readout and after the report; the in-chain estimator of analysis/cloud_run_eig_drift.py reads them as negative memory, the instrument fit does not.",
+ "cases": [
+  {
+   "t1_us": 150.0,
+   "early_fraction": 0.5,
+   "state_preserving_e1": 0.003,
+   "early_decay": 0.004605,
+   "first_readout_e1": 0.007605,
+   "in_chain_estimator": {
+    "de1": [
+     -0.0022663515010507306,
+     7.318811801161272e-05
+    ],
+    "contrast_deviation": [
+     0.002047716597799805,
+     0.00023886238920710248
+    ],
+    "z_clean": 8.57,
+    "z_clean_next": 8.2,
+    "reading": "negative memory on eigenstate readouts",
+    "first_readout_null_deviation": -8.5e-05
+   },
+   "instrument_fit": {
+    "prev": {
+     "m0": {
+      "value": 8e-06,
+      "se": 7.3e-05,
+      "fisher_se": 6.4e-05,
+      "jackknife_se": 7.3e-05,
+      "z": 0.11
+     },
+     "m1": {
+      "value": -2.5e-05,
+      "se": 7.7e-05,
+      "fisher_se": 6.4e-05,
+      "jackknife_se": 7.7e-05,
+      "z": -0.32
+     }
+    },
+    "prev_next": {
+     "m0": {
+      "value": 5.1e-05,
+      "se": 7.7e-05,
+      "fisher_se": 7.7e-05,
+      "jackknife_se": 7.7e-05,
+      "z": 0.66
+     },
+     "m1": {
+      "value": 1.6e-05,
+      "se": 8.7e-05,
+      "fisher_se": 6.9e-05,
+      "jackknife_se": 8.7e-05,
+      "z": 0.19
+     }
+    },
+    "reading_m1": "consistent with the memoryless instrument",
+    "reading_m0": "consistent with the memoryless instrument"
+   }
+  },
+  {
+   "t1_us": 100.0,
+   "early_fraction": 0.5,
+   "state_preserving_e1": 0.003,
+   "early_decay": 0.006892,
+   "first_readout_e1": 0.009892,
+   "in_chain_estimator": {
+    "de1": [
+     -0.003288386848086671,
+     8.308417288817241e-05
+    ],
+    "contrast_deviation": [
+     0.0027178830425828556,
+     0.0002753385068284638
+    ],
+    "z_clean": 9.87,
+    "z_clean_next": 9.26,
+    "reading": "negative memory on eigenstate readouts",
+    "first_readout_null_deviation": -0.000428
+   },
+   "instrument_fit": {
+    "prev": {
+     "m0": {
+      "value": 1.4e-05,
+      "se": 7.2e-05,
+      "fisher_se": 6.5e-05,
+      "jackknife_se": 7.2e-05,
+      "z": 0.19
+     },
+     "m1": {
+      "value": -3.5e-05,
+      "se": 8.1e-05,
+      "fisher_se": 6.5e-05,
+      "jackknife_se": 8.1e-05,
+      "z": -0.43
+     }
+    },
+    "prev_next": {
+     "m0": {
+      "value": 5.9e-05,
+      "se": 7.8e-05,
+      "fisher_se": 7.8e-05,
+      "jackknife_se": 7.3e-05,
+      "z": 0.75
+     },
+     "m1": {
+      "value": -8e-06,
+      "se": 9e-05,
+      "fisher_se": 7e-05,
+      "jackknife_se": 9e-05,
+      "z": -0.08
+     }
+    },
+    "reading_m1": "consistent with the memoryless instrument",
+    "reading_m0": "consistent with the memoryless instrument"
+   }
+  },
+  {
+   "t1_us": 200.0,
+   "early_fraction": 0.4,
+   "state_preserving_e1": 0.002,
+   "early_decay": 0.002766,
+   "first_readout_e1": 0.004766,
+   "in_chain_estimator": {
+    "de1": [
+     -0.0013406616242674567,
+     5.8633839870279185e-05
+    ],
+    "contrast_deviation": [
+     0.0012467960599050138,
+     0.00020238749528587018
+    ],
+    "z_clean": 6.16,
+    "z_clean_next": 5.56,
+    "reading": "negative memory on eigenstate readouts",
+    "first_readout_null_deviation": 1.6e-05
+   },
+   "instrument_fit": {
+    "prev": {
+     "m0": {
+      "value": 1e-06,
+      "se": 5.4e-05,
+      "fisher_se": 5.2e-05,
+      "jackknife_se": 5.4e-05,
+      "z": 0.01
+     },
+     "m1": {
+      "value": 1.4e-05,
+      "se": 6.1e-05,
+      "fisher_se": 5.2e-05,
+      "jackknife_se": 6.1e-05,
+      "z": 0.23
+     }
+    },
+    "prev_next": {
+     "m0": {
+      "value": 4.5e-05,
+      "se": 6.2e-05,
+      "fisher_se": 6.2e-05,
+      "jackknife_se": 6e-05,
+      "z": 0.73
+     },
+     "m1": {
+      "value": 4.3e-05,
+      "se": 6.2e-05,
+      "fisher_se": 5.6e-05,
+      "jackknife_se": 6.2e-05,
+      "z": 0.7
+     }
+    },
+    "reading_m1": "consistent with the memoryless instrument",
+    "reading_m0": "consistent with the memoryless instrument"
+   }
+  }
+ ]
+}
