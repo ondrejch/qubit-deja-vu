@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Data figures of the journal manuscript, from saved run outputs only.
 
-Reads data/cloudrun/*/report.json, drift_exploratory.json and
+Reads data/cloudrun/*/report.json, instrument_reading.json and
 leakage_exploratory.json; writes figures/*.pdf. Every plotted number is
 asserted against the value quoted in the manuscript (tolerance covers the table
 rounding). No IBM contact, no new computation of statistics.
@@ -128,62 +128,61 @@ def fig_sign():
 
 
 def fig_equator_eig():
-    """Equator memory against eigenstate memory per qubit, E0 and E0R.
+    """Eigenstate repeat bias m0 - m1 against equator covariance D_clean, E0 and E0R.
 
-    Both axes use the sign convention of D: positive is a bias toward
-    repeating the previous report. The eigenstate memory is the negative of
-    the contrast deviation from the in-chain null (a negative deviation is
-    positive memory). E0's in-chain reading is exploratory; E0R's is the
-    pre-registered primary reading.
+    Both from the same shots: D_clean from report.json (clean B lag-1), m0 and m1
+    from instrument_reading.json (prev_next mask). A readout that tends to
+    repeat its previous report gives m0 - m1 = 2D (main.tex Section 2.3, item 1).
     """
-    runs = (("2026-11-19_eig", "drift_exploratory.json", "E0 (exploratory)", "o", "white"),
-            ("2026-11-19_eigrepeat", "inchain_reading.json", "E0R (pre-registered)", "s", INK))
-    # Values quoted in main.tex Tables tab:eig, tab:inchain and tab:repeat
-    # (deviation, not yet sign-flipped) and in the E0 and E0R equator text.
+    runs = (("2026-11-19_eig", "E0", "o", "white"), ("2026-11-19_eigrepeat", "E0R", "s", INK))
+    # Values quoted in main.tex Table tab:eig (D_clean; m1 and m0 in units of 1e-4).
     expect = {
-        "2026-11-19_eig": ({124: 0.0035, 144: 0.0052, 6: 0.0051, 50: -0.0013,
-                            23: 0.0, 59: 0.0060, 114: -0.0001, 132: -0.0004},
-                           {124: 0.0032, 144: 0.0023, 6: -0.0020, 50: 0.0008,
-                            23: 0.0041, 59: 0.0007, 114: 0.0022, 132: 0.0021}),
-        "2026-11-19_eigrepeat": ({124: 0.0038, 144: 0.0055, 6: 0.0055},
-                                 {124: 0.0029, 144: 0.0014, 6: -0.0013, 50: 0.0002,
-                                  23: 0.0040, 59: 0.0016, 114: 0.0030, 132: 0.0016}),
+        "2026-11-19_eig": {124: (0.0035, 0.2, 0.1), 144: (0.0052, -1.0, -0.5), 6: (0.0051, 0.5, 0.0),
+                           50: (-0.0013, 0.3, -0.3), 23: (0.0, -2.0, 1.7), 59: (0.0060, -0.3, -0.4),
+                           114: (-0.0001, -1.0, 0.0), 132: (-0.0003, 0.6, -0.4)},
+        "2026-11-19_eigrepeat": {124: (0.0038, -0.1, 0.0), 144: (0.0055, 1.1, 0.0), 6: (0.0055, 0.8, 0.5),
+                                 50: (-0.0012, 0.4, -0.1), 23: (-0.0003, -2.8, 0.4), 59: (0.0058, -2.0, -1.1),
+                                 114: (0.0001, -1.2, -0.8), 132: (0.0, 0.1, -0.6)},
     }
     _, ax = plt.subplots(figsize=(5.0, 3.6))
     pos = {}
-    for run, name, label, marker, face in runs:
+    for run, label, marker, face in runs:
         rep = load(run)
-        reading = load(run, name)
-        layout = rep["layout"]
+        fit = load(run, "instrument_reading.json")
         per = rep["conditions"]["E0"]["per_qubit"]
         xs, ys, xes, yes = [], [], [], []
-        for i, q in enumerate(layout):
+        for i, q in enumerate(rep["layout"]):
             ex, exe = val_se(per[i]["clean"]["B_lag1"])
-            dy, dye = val_se(reading["qubits"][str(q)]["clean"]["contrast_deviation_in_chain_null"])
-            ex_x, ex_y = expect[run]
-            if q in ex_x:
-                assert abs(ex - ex_x[q]) < 2.5e-4, (run, q, ex)
-            assert abs(dy - ex_y[q]) < 2.5e-4, (run, q, dy)
+            pn = fit["qubits"][str(q)]["prev_next"]
+            m0, m0e = pn["m0"]["value"], pn["m0"]["se"]
+            m1, m1e = pn["m1"]["value"], pn["m1"]["se"]
+            wd, w1, w0 = expect[run][q]
+            assert abs(ex - wd) < 6e-5, (run, q, ex)
+            assert abs(m1 * 1e4 - w1) < 0.06 and abs(m0 * 1e4 - w0) < 0.06, (run, q, m1, m0)
             xs.append(ex)
-            ys.append(-dy)
+            ys.append(m0 - m1)
             xes.append(exe)
-            yes.append(dye)
-            pos.setdefault(q, []).append((ex, -dy))
+            yes.append((m0e ** 2 + m1e ** 2) ** 0.5)
+            pos.setdefault(q, []).append((ex, m0 - m1))
         ax.errorbar(xs, ys, xerr=xes, yerr=yes, fmt=marker, ecolor="0.45", elinewidth=0.8,
                     capsize=1.5, markersize=4.5, markerfacecolor=face, markeredgecolor=INK,
                     markeredgewidth=1.0, label=label)
-    # One label per qubit, beside its E0R point, nudged where points crowd.
-    nudge = {114: (6, 4), 132: (-20, -10), 23: (6, 2), 50: (-16, 5), 6: (6, -2),
-             124: (6, 2), 144: (6, 2), 59: (-14, -11)}
+    lim = (-0.002, 0.0068)
+    ax.plot(lim, [2 * v for v in lim], color="0.35", linewidth=0.8, linestyle=":")
+    nudge = {124: (-4, 6), 144: (-6, 6), 6: (-14, -11), 50: (4, 5), 23: (-6, 7), 59: (4, -10),
+             114: (-2, -11), 132: (-14, 6)}
     for q, pts in pos.items():
         x, y = pts[-1]
         ax.annotate(str(q), (x, y), textcoords="offset points", xytext=nudge.get(q, (4, 3)),
                     fontsize=7, color="0.2")
     ax.axhline(0, color="0.5", linewidth=0.7, linestyle="--")
     ax.axvline(0, color="0.5", linewidth=0.7, linestyle="--")
-    ax.set_xlabel("equator memory (clean B lag-1 covariance)")
-    ax.set_ylabel("eigenstate memory (minus contrast deviation)")
-    ax.legend(frameon=False, fontsize=7.5, loc="lower right")
+    ax.set_xlim(lim)
+    ax.set_ylim(lim)
+    ax.set_aspect("equal")
+    ax.set_xlabel("equator covariance $D_{\\mathrm{clean}}$")
+    ax.set_ylabel("eigenstate repeat bias $m_0 - m_1$")
+    ax.legend(frameon=False, fontsize=7.5, loc="upper left")
     plt.tight_layout(pad=0.6)
     plt.savefig(os.path.join(FIGS, "fig-equator-eig.pdf"))
     plt.close()
